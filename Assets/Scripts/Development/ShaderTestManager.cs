@@ -113,25 +113,21 @@ public class ShaderTestManager : MonoBehaviour
             {
                 if (Input.GetMouseButtonDown(0))
                 {
-                    mousePosition = Input.mousePosition;
                     draggingLeft = true;
                     Cursor.visible = false;
+                    Cursor.lockState = CursorLockMode.Locked;
                 }
                 if (Input.GetMouseButtonUp(0))
                 {
                     draggingLeft = false;
                     Cursor.visible = true;
+                    Cursor.lockState = CursorLockMode.None;
                 }
 
                 if (draggingLeft)
                 {
-                    Vector3 lastMousePosition = mousePosition;
-                    mousePosition = Input.mousePosition;
-
-                    Vector3 delta = lastMousePosition - mousePosition;
-
-                    cameraTheta += delta.x * cameraHorizontalSpeed;
-                    cameraHeight += delta.y * cameraVerticalSpeed;
+                    cameraTheta -= Input.GetAxis("Mouse X") * cameraHorizontalSpeed;
+                    cameraHeight -= Input.GetAxis("Mouse Y") * cameraVerticalSpeed;
 
                     UpdatePositionAndAngle();
                 }
@@ -142,24 +138,21 @@ public class ShaderTestManager : MonoBehaviour
             {
                 if (Input.GetMouseButtonDown(1))
                 {
-                    mousePosition = Input.mousePosition;
                     draggingRight = true;
                     Cursor.visible = false;
+                    Cursor.lockState = CursorLockMode.Locked;
                 }
                 if (Input.GetMouseButtonUp(1))
                 {
                     draggingRight = false;
                     Cursor.visible = true;
+                    Cursor.lockState = CursorLockMode.None;
+
                 }
 
                 if (draggingRight)
                 {
-                    Vector3 lastMousePosition = mousePosition;
-                    mousePosition = Input.mousePosition;
-
-                    Vector3 delta = lastMousePosition - mousePosition;
-
-                    cameraDistance += delta.x * cameraMoveSpeed * 0.001f;
+                    cameraDistance -= Input.GetAxis("Mouse X") * cameraMoveSpeed * 0.05f;
 
                     UpdatePositionAndAngle();
                 }
@@ -243,6 +236,7 @@ public class ShaderTestManager : MonoBehaviour
         }
 
         mainObject.GetComponent<MeshRenderer>().material = materials[currentIndex];
+
         ChangeLineWidth(widthSlider.value);
     }
 
@@ -253,6 +247,7 @@ public class ShaderTestManager : MonoBehaviour
         if(currentIndex == 5)
         {
             mainCamera.GetComponent<EdgeDetection>().sampleDist = RemapFloat(width, 0.002f, 0.03f, 0.5f, 10);
+
         }
     }
     #endregion
