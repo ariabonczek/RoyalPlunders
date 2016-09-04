@@ -430,3 +430,8 @@ MonoBehaviour:
   freeLookRangeY: 13
   freeLookX: 0
   freeLookY: 0
+  angleSnapCount: 4
+  angleSnapIndex: 0
+  positionLerp: 5
+  rotationLerp: 10
+  immersiveLook: 1

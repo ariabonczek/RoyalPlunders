@@ -17,12 +17,12 @@ public class CamTest : MonoBehaviour
         if (Input.GetButton("Left Shoulder") && readyToTurn)
         {
             readyToTurn = false;
-            camCont.snapLeft();
+            camCont.angleSnapIndex--;
         }
         if (Input.GetButton("Right Shoulder") && readyToTurn)
         {
             readyToTurn = false;
-            camCont.snapRight();
+            camCont.angleSnapIndex++;
         }
 
         if (!Input.GetButton("Left Shoulder") && !readyToTurn && !Input.GetButton("Right Shoulder"))
