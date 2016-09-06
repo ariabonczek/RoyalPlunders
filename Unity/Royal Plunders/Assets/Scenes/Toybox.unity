@@ -37,7 +37,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44692558, g: 0.49678743, b: 0.57508624, a: 1}
+  m_IndirectSpecularColor: {r: 0.44692528, g: 0.4967872, b: 0.5750856, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -165,8 +165,9 @@ GameObject:
   - 65: {fileID: 400397464}
   - 23: {fileID: 400397463}
   - 114: {fileID: 400397467}
+  - 114: {fileID: 400397468}
   m_Layer: 0
-  m_Name: CameraTestA
+  m_Name: CharacterTest
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -244,6 +245,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc8f0d48149919d4dab1dd569f6d71c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &400397468
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 400397462}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25463243293229f41a753ca4dfd20b68, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  baseSpeed: 3
+  speedChangeThreshold: 0.8
+  slowWalkSpeed: 1
+  fastWalkSpeed: 2.3
+  runSpeed: 4
+  stealthWalkSpeed: 0.3
 --- !u!1 &899235711
 GameObject:
   m_ObjectHideFlags: 0
