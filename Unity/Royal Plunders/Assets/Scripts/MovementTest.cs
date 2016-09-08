@@ -82,12 +82,12 @@ public class MovementTest : MonoBehaviour {
             if (runButtonPressed)
             {
                 this.transform.position += rawMovementVec.normalized * runSpeed * baseSpeedWithDelta;
-                Debug.Log("Running");
+                // Debug.Log("Running");
             }
             else if(stealthWalkButtonPressed)
             {
                 this.transform.position += rawMovementVec.normalized * stealthWalkSpeed * baseSpeedWithDelta;
-                Debug.Log("Stealth Walking");
+                // Debug.Log("Stealth Walking");
             }
             else
             { 
@@ -95,12 +95,12 @@ public class MovementTest : MonoBehaviour {
                 if (rawMovementVec.magnitude < speedChangeThreshold)
                 {
                     appliedSpeed = slowWalkSpeed;
-                    Debug.Log("Slow Walk");
+                    // Debug.Log("Slow Walk");
                 }
                 else
                 {
                     appliedSpeed = fastWalkSpeed;
-                    Debug.Log("Fast Walk");
+                    // Debug.Log("Fast Walk");
                 }
                 this.transform.position += rawMovementVec.normalized * appliedSpeed * baseSpeedWithDelta;
             }
