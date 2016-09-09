@@ -3,33 +3,41 @@ using System.Collections;
 
 public class Door : MonoBehaviour {
 
-    public GameObject keyReq;
+    private Quaternion startingRotation;
 
     public float rotation; // negative for left, positive for right
     public float rotationSpeed;
 
-    public bool opened;
-    public bool keyReqMet;
+    public bool openCommand;
 
 	// Use this for initialization
 	void Start () 
     {
-	
+        startingRotation = transform.rotation;
 	}
 	
 	// Update is called once per frame
 	void Update () 
     {
-        if (keyReq == null)
+        if (openCommand)
         {
-            keyReqMet = true;
             Open();
+        }
+        else
+        {
+            Close();
         }
 	}
 
     public void Open()
     {
         Quaternion quat = Quaternion.Euler(0, rotation, 0);
-        transform.localRotation = Quaternion.Slerp(transform.localRotation, quat, Time.deltaTime * rotationSpeed );
+        transform.localRotation = Quaternion.Lerp(transform.localRotation, quat, Time.deltaTime * rotationSpeed);
+    }
+
+    public void Close()
+    {
+        openCommand = false;
+        transform.localRotation = Quaternion.Lerp(transform.localRotation, startingRotation, Time.deltaTime * rotationSpeed);
     }
 }

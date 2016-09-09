@@ -26,7 +26,7 @@ GameObject:
   - 114: {fileID: 114000013981983986}
   m_Layer: 0
   m_Name: Door
-  m_TagString: Untagged
+  m_TagString: Door
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -37,10 +37,10 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000010888596320}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.1567792, y: 1.03, z: -6.79}
+  m_LocalRotation: {x: 0, y: 0.7193398, z: 0, w: 0.6946584}
+  m_LocalPosition: {x: 3.79, y: 1.03, z: -0.67}
   m_LocalScale: {x: 0.14154537, y: 1, z: 1.0041614}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 92, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -118,8 +118,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7fc12036eb52da04c83a26d8b2d41c4a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  keyReq: {fileID: 0}
-  rotation: -90
+  rotation: 0
   rotationSpeed: 1
-  opened: 0
-  keyReqMet: 0
+  openCommand: 0
