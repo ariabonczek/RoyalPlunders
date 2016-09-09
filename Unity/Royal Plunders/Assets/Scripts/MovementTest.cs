@@ -23,6 +23,11 @@ public class MovementTest : MonoBehaviour {
 
     private bool stealthWalkButtonPressed;
 
+    public bool GetStealthWalkState()
+    {
+        return stealthWalkButtonPressed;
+    }
+
     // float used to rotate the movement vector relative to camera orientation
     private float cameraAngleDiff;
 

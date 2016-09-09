@@ -11,7 +11,7 @@ public class InventoryManager : MonoBehaviour
         return numKeys;
     }
 
-    public void UseKey()
+    public void LoseKey()
     {
         numKeys--;
     }

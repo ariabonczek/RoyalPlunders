@@ -8,6 +8,8 @@ public class Door : MonoBehaviour {
     public float rotation; // negative for left, positive for right
     public float rotationSpeed;
 
+    public int numKeyReq;
+
     public bool openCommand;
 
 	// Use this for initialization
@@ -39,5 +41,10 @@ public class Door : MonoBehaviour {
     {
         openCommand = false;
         transform.localRotation = Quaternion.Lerp(transform.localRotation, startingRotation, Time.deltaTime * rotationSpeed);
+    }
+
+    public void WipeKeyReq()
+    {
+        numKeyReq = 0;
     }
 }

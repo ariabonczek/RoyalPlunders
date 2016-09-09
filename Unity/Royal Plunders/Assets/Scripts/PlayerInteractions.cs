@@ -23,13 +23,39 @@ public class PlayerInteractions : MonoBehaviour {
         {
             RaycastHit rayHit = new RaycastHit();
             Ray ray = new Ray(transform.position, transform.forward);
+
             if (Physics.Raycast(ray, out rayHit) && rayHit.transform.tag == "Door")
             {
                 if (this.gameObject.GetComponent<InventoryManager>()
-                    && this.gameObject.GetComponent<InventoryManager>().GetNumKeys() > 0)
+                    && (rayHit.transform.gameObject.GetComponent<Door>().numKeyReq 
+                        <= this.gameObject.GetComponent<InventoryManager>().GetNumKeys() ))
                 {
                     rayHit.transform.gameObject.GetComponent<Door>().openCommand = true;
-                    this.gameObject.GetComponent<InventoryManager>().UseKey();
+
+                    for (uint i = 0; i < rayHit.transform.gameObject.GetComponent<Door>().numKeyReq; ++i)
+                    {
+                        this.gameObject.GetComponent<InventoryManager>().LoseKey();
+                        // TODO play animation or trigger hud here?
+                    }
+
+                    rayHit.transform.GetComponent<Door>().WipeKeyReq();
+                }
+            }
+
+            if (this.GetComponent<MovementTest>())
+            {
+                if (this.GetComponent<MovementTest>().GetStealthWalkState())
+                {
+                    if (Physics.Raycast(ray, out rayHit) && rayHit.transform.tag == "Guard")
+                    {
+                        if (this.gameObject.GetComponent<InventoryManager>()
+                            && rayHit.transform.GetComponent<InventoryManager>()
+                            && rayHit.transform.GetComponent<InventoryManager>().GetNumKeys() > 0)
+                        {
+                            rayHit.transform.GetComponent<InventoryManager>().LoseKey();
+                            this.gameObject.GetComponent<InventoryManager>().GainKey();
+                        }
+                    }
                 }
             }
         }
