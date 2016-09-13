@@ -4,6 +4,8 @@ using System.Collections.Generic;
 
 public class MovementTest : MonoBehaviour {
 
+    public bool inputDisabled;
+
     public float baseSpeed;
 
     // the stick amount threshold to switch from slow to fast walk
@@ -42,6 +44,7 @@ public class MovementTest : MonoBehaviour {
         // initializations
         cameraAngleDiff = 0;
         rawMovementVec = new Vector3();
+        inputDisabled = false;
 
         // gets the camera reference from the scene
         myCamera = GameObject.FindGameObjectWithTag("MainCamera");
@@ -49,6 +52,8 @@ public class MovementTest : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        if (inputDisabled)
+            return;
 
         // set the booleans for stealth walk and run buttons
         runButtonPressed = Input.GetButton("A Button");
