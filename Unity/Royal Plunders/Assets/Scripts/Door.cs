@@ -23,7 +23,8 @@ public class Door : MonoBehaviour, IInteraction {
 	// Update is called once per frame
 	void Update () 
     {
-        if (GameObject.FindWithTag("Player").GetComponent<PlayerInteractions>().interactionButtonPressed && inCH)
+        if (inCH &&
+            GameObject.FindWithTag("Player").GetComponent<PlayerInteractions>().interactionButtonPressed)
         {
             Interact();
         }

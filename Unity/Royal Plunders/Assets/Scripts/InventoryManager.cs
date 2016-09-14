@@ -5,19 +5,41 @@ public class InventoryManager : MonoBehaviour
 {
     // right now inventory only contains keys
     public int numKeys;
+    public int MAX_KEYS;
+
+    public void Start()
+    {
+        MAX_KEYS = 100;
+    }
 
     public int GetNumKeys()
     {
         return numKeys;
     }
 
-    public void LoseKey()
+    public bool LoseKey()
     {
-        numKeys--;
+        bool bRetVal = false;
+
+        if (numKeys > 0)
+        {
+            numKeys--;
+            bRetVal = true;
+        }
+
+        return bRetVal;
     }
 
-    public void GainKey()
+    public bool GainKey()
     {
-        numKeys++;
+        bool bRetVal = false;
+
+        if (numKeys < MAX_KEYS)
+        {
+            numKeys++;
+            bRetVal = true;
+        }
+
+        return bRetVal;
     }
 }
