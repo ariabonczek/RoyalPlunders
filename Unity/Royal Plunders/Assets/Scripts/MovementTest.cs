@@ -20,6 +20,8 @@ public class MovementTest : MonoBehaviour {
 
     public float stealthWalkSpeed;
 
+    public float holdingWalkSpeed;
+
     // booleans for the moveMode selected by the player
     private bool runButtonPressed;
 
@@ -87,9 +89,15 @@ public class MovementTest : MonoBehaviour {
         {
             float baseSpeedWithDelta = (baseSpeed * Time.deltaTime);
 
+            // check if this object has a holder script and if they are holding anything
+            HolderScript holder = GetComponent<HolderScript>();
 
+            if(holder && holder.IsHolding())
+            {
+                this.transform.position += rawMovementVec.normalized * holdingWalkSpeed * baseSpeedWithDelta;
+            }
             // check if the movement buttons have been pressed, with priority given to running
-            if (runButtonPressed)
+            else if (runButtonPressed)
             {
                 this.transform.position += rawMovementVec.normalized * runSpeed * baseSpeedWithDelta;
                 // Debug.Log("Running");

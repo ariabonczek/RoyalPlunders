@@ -7,6 +7,8 @@ public class HolderScript : MonoBehaviour {
 
     private GameObject HeldObject;
 
+    private bool holdingObject;
+
     private bool holdingButton;
 
     private bool clicked;
@@ -42,10 +44,21 @@ public class HolderScript : MonoBehaviour {
     {
         if(clicked && col.gameObject.GetComponent<HoldableScript>())
         {
-            if(!col.gameObject.GetComponent<HoldableScript>().IsHeld())
+            if (!col.gameObject.GetComponent<HoldableScript>().IsHeld())
+            {
                 col.gameObject.GetComponent<HoldableScript>().BeginHold(this.gameObject);
+                holdingObject = true;
+            }
             else
+            {
                 col.gameObject.GetComponent<HoldableScript>().EndHold(DisplacementOnDrop);
+                holdingObject = false;
+            }
         }
+    }
+
+    public bool IsHolding()
+    {
+        return holdingObject;
     }
 }
