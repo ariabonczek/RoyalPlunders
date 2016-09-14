@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Door : MonoBehaviour {
+public class Door : MonoBehaviour, IInteraction {
 
     private Quaternion startingRotation;
 
@@ -10,24 +10,22 @@ public class Door : MonoBehaviour {
 
     public int numKeyReq;
 
-    public bool openCommand;
+    public bool isOpen;
+    private bool inCH;
 
 	// Use this for initialization
 	void Start () 
     {
         startingRotation = transform.rotation;
+        isOpen = false;
 	}
 	
 	// Update is called once per frame
 	void Update () 
     {
-        if (openCommand)
+        if (GameObject.FindWithTag("Player").GetComponent<PlayerInteractions>().interactionButtonPressed && inCH)
         {
-            Open();
-        }
-        else
-        {
-            Close();
+            Interact();
         }
 	}
 
@@ -39,12 +37,32 @@ public class Door : MonoBehaviour {
 
     public void Close()
     {
-        openCommand = false;
         transform.localRotation = Quaternion.Lerp(transform.localRotation, startingRotation, Time.deltaTime * rotationSpeed);
     }
 
     public void WipeKeyReq()
     {
         numKeyReq = 0;
+    }
+
+    public void Interact()
+    {
+        Open();
+    }
+
+    public void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Player")
+        {
+            inCH = true;
+        }
+    }
+
+    public void OnTriggerExit(Collider other)
+    {
+        if (other.tag == "Player")
+        {
+            inCH = false;
+        }
     }
 }
