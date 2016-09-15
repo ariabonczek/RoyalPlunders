@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Guard : MonoBehaviour, IInteraction {
+public class Guard : MonoBehaviour {
 
     private bool inCH;
 

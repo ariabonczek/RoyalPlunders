@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Door : MonoBehaviour, IInteraction {
+public class Door : MonoBehaviour {
 
     private Quaternion startingRotation;
 
