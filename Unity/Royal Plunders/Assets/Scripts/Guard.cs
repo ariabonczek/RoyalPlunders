@@ -1,46 +1,33 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Guard : MonoBehaviour {
+public class Guard : MonoBehaviour, Iinteractable
+{
+    InventoryManager inventory;
 
-    private bool inCH;
-
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () 
+    void Start()
     {
-        if (inCH &&
-            GameObject.FindWithTag("Player").GetComponent<PlayerInteractions>().interactionButtonPressed)
-        {
-            Interact();
-        }
-	}
+        inventory = gameObject.GetComponent<InventoryManager>();
+    }
 
-    public void Interact()
+    public void interact(GameObject interactor)
     {
-        if (this.GetComponent<InventoryManager>().LoseKey())
+        InventoryManager invManager = interactor.GetComponent<InventoryManager>();
+
+        if (invManager != null && inventory.GetNumKeys() > 0) // a player, right?
         {
-            GameObject.FindWithTag("Player").GetComponent<InventoryManager>().GainKey();
+            invManager.GainKey();
+            inventory.LoseKey();
         }
     }
 
-    public void OnTriggerEnter(Collider other)
+    public string getTypeLabel()
     {
-        if (other.tag == "Player")
-        {
-            inCH = true;
-        }
+        return "Guard";
     }
 
-    public void OnTriggerExit(Collider other)
+    public bool isInstant()
     {
-        if (other.tag == "Player")
-        {
-            inCH = false;
-        }
+        return false;
     }
 }

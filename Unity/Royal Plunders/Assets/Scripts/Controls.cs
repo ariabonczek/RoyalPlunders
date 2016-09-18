@@ -1,14 +1,17 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class CamTest : MonoBehaviour
+public class Controls : MonoBehaviour
 {
     CameraController camCont;
+    Interactor actor;
     bool readyToTurn = true;
+    bool readyToInteract = true;
 
 	void Start ()
     {
         camCont = Camera.main.GetComponent<CameraController>();
+        actor = gameObject.GetComponent<Interactor>();
         camCont.targetTransform = transform;
 	}
 	
@@ -27,6 +30,14 @@ public class CamTest : MonoBehaviour
 
         if (!Input.GetButton("Left Shoulder") && !readyToTurn && !Input.GetButton("Right Shoulder"))
             readyToTurn = true;
+
+        if (Input.GetButton("Fire1") && readyToInteract)
+        {
+            readyToInteract = false;
+            actor.interact();
+        }
+        if (!Input.GetButton("Fire1") && !readyToInteract)
+            readyToInteract = true;
 
         camCont.freeLookX = Input.GetAxis("Right Horizontal");
         camCont.freeLookY = Input.GetAxis("Right Vertical");
