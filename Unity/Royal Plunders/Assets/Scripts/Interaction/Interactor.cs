@@ -15,6 +15,10 @@ public class Interactor : MonoBehaviour
     // Called by a ConvexHull, telling the interactor what it can now interact with
     public void addInteractable(GameObject other)
     {
+        // stop touching yourself
+        if (gameObject == other)
+            return;
+
         // if it is not in the list and is a valid target to interact with
         if (InteractionTable.canInteract(gameObject, other) && !listOfInteractables.Contains(other))
         {

@@ -1,0 +1,25 @@
+{
+	"priority": [
+		"Key",
+		"Door",
+		"Guard",
+		"Rail"
+	],
+	"permissions": [
+		{
+			"name": "Guard",
+			"perms": [
+				"Door"
+			]
+		},
+		{
+			"name": "Player",
+			"perms": [
+				"Key",
+				"Door",
+				"Guard",
+				"Rail"
+			]
+		}
+	]
+}

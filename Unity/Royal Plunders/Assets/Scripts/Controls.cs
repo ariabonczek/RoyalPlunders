@@ -13,6 +13,8 @@ public class Controls : MonoBehaviour
         camCont = Camera.main.GetComponent<CameraController>();
         actor = gameObject.GetComponent<Interactor>();
         camCont.targetTransform = transform;
+
+        InteractionTable.LoadTables("interactionTables"); // might be a good idea to move this to a game manager once we have one
 	}
 	
 	void Update ()
