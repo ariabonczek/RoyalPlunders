@@ -22,12 +22,12 @@ public class Controls : MonoBehaviour
         if (Input.GetButton("Left Shoulder") && readyToTurn)
         {
             readyToTurn = false;
-            camCont.angleSnapIndex--;
+            camCont.angleSnapIndex++;
         }
         if (Input.GetButton("Right Shoulder") && readyToTurn)
         {
             readyToTurn = false;
-            camCont.angleSnapIndex++;
+            camCont.angleSnapIndex--;
         }
 
         if (!Input.GetButton("Left Shoulder") && !readyToTurn && !Input.GetButton("Right Shoulder"))
