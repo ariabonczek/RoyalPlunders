@@ -9,6 +9,8 @@ public class GuardAITest : MonoBehaviour {
 
     public GameObject pathPoints;
 
+    public float angleOfView;
+
     // the distance at which the guard will chase the player
     public float PlayerSpotDistance;
 
@@ -44,10 +46,11 @@ public class GuardAITest : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         // chase the player if they are in range and you are not too far from your patrol route
-        if(player && Vector3.Distance(transform.position, player.transform.position) < PlayerSpotDistance && Vector3.Distance(transform.position, pathLocations[destPoint]) <= MaxDistanceFromPoint)
+        if(player && PlayerInView() && Vector3.Distance(transform.position, player.transform.position) < PlayerSpotDistance && Vector3.Distance(transform.position, pathLocations[destPoint]) <= MaxDistanceFromPoint)
         {
             chasingPlayer = true;
         }
+        Debug.DrawRay(transform.position, transform.forward, Color.red, 20);
 
         // while in the state of chasing the player
         if(chasingPlayer)
@@ -80,5 +83,30 @@ public class GuardAITest : MonoBehaviour {
        
         // Set the agent to go to the currently selected destination.
         agent.destination = pathLocations[destPoint];
+    }
+
+    bool PlayerInView()
+    {
+        if(player)
+        {
+            // using the dot product formular where dot = |a||b|cos(theta) and solving for theta
+            Vector2 forward = new Vector2(transform.forward.x, transform.forward.y);
+            Vector2 toPlayer = new Vector2(player.transform.position.x - transform.position.x, player.transform.position.y- transform.position.y);
+
+            // the forward is already normalized, and by normalizing toPayer, we eliminate the magnitude part of the equation
+            float dot = Vector2.Dot(forward, toPlayer.normalized);
+
+            // now we have cos(theta) for dot, we just need to get the arc cosine to get theta.
+            if(Mathf.Acos(dot) <=(Mathf.Deg2Rad*angleOfView/2))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+
+        }
+        return false;
     }
 }
