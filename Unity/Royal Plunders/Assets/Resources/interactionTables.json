@@ -9,6 +9,7 @@
 		{
 			"name": "Guard",
 			"perms": [
+				"Player",
 				"Door"
 			]
 		},

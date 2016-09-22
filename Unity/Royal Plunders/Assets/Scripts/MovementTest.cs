@@ -5,6 +5,8 @@ using System.Collections.Generic;
 public class MovementTest : MonoBehaviour {
 
     public bool inputDisabled;
+    public bool sidewaysLocked;
+    public bool frontandbackLocked;
 
     public float baseSpeed;
 
@@ -78,11 +80,28 @@ public class MovementTest : MonoBehaviour {
             }
 
             // we get the movement vector using the left analog stick input and the character's orientation
-            rawMovementVec.x = (Vector3.left * -(Input.GetAxis("Left Horizontal"))).x;
-            rawMovementVec.z = (Vector3.forward * -(Input.GetAxis("Left Vertical"))).z;
+            if ( !sidewaysLocked && !frontandbackLocked )
+            {
+                rawMovementVec.x = (Vector3.left * -(Input.GetAxis("Left Horizontal"))).x;
+                rawMovementVec.z = (Vector3.forward * -(Input.GetAxis("Left Vertical"))).z;
 
-            // we then rotate the movement vector by the camera angle difference we've just calculated
-            rawMovementVec = Quaternion.AngleAxis(cameraAngleDiff, Vector3.up) * rawMovementVec;
+                // we then rotate the movement vector by the camera angle difference we've just calculated
+                rawMovementVec = Quaternion.AngleAxis(cameraAngleDiff, Vector3.up) * rawMovementVec;
+            }
+            else if(sidewaysLocked)
+            {
+                rawMovementVec.x = (Vector3.left * -(Input.GetAxis("Left Horizontal"))).x;
+                rawMovementVec.z = 0;
+            }
+            else if(frontandbackLocked)
+            {
+                rawMovementVec.x = 0;
+                rawMovementVec.z = (Vector3.forward * -(Input.GetAxis("Left Vertical"))).z;
+            }
+            else
+            {
+                Debug.Log("Input Error!");
+            }
         }
 
         // here we interpret the speed the player has put in via stick and button control, factor it in with base speed and time delta, and apply it as the new speed
