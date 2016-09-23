@@ -91,19 +91,23 @@ public class MovementTest : MonoBehaviour {
 
             // check if this object has a holder script and if they are holding anything
             HolderScript holder = GetComponent<HolderScript>();
+            int soundValue = 0;
 
             if(holder && holder.IsHolding())
             {
+                soundValue = 3;
                 this.transform.position += rawMovementVec.normalized * holdingWalkSpeed * baseSpeedWithDelta;
             }
             // check if the movement buttons have been pressed, with priority given to running
             else if (runButtonPressed)
             {
+                soundValue = 4;
                 this.transform.position += rawMovementVec.normalized * runSpeed * baseSpeedWithDelta;
                 // Debug.Log("Running");
             }
             else if(stealthWalkButtonPressed)
             {
+                soundValue = 1;
                 this.transform.position += rawMovementVec.normalized * stealthWalkSpeed * baseSpeedWithDelta;
                 // Debug.Log("Stealth Walking");
             }
@@ -112,15 +116,26 @@ public class MovementTest : MonoBehaviour {
                 float appliedSpeed;
                 if (rawMovementVec.magnitude < speedChangeThreshold)
                 {
+                    soundValue = 2;
                     appliedSpeed = slowWalkSpeed;
                     // Debug.Log("Slow Walk");
                 }
                 else
                 {
+                    soundValue = 3;
                     appliedSpeed = fastWalkSpeed;
                     // Debug.Log("Fast Walk");
                 }
                 this.transform.position += rawMovementVec.normalized * appliedSpeed * baseSpeedWithDelta;
+
+            }
+            if (rawMovementVec == Vector3.zero)
+                soundValue = 0;
+
+            NoiseMakerScript noiseScript = GetComponent<NoiseMakerScript>();
+            if (noiseScript)
+            {
+                noiseScript.AdjustSoundLevel(soundValue);
             }
         }
     }
