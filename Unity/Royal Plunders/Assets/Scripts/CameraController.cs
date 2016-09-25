@@ -35,7 +35,7 @@ public class CameraController : MonoBehaviour
     public float rotationLerp = 10;
 
     // experimental feature
-    public bool immersiveLook = true;
+    public bool immersiveLook = false;
 
     // whatever this script is attached to
     private Transform self;

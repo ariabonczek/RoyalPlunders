@@ -9,9 +9,9 @@ public class SetJailPoint : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
-            if (other.GetComponent<PlayerInteraction>())
+            if (other.GetComponent<Player>())
             {
-                other.GetComponent<PlayerInteraction>().respawnPoint = respawnPosition;
+                other.GetComponent<Player>().respawnPoint = respawnPosition;
             }
         }
     }

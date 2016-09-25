@@ -5,15 +5,17 @@ public class Door : MonoBehaviour, Iinteractable
 {
     private Quaternion startingRotation;
     private bool isOpen = false;
+    private Transform hinge;
 
-    public float rotation = 0;
+    public float rotation = 90;
     public float rotationSpeed = 1;
 
     public int numKeyReq = 0;
     
     void Start()
     {
-        startingRotation = transform.rotation;
+        hinge = transform.parent;
+        startingRotation = hinge.rotation;
     }
 
     void Update()
@@ -21,11 +23,11 @@ public class Door : MonoBehaviour, Iinteractable
         if (isOpen)
         {
             Quaternion quat = Quaternion.Euler(0, rotation, 0);
-            transform.localRotation = Quaternion.Lerp(transform.localRotation, quat, Time.deltaTime * rotationSpeed);
+            hinge.localRotation = Quaternion.Lerp(hinge.localRotation, quat, Time.deltaTime * rotationSpeed);
         }
         else
         {
-            transform.localRotation = Quaternion.Lerp(transform.localRotation, startingRotation, Time.deltaTime * rotationSpeed);
+            hinge.localRotation = Quaternion.Lerp(hinge.localRotation, startingRotation, Time.deltaTime * rotationSpeed);
         }
     }
 
@@ -48,7 +50,7 @@ public class Door : MonoBehaviour, Iinteractable
     {
         InventoryManager invManager = interactor.GetComponent<InventoryManager>();
 
-        if (invManager == null) // not a player, right?
+        if (invManager == null)
         {
             Open();
             return;

@@ -3,20 +3,40 @@ using System.Collections;
 
 public class Rail : MonoBehaviour, Iinteractable
 {
-    public GameObject playerRef;
+    GameObject shell;
+
+    static int idTracker = 1;
+    private int id;
+    public int ID { get{ return id; } }
 
     void Start()
     {
-        playerRef = GameObject.FindWithTag("Player");
+        shell = transform.parent.gameObject;
+        id = idTracker++;
     }
 
     public void interact(GameObject interactor)
     {
-        if (playerRef)
+        Player player = interactor.GetComponent<Player>();
+        Movement mover = interactor.GetComponent<Movement>();
+
+        if (!player)
+            return;
+
+        if (player.RailID != id)
         {
-            playerRef.transform.position = transform.position;
+            mover.rail = shell.transform.right * shell.transform.localScale.x;
+            mover.railPos = transform.position - mover.rail / 2;
+            mover.lockMovementToRail = true;
+            mover.lockPositionToRail = true;
+            player.assignRail(this);
         }
-        Debug.Log("Interacted!");
+        else if (player.RailID == id)
+        {
+            mover.lockMovementToRail = false;
+            mover.lockPositionToRail = false;
+            player.unassignRail();
+        }
     }
 
     public string getTypeLabel()

@@ -4,13 +4,8 @@ using System.Collections;
 public class InventoryManager : MonoBehaviour 
 {
     // right now inventory only contains keys
-    public int numKeys;
-    public int MAX_KEYS;
-
-    public void Start()
-    {
-        MAX_KEYS = 100;
-    }
+    public int numKeys = 0;
+    public int MAX_KEYS = 100;
 
     public int GetNumKeys()
     {

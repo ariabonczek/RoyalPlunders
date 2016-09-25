@@ -31,21 +31,21 @@ public class HoldableScript : MonoBehaviour {
         originalY = transform.position.y;
         held = true;
         owner = newOwner;
-        if (GetComponent<MovementTest>())
-        {
-            GetComponent<MovementTest>().inputDisabled = true;
-        }
 
+        Movement mover = gameObject.GetComponent<Movement>();
+        if (mover)
+            mover.enabled = false;
     }
 
     // this function restores movement, returns the held boolean to false and places the item in front of the player
     public void EndHold(float displacement)
     {
         held = false;
-        if (GetComponent<MovementTest>())
-        {
-            GetComponent<MovementTest>().inputDisabled = false;
-        }
+
+        Movement mover = gameObject.GetComponent<Movement>();
+        if (mover)
+            mover.enabled = true;
+
         this.transform.position = owner.transform.position + owner.transform.forward * displacement;
         transform.position.Set(transform.position.x, originalY, transform.position.z);
         GetComponent<Collider>().enabled = true;

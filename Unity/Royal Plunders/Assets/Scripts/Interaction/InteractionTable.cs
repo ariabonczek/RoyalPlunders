@@ -20,8 +20,8 @@ public static class InteractionTable
     [System.Serializable]
     class JSONData
     {
-        public string[] priority; // the order by which to sort interactables if the interactor has more than 1 available to it
-        public interactorPerms[] permissions; // all the per-interactor permissions
+        public string[] priority = new string[0]; // the order by which to sort interactables if the interactor has more than 1 available to it
+        public interactorPerms[] permissions  = new interactorPerms[0]; // all the per-interactor permissions
     }
 
     static JSONData tables;
