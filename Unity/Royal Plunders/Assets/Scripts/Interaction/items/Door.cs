@@ -15,18 +15,20 @@ public class Door : MonoBehaviour, Iinteractable
     void Start()
     {
         hinge = transform.parent;
-        startingRotation = hinge.rotation;
+        startingRotation = hinge.localRotation;
     }
 
     void Update()
     {
         if (isOpen)
         {
-            Quaternion quat = Quaternion.Euler(0, rotation, 0);
+            Debug.Log("o: " + hinge.localRotation);
+            Quaternion quat = Quaternion.Euler(0, startingRotation.eulerAngles.y + rotation, 0);
             hinge.localRotation = Quaternion.Lerp(hinge.localRotation, quat, Time.deltaTime * rotationSpeed);
         }
         else
         {
+            Debug.Log("c: " + hinge.localRotation);
             hinge.localRotation = Quaternion.Lerp(hinge.localRotation, startingRotation, Time.deltaTime * rotationSpeed);
         }
     }
