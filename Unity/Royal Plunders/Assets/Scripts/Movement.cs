@@ -19,13 +19,18 @@ public class Movement : MonoBehaviour
     public Vector3 relativeForward;
     public Vector3 direction;
 
-    // rail vectors
+    // rail locking
     // rail defines the direction of resitricted movement
     public Vector3 rail;
     public bool lockMovementToRail;
     // if the rail becomes a plane, it's length is used with this position to confine movement to a plane rotated about the Y axis
     public Vector3 railPos;
     public bool lockPositionToRail;
+
+    // rotation locking
+    public Vector3 rotationLockDirection;
+    public float rotationLockRange;
+    public bool lockRotation;
 
     // movement states
     public bool sprint;
@@ -35,10 +40,15 @@ public class Movement : MonoBehaviour
     NoiseMakerScript noiseScript;
     HolderScript holder;
 
+    // model
+    GameObject model;
+    public float modelTurnRate = 7.5f;
+
     void Start ()
     {
         noiseScript = GetComponent<NoiseMakerScript>();
         holder = GetComponent<HolderScript>();
+        model = transform.FindChild("Model").gameObject;
     }
 	
 	void Update ()
@@ -111,7 +121,20 @@ public class Movement : MonoBehaviour
         if (direction == Vector3.zero)
             soundValue = 0;
         else
+        {
             this.transform.position = position + direction * appliedSpeed;
+
+            Quaternion directionRotation = Quaternion.LookRotation(direction, Vector3.up);
+
+            if (lockRotation)
+            {
+                float dirAngle = Vector3.Angle(direction, rotationLockDirection);
+                if (dirAngle >= rotationLockRange)
+                    directionRotation = Quaternion.Lerp(directionRotation, Quaternion.LookRotation(rotationLockDirection, Vector3.up), 1 - (rotationLockRange / dirAngle));
+            }
+
+            model.transform.rotation = Quaternion.Lerp(model.transform.rotation, directionRotation, Time.deltaTime * modelTurnRate);
+        }
 
         if (noiseScript)
             noiseScript.AdjustSoundLevel(soundValue);

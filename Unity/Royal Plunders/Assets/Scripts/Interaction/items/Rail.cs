@@ -27,14 +27,18 @@ public class Rail : MonoBehaviour, Iinteractable
         {
             mover.rail = shell.transform.right * shell.transform.localScale.x;
             mover.railPos = transform.position - mover.rail / 2;
+            mover.rotationLockDirection = transform.forward;
+            mover.rotationLockRange = 5;
             mover.lockMovementToRail = true;
             mover.lockPositionToRail = true;
+            mover.lockRotation = true;
             player.assignRail(this);
         }
         else if (player.RailID == id)
         {
             mover.lockMovementToRail = false;
             mover.lockPositionToRail = false;
+            mover.lockRotation = false;
             player.unassignRail();
         }
     }
