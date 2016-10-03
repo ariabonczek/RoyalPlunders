@@ -28,9 +28,9 @@ public class GuardAITest : MonoBehaviour {
     // the points for the guards patrol
     private Vector3[] pathLocations;
 
-    enum AIState {Chasing, Suspcious,Patrolling};
+    public enum AIState {Chasing, Suspcious,Patrolling};
 
-    private AIState myState;
+    public AIState myState;
 
     private bool suspiciousPrev;
 
@@ -81,7 +81,6 @@ public class GuardAITest : MonoBehaviour {
         // while in the state of chasing the player
         if (myState == AIState.Chasing)
         {
-            Debug.Log("Chasing");
             transform.GetChild(0).position = transform.position + new Vector3(0, 2, 0);
             transform.GetChild(2).position = transform.position + new Vector3(0, -100, 0);
             transform.GetChild(1).position = transform.position + new Vector3(0, -100, 0);
@@ -89,7 +88,6 @@ public class GuardAITest : MonoBehaviour {
         }
         else if (myState == AIState.Suspcious)
         {
-            Debug.Log("Susp");
             transform.GetChild(1).position = transform.position + new Vector3(0, 2, 0);
             transform.GetChild(0).position = transform.position + new Vector3(0, -100, 0);
             transform.GetChild(2).position = transform.position + new Vector3(0, -100, 0);
@@ -101,7 +99,6 @@ public class GuardAITest : MonoBehaviour {
         }
         else
         {
-            Debug.Log("Destin'ysBoringAsShit");
             transform.GetChild(2).position = transform.position + new Vector3(0, 2, 0);
             transform.GetChild(0).position = transform.position + new Vector3(0, -100, 0);
             transform.GetChild(1).position = transform.position + new Vector3(0, -100, 0);
@@ -121,29 +118,27 @@ public class GuardAITest : MonoBehaviour {
     //
     void DetermineAIState()
     {
+        Debug.DrawLine(this.transform.position, player.transform.position);
         // chase the player if they are in range and you are not too far from your patrol route
         if (player && PlayerInView() && Vector3.Distance(transform.position, pathLocations[destPoint]) <= MaxDistanceFromPoint)
         {
             // doing a line cast check to see if there are any obstacles between the AI and the player
-            ray = new Ray(transform.position, player.transform.position);
-
-            bool obstruction = false;
+            ray = new Ray(transform.position, player.transform.position - transform.position);
 
             if (Physics.Raycast(ray, out hit, PlayerSpotDistance))
             {
-                if (hit.collider.gameObject != player)
-                    obstruction = true;
+                GameObject targetObj = hit.collider.gameObject;
+                if (targetObj == player || (targetObj.transform.parent && targetObj.transform.parent.gameObject == player))
+                {
+                    myState = AIState.Chasing;
+                }
             }
-                if(!obstruction)
-                myState = AIState.Chasing;
             return;
         }
         else if (Vector3.Distance(transform.position, pathLocations[destPoint]) > MaxDistanceFromPoint)
         {
             myState = AIState.Patrolling;
         }
-
-        Debug.DrawRay(transform.position, transform.forward, Color.red, 20);
 
         // chase the player if they are in range and making a loud enough sound
         NoiseMakerScript noiseScript = player.GetComponent<NoiseMakerScript>();
