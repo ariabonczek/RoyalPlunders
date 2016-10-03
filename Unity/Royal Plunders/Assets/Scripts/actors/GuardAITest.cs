@@ -28,9 +28,9 @@ public class GuardAITest : MonoBehaviour {
     // the points for the guards patrol
     private Vector3[] pathLocations;
 
-    private bool chasingPlayer;
+    enum AIState {Chasing, Suspcious,Patrolling};
 
-    private bool suspicious;
+    private AIState myState;
 
     private bool suspiciousPrev;
 
@@ -38,12 +38,17 @@ public class GuardAITest : MonoBehaviour {
 
     private int destPoint = 0;
 
+    // ray used for player detection checks
+    private Ray ray;
+
+    // raycast hit used for player detection checks
+    private RaycastHit hit;
+
     // Use this for initialization
     void Start () {
         agent = GetComponent<NavMeshAgent>();
         agent.autoBraking = false;
-        chasingPlayer = false;
-        suspicious = false;
+        myState = AIState.Patrolling;
         suspiciousPrev = false;
         // setting up the array of points to use as the patrol
         if(pathPoints)
@@ -61,82 +66,119 @@ public class GuardAITest : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        // chase the player if they are in range and you are not too far from your patrol route
-        if(player && PlayerInView() && Vector3.Distance(transform.position, pathLocations[destPoint]) <= MaxDistanceFromPoint)
-        {
-            chasingPlayer = true;
-        }
-        Debug.DrawRay(transform.position, transform.forward, Color.red, 20);
 
-        // chase the player if they are in range and making a loud enough sound
-        NoiseMakerScript noiseScript = player.GetComponent<NoiseMakerScript>();
-        if(noiseScript)
-        {
-            switch(noiseScript.GetSoundLevel())
-            {
-                case 1:
-                    suspicious |= (Vector3.Distance(transform.position, player.transform.position) < sneakWalkDetectionRange);
-                    break;
-                case 2:
-                    suspicious |= (Vector3.Distance(transform.position, player.transform.position) < slowWalkDetectionRange);
-                    break;
-                case 3:
-                    suspicious |= (Vector3.Distance(transform.position, player.transform.position) < fastWalkDetectionRange);
-                    break;
-                case 4:
-                    suspicious |= (Vector3.Distance(transform.position, player.transform.position) < runDetectionRange);
-                    break;
-                default:
+        DetermineAIState();
 
-                    break;
-            }
-            if(suspicious && !suspiciousPrev)
-            {
-                suspicionPoint = player.transform.position;
-            }
-        }
+        ExecuteAIStateResult();
+   
+    }
 
+    //
+    // This segment covers the proper resulting actions for the AI to take given its current state
+    //
+    void ExecuteAIStateResult()
+    {
         // while in the state of chasing the player
-        if(chasingPlayer)
+        if (myState == AIState.Chasing)
         {
-            suspicious = false;
+            Debug.Log("Chasing");
             transform.GetChild(0).position = transform.position + new Vector3(0, 2, 0);
             transform.GetChild(2).position = transform.position + new Vector3(0, -100, 0);
             transform.GetChild(1).position = transform.position + new Vector3(0, -100, 0);
             agent.destination = player.transform.position;
-
-            // stop chasing if it strays too far off path
-            if (Vector3.Distance(transform.position, pathLocations[destPoint]) > MaxDistanceFromPoint)
-            {
-                chasingPlayer = false;
-                agent.destination = pathLocations[destPoint];
-            }
         }
-        else if (suspicious && Vector3.Distance(transform.position, pathLocations[destPoint]) <= MaxDistanceFromPoint)
+        else if (myState == AIState.Suspcious)
         {
+            Debug.Log("Susp");
             transform.GetChild(1).position = transform.position + new Vector3(0, 2, 0);
             transform.GetChild(0).position = transform.position + new Vector3(0, -100, 0);
             transform.GetChild(2).position = transform.position + new Vector3(0, -100, 0);
-            agent.destination = suspicionPoint;
-            if(Vector3.Distance(transform.position,suspicionPoint)<1)
+            if (!suspiciousPrev)
             {
-                suspicious = false;
-                agent.destination = pathLocations[destPoint];
+                suspicionPoint = player.transform.position;
             }
+            agent.destination = suspicionPoint;
         }
         else
         {
+            Debug.Log("Destin'ysBoringAsShit");
             transform.GetChild(2).position = transform.position + new Vector3(0, 2, 0);
             transform.GetChild(0).position = transform.position + new Vector3(0, -100, 0);
             transform.GetChild(1).position = transform.position + new Vector3(0, -100, 0);
+            agent.destination = pathLocations[destPoint];
         }
-        
+
         // proceed to next patrol point when in range of current point
-        if (pathPoints && Vector3.Distance(transform.position,pathLocations[destPoint])<1)
+        if (pathPoints && Vector3.Distance(transform.position, pathLocations[destPoint]) < 1)
         {
             GotoNextPoint();
         }
-        suspiciousPrev = suspicious;
+        suspiciousPrev = (myState == AIState.Suspcious);
+    }
+
+    //
+    // This function covers the decision process for the AI entering its states
+    //
+    void DetermineAIState()
+    {
+        // chase the player if they are in range and you are not too far from your patrol route
+        if (player && PlayerInView() && Vector3.Distance(transform.position, pathLocations[destPoint]) <= MaxDistanceFromPoint)
+        {
+            // doing a line cast check to see if there are any obstacles between the AI and the player
+            ray = new Ray(transform.position, player.transform.position);
+
+            bool obstruction = false;
+
+            if (Physics.Raycast(ray, out hit, PlayerSpotDistance))
+            {
+                if (hit.collider.gameObject != player)
+                    obstruction = true;
+            }
+                if(!obstruction)
+                myState = AIState.Chasing;
+            return;
+        }
+        else if (Vector3.Distance(transform.position, pathLocations[destPoint]) > MaxDistanceFromPoint)
+        {
+            myState = AIState.Patrolling;
+        }
+
+        Debug.DrawRay(transform.position, transform.forward, Color.red, 20);
+
+        // chase the player if they are in range and making a loud enough sound
+        NoiseMakerScript noiseScript = player.GetComponent<NoiseMakerScript>();
+        if (noiseScript)
+        {
+                if (Vector3.Distance(transform.position, pathLocations[destPoint]) <= MaxDistanceFromPoint)
+                {
+                    switch (noiseScript.GetSoundLevel())
+                    {
+                        case 1:
+                            if (Vector3.Distance(transform.position, player.transform.position) < sneakWalkDetectionRange && myState != AIState.Chasing)
+                                myState = AIState.Suspcious;
+                            break;
+                        case 2:
+                            if (Vector3.Distance(transform.position, player.transform.position) < slowWalkDetectionRange && myState != AIState.Chasing)
+                                myState = AIState.Suspcious;
+                            break;
+                        case 3:
+                            if (Vector3.Distance(transform.position, player.transform.position) < fastWalkDetectionRange && myState != AIState.Chasing)
+                                myState = AIState.Suspcious;
+                            break;
+                        case 4:
+                            if (Vector3.Distance(transform.position, player.transform.position) < runDetectionRange && myState != AIState.Chasing)
+                                myState = AIState.Suspcious;
+                            break;
+                        default:
+
+                            break;
+                    }
+                }
+                if(Vector3.Distance(transform.position, suspicionPoint) < 2 && myState ==AIState.Suspcious)
+                {
+                    myState = AIState.Patrolling;
+                }
+        }
     }
 
     void GotoNextPoint()
