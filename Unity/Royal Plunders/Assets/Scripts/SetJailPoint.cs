@@ -5,13 +5,18 @@ public class SetJailPoint : MonoBehaviour
 {
     public Transform respawnPosition;
 
-    void OnTriggerEnter(Collider other)
+    void Update()
     {
-        if (other.gameObject.tag == "Player")
+        GuardAITest guardScript = GetComponent<GuardAITest>();
+        if (guardScript)
         {
-            if (other.GetComponent<Player>())
+            if(guardScript.myState == GuardAITest.AIState.Chasing)
             {
-                other.GetComponent<Player>().respawnPoint = respawnPosition;
+                if((guardScript.player.transform.position-transform.position).magnitude<1.5 && respawnPosition)
+                {
+                    guardScript.player.transform.position = respawnPosition.position;
+                    guardScript.myState = GuardAITest.AIState.Patrolling;
+                }
             }
         }
     }

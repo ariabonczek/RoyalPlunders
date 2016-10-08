@@ -306,13 +306,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25463243293229f41a753ca4dfd20b68, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseSpeed: 2
+  baseSpeed: 1.7
   speedChangeThreshold: 0.8
-  slowWalkSpeed: 2
+  slowWalkSpeed: 1.5
   fastWalkSpeed: 3
   sprintSpeed: 4
-  sneakSpeed: 0.3
-  carrySpeed: 0.5
+  sneakSpeed: 0.5
+  carrySpeed: 0.8
   relativeForward: {x: 0, y: 0, z: 0}
   direction: {x: 0, y: 0, z: 0}
   rail: {x: 0, y: 0, z: 0}

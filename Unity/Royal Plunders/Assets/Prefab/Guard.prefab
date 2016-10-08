@@ -63,9 +63,10 @@ GameObject:
   - 195: {fileID: 195000014284045562}
   - 114: {fileID: 114000011536717420}
   - 114: {fileID: 114000010802401798}
+  - 114: {fileID: 114000012595850968}
   m_Layer: 0
   m_Name: Guard
-  m_TagString: Untagged
+  m_TagString: Guard
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -158,7 +159,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000012357000632}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.313, z: -0.6}
+  m_LocalPosition: {x: 0, y: -0.313, z: -0.663}
   m_LocalScale: {x: 0.720673, y: 0.9106518, z: 0.8137364}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
@@ -496,6 +497,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   numKeys: 1
   MAX_KEYS: 100
+--- !u!114 &114000012595850968
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000011881299508}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d931ed565ff87e743b59a410627a4b39, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  respawnPosition: {fileID: 0}
 --- !u!114 &114000013084243630
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -516,6 +529,7 @@ MonoBehaviour:
   runDetectionRange: 20
   PlayerSpotDistance: 10
   MaxDistanceFromPoint: 20
+  myState: 0
 --- !u!135 &135000011196762826
 SphereCollider:
   m_ObjectHideFlags: 1

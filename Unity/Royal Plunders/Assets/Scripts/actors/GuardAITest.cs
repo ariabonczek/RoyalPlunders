@@ -32,6 +32,8 @@ public class GuardAITest : MonoBehaviour {
 
     public AIState myState;
 
+    private bool suspicionRange;
+
     private bool suspiciousPrev;
 
     private Vector3 suspicionPoint;
@@ -47,6 +49,7 @@ public class GuardAITest : MonoBehaviour {
     // Use this for initialization
     void Start () {
         agent = GetComponent<NavMeshAgent>();
+        suspicionRange = false;
         agent.autoBraking = false;
         myState = AIState.Patrolling;
         suspiciousPrev = false;
@@ -78,7 +81,7 @@ public class GuardAITest : MonoBehaviour {
     //
     void ExecuteAIStateResult()
     {
-        // while in the state of chasing the player
+        // while in the state of Chasing the player
         if (myState == AIState.Chasing)
         {
             transform.GetChild(0).position = transform.position + new Vector3(0, 2, 0);
@@ -130,7 +133,10 @@ public class GuardAITest : MonoBehaviour {
                 GameObject targetObj = hit.collider.gameObject;
                 if (targetObj == player || (targetObj.transform.parent && targetObj.transform.parent.gameObject == player))
                 {
-                    myState = AIState.Chasing;
+                    if (suspicionRange && myState != AIState.Chasing)
+                        myState = AIState.Suspcious;
+                    else
+                        myState = AIState.Chasing;
                 }
             }
             return;
@@ -193,8 +199,13 @@ public class GuardAITest : MonoBehaviour {
     {
         if(player)
         {
-            if (Vector3.Distance(transform.position, player.transform.position) > PlayerSpotDistance)
+            if (Vector3.Distance(transform.position, player.transform.position) > PlayerSpotDistance * 2)
                 return false;
+
+            if (Vector3.Distance(transform.position, player.transform.position) > PlayerSpotDistance)
+                suspicionRange = true;
+            else
+                suspicionRange = false;
 
             // using the dot product formular where dot = |a||b|cos(theta) and solving for theta
             Vector2 forward = new Vector2(transform.forward.x, transform.forward.z);
