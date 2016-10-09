@@ -28,7 +28,7 @@ public class Rail : MonoBehaviour, Iinteractable
             mover.rail = shell.transform.right * shell.transform.localScale.x;
             mover.railPos = transform.position - mover.rail / 2;
             mover.rotationLockDirection = transform.forward;
-            mover.rotationLockRange = 5;
+            mover.rotationLockRange = 0.01f;
             mover.lockMovementToRail = true;
             mover.lockPositionToRail = true;
             mover.lockRotation = true;

@@ -2,7 +2,8 @@
 	"priority": [
 		"Key",
 		"Door",
-		"Guard",
+    "Guard",
+    "Box",
 		"Rail"
 	],
 	"permissions": [
@@ -19,7 +20,8 @@
 				"Key",
 				"Door",
 				"Guard",
-				"Rail"
+        "Rail",
+        "Box"
 			]
 		}
 	]
