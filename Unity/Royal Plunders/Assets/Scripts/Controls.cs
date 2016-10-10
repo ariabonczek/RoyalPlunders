@@ -4,18 +4,17 @@ using System.Collections;
 public class Controls : MonoBehaviour
 {
     Camera mainCamera;
-    CameraController camCont;
+    ThirdPersonCamera cam;
     Interactor actor;
     Movement mover;
-    bool readyToTurn = true;
     bool readyToInteract = true;
 
 	void Start ()
     {
         mainCamera = Camera.main;
-        camCont = mainCamera.GetComponent<CameraController>();
+        cam = mainCamera.GetComponent<ThirdPersonCamera>();
         actor = GetComponent<Interactor>();
-        camCont.targetTransform = transform;
+        cam.setTarget(gameObject);
         mover = GetComponent<Movement>();
 
         InteractionTable.LoadTables("interactionTables"); // might be a good idea to move this to a game manager once we have one
@@ -23,20 +22,6 @@ public class Controls : MonoBehaviour
 	
 	void Update ()
     {
-        if (Input.GetButton("Left Shoulder") && readyToTurn)
-        {
-            readyToTurn = false;
-            camCont.angleSnapIndex++;
-        }
-        if (Input.GetButton("Right Shoulder") && readyToTurn)
-        {
-            readyToTurn = false;
-            camCont.angleSnapIndex--;
-        }
-
-        if (!Input.GetButton("Left Shoulder") && !readyToTurn && !Input.GetButton("Right Shoulder"))
-            readyToTurn = true;
-
         if (Input.GetButton("A Button") && readyToInteract)
         {
             readyToInteract = false;
@@ -44,12 +29,16 @@ public class Controls : MonoBehaviour
         }
         if (!Input.GetButton("A Button") && !readyToInteract)
             readyToInteract = true;
-
-        camCont.freeLookX = Input.GetAxis("Right Horizontal");
-        camCont.freeLookY = Input.GetAxis("Right Vertical");
-
+        
+        cam.inputPitch = Input.GetAxis("Right Vertical");
+        cam.inputYaw = Input.GetAxis("Right Horizontal");
+        
         mover.sprint = Input.GetButton("X Button");
         mover.sneak = Input.GetButton("B Button");
+
+        cam.sprinting = mover.sprint;
+        cam.sneaking = mover.sneak;
+
         mover.direction.x = Input.GetAxis("Left Horizontal");
         mover.direction.z = -Input.GetAxis("Left Vertical");
         mover.relativeForward = mainCamera.transform.forward;
