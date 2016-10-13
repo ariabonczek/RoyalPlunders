@@ -15,7 +15,7 @@ public class SetJailPoint : MonoBehaviour
                 if((guardScript.player.transform.position-transform.position).magnitude<1.5 && respawnPosition)
                 {
                     guardScript.player.transform.position = respawnPosition.position;
-                    guardScript.myState = GuardAITest.AIState.Patrolling;
+                    guardScript.myState = GuardAITest.AIState.Escorting;
                 }
             }
         }

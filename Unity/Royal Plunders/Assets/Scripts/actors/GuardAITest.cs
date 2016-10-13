@@ -9,6 +9,10 @@ public class GuardAITest : MonoBehaviour {
 
     public GameObject pathPoints;
 
+    public TargetAITest myTarget;
+
+    private Vector3 escortLocation;
+
     public float angleOfView;
 
     public float sneakWalkDetectionRange;
@@ -28,7 +32,7 @@ public class GuardAITest : MonoBehaviour {
     // the points for the guards patrol
     private Vector3[] pathLocations;
 
-    public enum AIState {Chasing, Suspcious,Patrolling};
+    public enum AIState {Chasing, Suspcious,Patrolling, Escorting};
 
     public AIState myState;
 
@@ -53,6 +57,8 @@ public class GuardAITest : MonoBehaviour {
         agent.autoBraking = false;
         myState = AIState.Patrolling;
         suspiciousPrev = false;
+        escortLocation = Vector3.zero;
+        myTarget = null;
         // setting up the array of points to use as the patrol
         if(pathPoints)
         {
@@ -100,12 +106,35 @@ public class GuardAITest : MonoBehaviour {
             }
             agent.destination = suspicionPoint;
         }
-        else
+        else if (myState == AIState.Patrolling)
         {
             transform.GetChild(2).position = transform.position + new Vector3(0, 2, 0);
             transform.GetChild(0).position = transform.position + new Vector3(0, -100, 0);
             transform.GetChild(1).position = transform.position + new Vector3(0, -100, 0);
             agent.destination = pathLocations[destPoint];
+
+            if(myTarget)
+            {
+                myState = AIState.Escorting;
+            }
+        }
+        else if (myState == AIState.Escorting)
+        {
+            transform.GetChild(2).position = transform.position + new Vector3(0, 2, 0);
+            transform.GetChild(0).position = transform.position + new Vector3(0, -100, 0);
+            transform.GetChild(1).position = transform.position + new Vector3(0, -100, 0);
+            if (escortLocation == Vector3.zero)
+            {
+                escortLocation = myTarget.GetComponent<TargetAITest>().GetTargetBasePosition();
+            }
+            agent.destination = escortLocation;
+            if (Vector3.Distance(transform.position, escortLocation) < 2)
+            {
+                myTarget.myState = TargetAITest.AIState.Unaware;
+                myTarget = null;
+                escortLocation = Vector3.zero;
+                myState = AIState.Patrolling;
+            }
         }
 
         // proceed to next patrol point when in range of current point
@@ -141,7 +170,7 @@ public class GuardAITest : MonoBehaviour {
             }
             return;
         }
-        else if (Vector3.Distance(transform.position, pathLocations[destPoint]) > MaxDistanceFromPoint)
+        else if (Vector3.Distance(transform.position, pathLocations[destPoint]) > MaxDistanceFromPoint && myState != AIState.Escorting)
         {
             myState = AIState.Patrolling;
         }
