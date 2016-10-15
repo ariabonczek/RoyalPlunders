@@ -20,23 +20,38 @@ public class HolderScript : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
-        if (Input.GetButton("B Button"))
+        if (Input.GetButtonDown("A Button"))
         {
             if (!holdingButton)
             {
+                Debug.Log("PRessed");
                 holdingButton = true;
 
                 clicked = true;
             }
             else
             {
+                Debug.Log("Held");
                 clicked = false;
             }
         }
-        else if (!Input.GetButton("B Button"))
+        else
         {
             holdingButton = false;
             clicked = false;
+            Debug.Log("NotPRessed");
+        }
+
+        if (clicked && HeldObject)
+        {
+            if (HeldObject.GetComponent<HoldableScript>().IsHeld())
+            {
+                HeldObject.GetComponent<HoldableScript>().EndHold(DisplacementOnDrop);
+                holdingObject = false;
+                HeldObject = null;
+                Debug.Log("DOWN");
+                clicked = false;
+            }
         }
     }
 
@@ -48,11 +63,7 @@ public class HolderScript : MonoBehaviour {
             {
                 col.gameObject.GetComponent<HoldableScript>().BeginHold(this.gameObject);
                 holdingObject = true;
-            }
-            else
-            {
-                col.gameObject.GetComponent<HoldableScript>().EndHold(DisplacementOnDrop);
-                holdingObject = false;
+                HeldObject = col.gameObject;
             }
         }
     }

@@ -46,7 +46,7 @@ public class HoldableScript : MonoBehaviour {
         if (mover)
             mover.enabled = true;
 
-        this.transform.position = owner.transform.position + owner.transform.forward * displacement;
+        this.transform.position = owner.transform.position + owner.transform.GetChild(0).forward * displacement;
         transform.position.Set(transform.position.x, originalY, transform.position.z);
         GetComponent<Collider>().enabled = true;
     }
