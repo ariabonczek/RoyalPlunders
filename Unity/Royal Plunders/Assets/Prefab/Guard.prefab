@@ -172,7 +172,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000011146755552}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.030000687, y: 0.10000014, z: 0.3499992}
+  m_LocalPosition: {x: -0.030000687, y: 1.9, z: 0.3499992}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
@@ -522,6 +522,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   pathPoints: {fileID: 0}
+  myTarget: {fileID: 0}
   angleOfView: 45
   sneakWalkDetectionRange: 0
   slowWalkDetectionRange: 5

@@ -24,14 +24,14 @@ public class HolderScript : MonoBehaviour {
         {
             if (!holdingButton)
             {
-                Debug.Log("PRessed");
+                //Debug.Log("PRessed");
                 holdingButton = true;
 
                 clicked = true;
             }
             else
             {
-                Debug.Log("Held");
+                //Debug.Log("Held");
                 clicked = false;
             }
         }
@@ -39,7 +39,7 @@ public class HolderScript : MonoBehaviour {
         {
             holdingButton = false;
             clicked = false;
-            Debug.Log("NotPRessed");
+            //Debug.Log("NotPRessed");
         }
 
         if (clicked && HeldObject)
@@ -49,7 +49,7 @@ public class HolderScript : MonoBehaviour {
                 HeldObject.GetComponent<HoldableScript>().EndHold(DisplacementOnDrop);
                 holdingObject = false;
                 HeldObject = null;
-                Debug.Log("DOWN");
+                //Debug.Log("DOWN");
                 clicked = false;
             }
         }

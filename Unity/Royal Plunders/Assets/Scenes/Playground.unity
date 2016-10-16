@@ -37,7 +37,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44692534, g: 0.49678725, b: 0.57508564, a: 1}
+  m_IndirectSpecularColor: {r: 0.44692558, g: 0.49678743, b: 0.57508624, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -16298,6 +16298,11 @@ Prefab:
       propertyPath: m_RootOrder
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 114000012595850968, guid: 944eed087f8639f4bbe05a27197ee8b2,
+        type: 2}
+      propertyPath: respawnPosition
+      value: 
+      objectReference: {fileID: 320263124}
     - target: {fileID: 114000013084243630, guid: 944eed087f8639f4bbe05a27197ee8b2,
         type: 2}
       propertyPath: player
@@ -16308,19 +16313,6 @@ Prefab:
       propertyPath: pathPoints
       value: 
       objectReference: {fileID: 797260264}
-    - target: {fileID: 4000012915722570, guid: 944eed087f8639f4bbe05a27197ee8b2, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: -0.663
-      objectReference: {fileID: 0}
-    - target: {fileID: 4000012970192476, guid: 944eed087f8639f4bbe05a27197ee8b2, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 1.9
-      objectReference: {fileID: 0}
-    - target: {fileID: 114000012595850968, guid: 944eed087f8639f4bbe05a27197ee8b2,
-        type: 2}
-      propertyPath: respawnPosition
-      value: 
-      objectReference: {fileID: 320263124}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 944eed087f8639f4bbe05a27197ee8b2, type: 2}
   m_IsPrefabParent: 0
@@ -16867,11 +16859,6 @@ Prefab:
     - target: {fileID: 1000013821679766, guid: 1a941d8b4dca13d48a850c6d06838a3c, type: 2}
       propertyPath: m_Name
       value: DoorHinge
-      objectReference: {fileID: 0}
-    - target: {fileID: 114000011278684852, guid: 1a941d8b4dca13d48a850c6d06838a3c,
-        type: 2}
-      propertyPath: numKeyReq
-      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1a941d8b4dca13d48a850c6d06838a3c, type: 2}
@@ -20537,7 +20524,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0767bc70bc951540bab077fc038a53d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  YOffsetFromOwner: 1
+  YOffsetFromOwner: 0
   originalY: 0
 --- !u!43 &1859788413
 Mesh:
@@ -24261,10 +24248,6 @@ Prefab:
     - target: {fileID: 4000013526125246, guid: cc7f932e45eadfa48b292ac6fef3cb93, type: 2}
       propertyPath: m_RootOrder
       value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 4000013526125246, guid: cc7f932e45eadfa48b292ac6fef3cb93, type: 2}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 180
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: cc7f932e45eadfa48b292ac6fef3cb93, type: 2}
