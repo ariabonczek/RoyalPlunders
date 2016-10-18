@@ -185,14 +185,6 @@ public class TargetAITest : MonoBehaviour {
             agent.Resume();
             agent.destination = alertedGuard.transform.position;
         }
-        else if (myState == AIState.BeingEscorted)
-        {
-            Debug.Log("NO");
-            transform.GetChild(2).position = transform.position + new Vector3(0, 2, 0);
-            transform.GetChild(0).position = transform.position + new Vector3(0, -100, 0);
-            transform.GetChild(1).position = transform.position + new Vector3(0, -100, 0);
-            agent.destination = basePosition;
-        }
     }
 
     GameObject NearestGuard()

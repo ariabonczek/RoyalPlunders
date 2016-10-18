@@ -37,7 +37,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44692558, g: 0.49678743, b: 0.57508624, a: 1}
+  m_IndirectSpecularColor: {r: 0.44692528, g: 0.4967872, b: 0.5750856, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -4681,7 +4681,7 @@ Mesh:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: pb_Mesh58824
+  m_Name: pb_Mesh11314
   serializedVersion: 8
   m_SubMeshes:
   - serializedVersion: 2
@@ -16196,6 +16196,21 @@ Prefab:
       propertyPath: pathPoints
       value: 
       objectReference: {fileID: 797260264}
+    - target: {fileID: 114000013084243630, guid: 944eed087f8639f4bbe05a27197ee8b2,
+        type: 2}
+      propertyPath: StunnedDuration
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000013084243630, guid: 944eed087f8639f4bbe05a27197ee8b2,
+        type: 2}
+      propertyPath: DistractedDuration
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000013084243630, guid: 944eed087f8639f4bbe05a27197ee8b2,
+        type: 2}
+      propertyPath: SleepingDuration
+      value: 5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 944eed087f8639f4bbe05a27197ee8b2, type: 2}
   m_IsPrefabParent: 0
@@ -19389,7 +19404,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1644355484}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.396513, y: 1, z: -1.1468563}
+  m_LocalPosition: {x: 5.89, y: 1, z: 0.4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
@@ -20407,7 +20422,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0767bc70bc951540bab077fc038a53d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  YOffsetFromOwner: 0
+  YOffsetFromOwner: 3
   originalY: 0
 --- !u!43 &1859788413
 Mesh:
