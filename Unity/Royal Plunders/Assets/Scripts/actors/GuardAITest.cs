@@ -11,6 +11,14 @@ public class GuardAITest : MonoBehaviour {
 
     public TargetAITest myTarget;
 
+    public float ScanRotationSpeed;
+
+    public int AngleOfScan;
+
+    public bool ScanAtWaypoints;
+
+    public bool useWaypointDirectionForScan;
+
     public float StunnedDuration;
 
     private float currentStunnedDuration;
@@ -48,15 +56,27 @@ public class GuardAITest : MonoBehaviour {
     // the points for the guards patrol
     private Vector3[] pathLocations;
 
-    public enum AIState {Chasing, Suspcious,Patrolling,Escorting,Stunned,Sleeping,Distracted};
+    public enum AIState {Chasing, Suspcious,Patrolling,Escorting,Stunned,Sleeping,Distracted,Scanning};
+
+    private enum ScanningState {TurningRight,TurningLeft};
+
+    private ScanningState myScan;
 
     public AIState myState;
 
     private AIState prevState;
 
+    private Vector3 scanForward;
+
+    private Vector3 wierd;
+
+    private Vector3 scanTarget;
+
     private bool suspicionRange;
 
     private bool suspiciousPrev;
+
+    private bool suspiciousScan;
 
     private Vector3 suspicionPoint;
 
@@ -74,6 +94,7 @@ public class GuardAITest : MonoBehaviour {
         currentDistractedDuration = 0;
         currentSleepingDuration = 0;
         currentStunnedDuration = 0;
+        suspiciousScan = false;
         agent = GetComponent<NavMeshAgent>();
         suspicionRange = false;
         agent.autoBraking = false;
@@ -82,8 +103,9 @@ public class GuardAITest : MonoBehaviour {
         escortLocation = Vector3.zero;
         myTarget = null;
         basePoint = transform.position;
+        myScan = ScanningState.TurningLeft;
         // setting up the array of points to use as the patrol
-        if(pathPoints)
+        if (pathPoints)
         {
             pathLocations = new Vector3[pathPoints.transform.childCount];
             for (int i = 0; i < pathPoints.transform.childCount; i++)
@@ -131,10 +153,54 @@ public class GuardAITest : MonoBehaviour {
         myState = AIState.Distracted;
     }
 
+    private void RotateTowards(Vector3 direction)
+    {
+       Quaternion lookRotation = Quaternion.LookRotation(direction);
+       transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * ScanRotationSpeed);
+    }
+
+    private Vector3 GetScanTarget(bool leftTarget)
+    {
+        if(AngleOfScan==0)
+        {
+            return (transform.position + transform.forward);
+        }
+        float angle = AngleOfScan;
+        if (leftTarget)
+            angle = -angle;
+
+        Debug.Log(scanForward);
+
+        Vector3 target = Quaternion.AngleAxis(angle, transform.up) * scanForward;
+        return (target);
+    } 
+
     void AssessNegativeStatuses()
     {
         switch(myState)
         {
+            case AIState.Scanning:
+                agent.Stop();
+                RotateTowards(scanTarget);
+                if (Vector3.Angle(transform.forward, scanTarget) < 3)
+                {
+                    if (myScan == ScanningState.TurningLeft)
+                    {
+                        scanTarget = GetScanTarget(false);
+                        myScan = ScanningState.TurningRight;
+                    }
+                    else
+                    {
+                        myState = prevState;
+                        GotoNextPoint();
+                        agent.Resume();
+                        suspiciousScan = false;
+                        myScan = ScanningState.TurningLeft;
+                    }
+                }
+
+            break;
+
             case AIState.Stunned:
                 currentStunnedDuration += Time.deltaTime;
                 if(currentStunnedDuration>StunnedDuration)
@@ -248,9 +314,30 @@ public class GuardAITest : MonoBehaviour {
         // proceed to next patrol point when in range of current point
         if (Vector3.Distance(transform.position, GetNextPoint()) < 1 && myState == AIState.Patrolling)
         {
+            if(ScanAtWaypoints)
+            {
+                DoScan();
+                return;
+            }
             GotoNextPoint();
         }
         suspiciousPrev = (myState == AIState.Suspcious);
+    }
+
+    private void DoScan()
+    {
+        prevState = myState;
+        myState = AIState.Scanning;
+        if (useWaypointDirectionForScan && !suspiciousScan)
+        {
+            scanForward = pathPoints.transform.GetChild(destPoint).transform.forward;
+        }
+        else
+        {
+            scanForward = transform.forward;
+        }
+        scanTarget = GetScanTarget(true);
+        return;
     }
 
     //
@@ -318,6 +405,8 @@ public class GuardAITest : MonoBehaviour {
                 if(Vector3.Distance(transform.position, suspicionPoint) < 2 && myState ==AIState.Suspcious)
                 {
                     myState = AIState.Patrolling;
+                    suspiciousScan = true;
+                    DoScan();
                 }
         }
     }
@@ -348,8 +437,6 @@ public class GuardAITest : MonoBehaviour {
        
         // Set the agent to go to the currently selected destination.
         agent.destination = pathLocations[destPoint];
-
-        Distract();
     }
 
     bool PlayerInView()
