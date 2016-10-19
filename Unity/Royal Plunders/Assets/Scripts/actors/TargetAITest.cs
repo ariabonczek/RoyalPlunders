@@ -9,6 +9,8 @@ public class TargetAITest : MonoBehaviour {
 
     public float angleOfView;
 
+    private Vector3 basePosition;
+
     public float sneakWalkDetectionRange;
 
     public float slowWalkDetectionRange;
@@ -19,11 +21,13 @@ public class TargetAITest : MonoBehaviour {
 
     public float rotationSpeed;
 
-    public enum AIState { Running, Suspcious, Unaware };
+    public enum AIState { Running, Suspcious, Unaware, WaitingForSafety, BeingEscorted };
 
     public AIState myState;
 
     private bool suspicionRange;
+
+    private GameObject alertedGuard;
 
     // the distance at which the guard will chase the player
     public float PlayerSpotDistance;
@@ -42,6 +46,7 @@ public class TargetAITest : MonoBehaviour {
         agent = GetComponent<NavMeshAgent>();
         agent.autoBraking = false;
         myState = AIState.Unaware;
+        basePosition = this.transform.position;
     }
 
     // Update is called once per frame
@@ -67,11 +72,14 @@ public class TargetAITest : MonoBehaviour {
                 GameObject targetObj = hit.collider.gameObject;
                 if (targetObj == player || (targetObj.transform.parent && targetObj.transform.parent.gameObject == player))
                 {
-                    if (suspicionRange)
-                        myState = AIState.Suspcious;
-                    else
-                        myState = AIState.Running;
-                    return;
+                    if (myState != AIState.WaitingForSafety)
+                    {
+                        if (suspicionRange)
+                            myState = AIState.Suspcious;
+                        else
+                            myState = AIState.Running;
+                        return;
+                    }
                 }
             }
         }
@@ -85,43 +93,47 @@ public class TargetAITest : MonoBehaviour {
         NoiseMakerScript noiseScript = player.GetComponent<NoiseMakerScript>();
         if (noiseScript)
         {
-            switch (noiseScript.GetSoundLevel())
+            if (myState != AIState.WaitingForSafety)
             {
-               case 1:
-                    if (Vector3.Distance(transform.position, player.transform.position) < sneakWalkDetectionRange && myState != AIState.Running)
-                    { 
-                        myState = AIState.Suspcious;
-                        suspicionPoint = player.transform.position;
-                    }
-                    break;
-               case 2:
-                    if (Vector3.Distance(transform.position, player.transform.position) < slowWalkDetectionRange && myState != AIState.Running)
-                    { 
-                        myState = AIState.Suspcious;
-                        suspicionPoint = player.transform.position;
-                    }
-                    break;
-               case 3:
-                    if (Vector3.Distance(transform.position, player.transform.position) < fastWalkDetectionRange && myState != AIState.Running)
-                    { 
-                        myState = AIState.Suspcious;
-                        suspicionPoint = player.transform.position;
-                    }
-                    break;
-               case 4:
-                    if (Vector3.Distance(transform.position, player.transform.position) < runDetectionRange && myState != AIState.Running)
-                    {
-                        myState = AIState.Suspcious;
-                        suspicionPoint = player.transform.position;
-                    }
-                    break;
-               default:
+                switch (noiseScript.GetSoundLevel())
+                {
+                    case 1:
+                        if (Vector3.Distance(transform.position, player.transform.position) < sneakWalkDetectionRange && myState != AIState.Running)
+                        {
+                            myState = AIState.Suspcious;
+                            suspicionPoint = player.transform.position;
+                        }
+                        break;
+                    case 2:
+                        if (Vector3.Distance(transform.position, player.transform.position) < slowWalkDetectionRange && myState != AIState.Running)
+                        {
+                            myState = AIState.Suspcious;
+                            suspicionPoint = player.transform.position;
+                        }
+                        break;
+                    case 3:
+                        if (Vector3.Distance(transform.position, player.transform.position) < fastWalkDetectionRange && myState != AIState.Running)
+                        {
+                            myState = AIState.Suspcious;
+                            suspicionPoint = player.transform.position;
+                        }
+                        break;
+                    case 4:
+                        if (Vector3.Distance(transform.position, player.transform.position) < runDetectionRange && myState != AIState.Running)
+                        {
+                            myState = AIState.Suspcious;
+                            suspicionPoint = player.transform.position;
+                        }
+                        break;
+                    default:
 
-                    break;
-            }
-            if (Vector3.Distance(transform.position, suspicionPoint) < 2 && myState == AIState.Suspcious)
-            {
-                myState = AIState.Unaware;
+                        break;
+                }
+
+                if (Vector3.Distance(transform.position, suspicionPoint) < 2 && myState == AIState.Suspcious)
+                {
+                    myState = AIState.Unaware;
+                }
             }
         }
     }
@@ -138,11 +150,15 @@ public class TargetAITest : MonoBehaviour {
             transform.GetChild(2).position = transform.position + new Vector3(0, -100, 0);
             transform.GetChild(1).position = transform.position + new Vector3(0, -100, 0);
             agent.Resume();
-            MoveTowards(NearestGuard().transform.position);
+            if (!alertedGuard)
+                alertedGuard = NearestGuard();
+            MoveTowards(alertedGuard.transform.position);
 
-            if(Vector3.Distance(transform.position, NearestGuard().transform.position) <3)
+            if(Vector3.Distance(transform.position, alertedGuard.transform.position) <3)
             {
-                NearestGuard().GetComponent<GuardAITest>().myState = GuardAITest.AIState.Chasing;
+                alertedGuard.GetComponent<GuardAITest>().myState = GuardAITest.AIState.Chasing;
+                alertedGuard.GetComponent<GuardAITest>().myTarget = this;
+                myState = AIState.WaitingForSafety;
             }
         }
         else if (myState == AIState.Suspcious)
@@ -154,12 +170,20 @@ public class TargetAITest : MonoBehaviour {
             agent.Resume();
             RotateTowards(suspicionPoint);
         }
-        else
+        else if (myState == AIState.Unaware)
         {
             transform.GetChild(2).position = transform.position + new Vector3(0, 2, 0);
             transform.GetChild(0).position = transform.position + new Vector3(0, -100, 0);
             transform.GetChild(1).position = transform.position + new Vector3(0, -100, 0);
             agent.Stop();
+        }
+        else if (myState == AIState.WaitingForSafety)
+        {
+            transform.GetChild(1).position = transform.position + new Vector3(0, 2, 0);
+            transform.GetChild(0).position = transform.position + new Vector3(0, -100, 0);
+            transform.GetChild(2).position = transform.position + new Vector3(0, -100, 0);
+            agent.Resume();
+            agent.destination = alertedGuard.transform.position;
         }
     }
 
@@ -226,5 +250,10 @@ public class TargetAITest : MonoBehaviour {
 
         }
         return false;
+    }
+
+    public Vector3 GetTargetBasePosition()
+    {
+        return basePosition;
     }
 }

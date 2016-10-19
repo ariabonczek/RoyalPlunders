@@ -9,6 +9,26 @@ public class GuardAITest : MonoBehaviour {
 
     public GameObject pathPoints;
 
+    public TargetAITest myTarget;
+
+    public float StunnedDuration;
+
+    private float currentStunnedDuration;
+
+    public float SleepingDuration;
+
+    private float currentSleepingDuration;
+
+    public float DistractedDuration;
+
+    private float currentDistractedDuration;
+
+    private bool disabled;
+
+    private Vector3 escortLocation;
+     
+    private Vector3 basePoint;
+
     public float angleOfView;
 
     public float sneakWalkDetectionRange;
@@ -28,9 +48,11 @@ public class GuardAITest : MonoBehaviour {
     // the points for the guards patrol
     private Vector3[] pathLocations;
 
-    public enum AIState {Chasing, Suspcious,Patrolling};
+    public enum AIState {Chasing, Suspcious,Patrolling,Escorting,Stunned,Sleeping,Distracted};
 
     public AIState myState;
+
+    private AIState prevState;
 
     private bool suspicionRange;
 
@@ -48,11 +70,18 @@ public class GuardAITest : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
+        disabled = false;
+        currentDistractedDuration = 0;
+        currentSleepingDuration = 0;
+        currentStunnedDuration = 0;
         agent = GetComponent<NavMeshAgent>();
         suspicionRange = false;
         agent.autoBraking = false;
         myState = AIState.Patrolling;
         suspiciousPrev = false;
+        escortLocation = Vector3.zero;
+        myTarget = null;
+        basePoint = transform.position;
         // setting up the array of points to use as the patrol
         if(pathPoints)
         {
@@ -62,7 +91,11 @@ public class GuardAITest : MonoBehaviour {
                 Transform Go = pathPoints.transform.GetChild(i);
                 pathLocations[i] = Go.position;
             }
-            agent.destination = pathLocations[destPoint];
+            agent.destination = GetNextPoint();
+            if(!pathPoints)
+            {
+                agent.Stop();
+            }
         }
 
     }
@@ -70,10 +103,80 @@ public class GuardAITest : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
+        disabled = false;
+
+        AssessNegativeStatuses();
+
         DetermineAIState();
 
         ExecuteAIStateResult();
    
+    }
+
+    public void Stun()
+    {
+        prevState = myState;
+        myState = AIState.Stunned;
+    }
+
+    public void Sleep()
+    {
+        prevState = myState;
+        myState = AIState.Sleeping;
+    }
+
+    public void Distract()
+    {
+        prevState = myState;
+        myState = AIState.Distracted;
+    }
+
+    void AssessNegativeStatuses()
+    {
+        switch(myState)
+        {
+            case AIState.Stunned:
+                currentStunnedDuration += Time.deltaTime;
+                if(currentStunnedDuration>StunnedDuration)
+                {
+                    currentStunnedDuration = 0;
+                    myState = prevState;
+                    agent.Resume();
+                }
+                else
+                {
+                    disabled = true;
+                }
+                break;
+
+            case AIState.Sleeping:
+                currentSleepingDuration += Time.deltaTime;
+                if(currentSleepingDuration>SleepingDuration)
+                {
+                    currentSleepingDuration = 0;
+                    myState = prevState;
+                    agent.Resume();
+                }
+                else
+                {
+                    disabled = true;
+                }
+                break;
+
+            case AIState.Distracted:
+                currentDistractedDuration += Time.deltaTime;
+                if(currentDistractedDuration>DistractedDuration)
+                {
+                    currentDistractedDuration = 0;
+                    myState = prevState;
+                    agent.Resume();
+                }
+                else
+                {
+                    agent.Stop();
+                }
+                break;
+        }
     }
 
     //
@@ -81,9 +184,18 @@ public class GuardAITest : MonoBehaviour {
     //
     void ExecuteAIStateResult()
     {
+
+        // exiting if this AI is temporarily disabled
+        if (disabled)
+        {
+            agent.Stop();
+            return;
+        }
+
         // while in the state of Chasing the player
         if (myState == AIState.Chasing)
         {
+            agent.Resume();
             transform.GetChild(0).position = transform.position + new Vector3(0, 2, 0);
             transform.GetChild(2).position = transform.position + new Vector3(0, -100, 0);
             transform.GetChild(1).position = transform.position + new Vector3(0, -100, 0);
@@ -91,6 +203,7 @@ public class GuardAITest : MonoBehaviour {
         }
         else if (myState == AIState.Suspcious)
         {
+            agent.Resume();
             transform.GetChild(1).position = transform.position + new Vector3(0, 2, 0);
             transform.GetChild(0).position = transform.position + new Vector3(0, -100, 0);
             transform.GetChild(2).position = transform.position + new Vector3(0, -100, 0);
@@ -100,16 +213,40 @@ public class GuardAITest : MonoBehaviour {
             }
             agent.destination = suspicionPoint;
         }
-        else
+        else if (myState == AIState.Patrolling)
         {
             transform.GetChild(2).position = transform.position + new Vector3(0, 2, 0);
             transform.GetChild(0).position = transform.position + new Vector3(0, -100, 0);
             transform.GetChild(1).position = transform.position + new Vector3(0, -100, 0);
-            agent.destination = pathLocations[destPoint];
+            agent.destination = GetNextPoint();
+
+            if (myTarget)
+            {
+                myState = AIState.Escorting;
+            }
+        }
+        else if (myState == AIState.Escorting)
+        {
+            agent.Resume();
+            transform.GetChild(2).position = transform.position + new Vector3(0, 2, 0);
+            transform.GetChild(0).position = transform.position + new Vector3(0, -100, 0);
+            transform.GetChild(1).position = transform.position + new Vector3(0, -100, 0);
+            if (escortLocation == Vector3.zero)
+            {
+                escortLocation = myTarget.GetComponent<TargetAITest>().GetTargetBasePosition();
+            }
+            agent.destination = escortLocation;
+            if (Vector3.Distance(transform.position, escortLocation) < 2)
+            {
+                myTarget.myState = TargetAITest.AIState.Unaware;
+                myTarget = null;
+                escortLocation = Vector3.zero;
+                myState = AIState.Patrolling;
+            }
         }
 
         // proceed to next patrol point when in range of current point
-        if (pathPoints && Vector3.Distance(transform.position, pathLocations[destPoint]) < 1)
+        if (Vector3.Distance(transform.position, GetNextPoint()) < 1 && myState == AIState.Patrolling)
         {
             GotoNextPoint();
         }
@@ -121,9 +258,12 @@ public class GuardAITest : MonoBehaviour {
     //
     void DetermineAIState()
     {
+        if (disabled)
+            return;
+
         Debug.DrawLine(this.transform.position, player.transform.position);
         // chase the player if they are in range and you are not too far from your patrol route
-        if (player && PlayerInView() && Vector3.Distance(transform.position, pathLocations[destPoint]) <= MaxDistanceFromPoint)
+        if (player && PlayerInView() && Vector3.Distance(transform.position, GetNextPoint()) <= MaxDistanceFromPoint)
         {
             // doing a line cast check to see if there are any obstacles between the AI and the player
             ray = new Ray(transform.position, player.transform.position - transform.position);
@@ -141,7 +281,7 @@ public class GuardAITest : MonoBehaviour {
             }
             return;
         }
-        else if (Vector3.Distance(transform.position, pathLocations[destPoint]) > MaxDistanceFromPoint)
+        else if (Vector3.Distance(transform.position, GetNextPoint()) > MaxDistanceFromPoint && myState != AIState.Escorting)
         {
             myState = AIState.Patrolling;
         }
@@ -150,7 +290,7 @@ public class GuardAITest : MonoBehaviour {
         NoiseMakerScript noiseScript = player.GetComponent<NoiseMakerScript>();
         if (noiseScript)
         {
-                if (Vector3.Distance(transform.position, pathLocations[destPoint]) <= MaxDistanceFromPoint)
+                if (Vector3.Distance(transform.position, GetNextPoint()) <= MaxDistanceFromPoint)
                 {
                     switch (noiseScript.GetSoundLevel())
                     {
@@ -182,17 +322,34 @@ public class GuardAITest : MonoBehaviour {
         }
     }
 
+    Vector3 GetNextPoint()
+    {
+        if(pathPoints)
+        {
+            return pathLocations[destPoint];
+        }
+        else
+        {
+            return basePoint;
+        }
+    }
+
     void GotoNextPoint()
     {
         // Returns if no points have been set up
-        if (pathLocations.Length==0)
+        if (!pathPoints)
+        {
+            agent.Stop();
             return;
+        }
 
         // iterating through points on the patrol
         destPoint = (destPoint + 1) % pathLocations.Length;
        
         // Set the agent to go to the currently selected destination.
         agent.destination = pathLocations[destPoint];
+
+        Distract();
     }
 
     bool PlayerInView()

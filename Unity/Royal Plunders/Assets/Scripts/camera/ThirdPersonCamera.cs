@@ -23,6 +23,7 @@ public class ThirdPersonCamera : MonoBehaviour
     float yaw; // current yaw
 
     public float rotationLerp = 10; // rotation rate of the camera
+    public LayerMask raycastMask;
 
     GameObject target; // target object
     Transform targetTransform; // target object transform (its faster)
@@ -92,9 +93,14 @@ public class ThirdPersonCamera : MonoBehaviour
     // camera pos get
     Vector3 getPos()
     {
-        Vector3 pos = targetTransform.position + Vector3.up * (camHeightPercent * targetTransform.localScale.y * 2); // above player
+        Vector3 posAbove = targetTransform.position + Vector3.up * (camHeightPercent * targetTransform.localScale.y * 2); // above player
         float angle = Mathf.Deg2Rad * (-yaw - 90); // direction to go
-        pos += new Vector3(Mathf.Cos(angle), 0, Mathf.Sin(angle)) * camDistance; // done!
+        Vector3 pos = posAbove + new Vector3(Mathf.Cos(angle), 0, Mathf.Sin(angle)) * camDistance; // done! (pre-raycast)
+
+        RaycastHit camCast;
+        Ray raycast = new Ray(pos, (posAbove - pos).normalized);
+        if (Physics.Raycast(raycast, out camCast, (posAbove - pos).magnitude, raycastMask))
+            pos = camCast.point;
 
         return pos;
     }

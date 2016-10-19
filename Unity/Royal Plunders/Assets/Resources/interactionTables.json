@@ -1,6 +1,7 @@
 {
 	"priority": [
-		"Key",
+    "Key",
+    "Chest",
 		"Door",
     "Guard",
     "Box",
@@ -21,7 +22,8 @@
 				"Door",
 				"Guard",
         "Rail",
-        "Box"
+        "Box",
+        "Chest"
 			]
 		}
 	]
