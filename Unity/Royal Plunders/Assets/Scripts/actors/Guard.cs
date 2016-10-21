@@ -22,6 +22,12 @@ public class Guard : MonoBehaviour, Iinteractable
                 inventory.LoseKey();
             }
         }
+        if(button == InteractionButton.B)
+        {
+            GuardAITest guardAI = GetComponent<GuardAITest>();
+            if (guardAI)
+                guardAI.Stun();
+        }
 
         if (button == InteractionButton.B)
         {

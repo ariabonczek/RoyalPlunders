@@ -211,6 +211,10 @@ public class GuardAITest : MonoBehaviour {
                 }
                 else
                 {
+                    transform.GetChild(3).position = transform.position + new Vector3(0, 2, 0);
+                    transform.GetChild(0).position = transform.position + new Vector3(0, -100, 0);
+                    transform.GetChild(2).position = transform.position + new Vector3(0, -100, 0);
+                    transform.GetChild(1).position = transform.position + new Vector3(0, -100, 0);
                     disabled = true;
                 }
                 break;
@@ -265,6 +269,7 @@ public class GuardAITest : MonoBehaviour {
             transform.GetChild(0).position = transform.position + new Vector3(0, 2, 0);
             transform.GetChild(2).position = transform.position + new Vector3(0, -100, 0);
             transform.GetChild(1).position = transform.position + new Vector3(0, -100, 0);
+            transform.GetChild(3).position = transform.position + new Vector3(0, -100, 0);
             agent.destination = player.transform.position;
         }
         else if (myState == AIState.Suspcious)
@@ -273,6 +278,7 @@ public class GuardAITest : MonoBehaviour {
             transform.GetChild(1).position = transform.position + new Vector3(0, 2, 0);
             transform.GetChild(0).position = transform.position + new Vector3(0, -100, 0);
             transform.GetChild(2).position = transform.position + new Vector3(0, -100, 0);
+            transform.GetChild(3).position = transform.position + new Vector3(0, -100, 0);
             if (!suspiciousPrev)
             {
                 suspicionPoint = player.transform.position;
@@ -284,6 +290,7 @@ public class GuardAITest : MonoBehaviour {
             transform.GetChild(2).position = transform.position + new Vector3(0, 2, 0);
             transform.GetChild(0).position = transform.position + new Vector3(0, -100, 0);
             transform.GetChild(1).position = transform.position + new Vector3(0, -100, 0);
+            transform.GetChild(3).position = transform.position + new Vector3(0, -100, 0);
             agent.destination = GetNextPoint();
 
             if (myTarget)
@@ -297,6 +304,7 @@ public class GuardAITest : MonoBehaviour {
             transform.GetChild(2).position = transform.position + new Vector3(0, 2, 0);
             transform.GetChild(0).position = transform.position + new Vector3(0, -100, 0);
             transform.GetChild(1).position = transform.position + new Vector3(0, -100, 0);
+            transform.GetChild(3).position = transform.position + new Vector3(0, -100, 0);
             if (escortLocation == Vector3.zero)
             {
                 escortLocation = myTarget.GetComponent<TargetAITest>().GetTargetBasePosition();
