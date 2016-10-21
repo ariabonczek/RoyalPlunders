@@ -12,8 +12,11 @@ public class Chest : MonoBehaviour, Iinteractable
         return "Chest";
     }
 
-    public void interact(GameObject interactor)
+    public void interact(InteractionButton button, GameObject interactor)
     {
+        if (button != InteractionButton.Y)
+            return;
+
         if (!isOpen && itemPrefab)
         {
             Vector3 pos = transform.position + transform.forward * transform.localScale.z;

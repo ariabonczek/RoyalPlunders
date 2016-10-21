@@ -10,14 +10,22 @@ public class Guard : MonoBehaviour, Iinteractable
         inventory = gameObject.GetComponent<InventoryManager>();
     }
 
-    public void interact(GameObject interactor)
+    public void interact(InteractionButton button, GameObject interactor)
     {
-        InventoryManager invManager = interactor.GetComponent<InventoryManager>();
-
-        if (invManager != null && inventory.GetNumKeys() > 0) // a player, right?
+        if (button == InteractionButton.Y)
         {
-            invManager.GainKey();
-            inventory.LoseKey();
+            InventoryManager invManager = interactor.GetComponent<InventoryManager>();
+
+            if (invManager != null && inventory.GetNumKeys() > 0)
+            {
+                invManager.GainKey();
+                inventory.LoseKey();
+            }
+        }
+
+        if (button == InteractionButton.B)
+        {
+            // sneak attack!
         }
     }
 

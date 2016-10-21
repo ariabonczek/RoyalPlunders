@@ -23,7 +23,7 @@ public class Player : MonoBehaviour, Iinteractable
         vulnerable = false;
     }
 
-    public void interact(GameObject interactor)
+    public void interact(InteractionButton button, GameObject interactor)
     {
         if (!vulnerable)
         {

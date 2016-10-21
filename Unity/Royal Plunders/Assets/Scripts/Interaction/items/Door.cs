@@ -46,8 +46,11 @@ public class Door : MonoBehaviour, Iinteractable
         numKeyReq = 0;
     }
 
-    public void interact(GameObject interactor)
+    public void interact(InteractionButton button, GameObject interactor)
     {
+        if (button != InteractionButton.Y)
+            return;
+
         InventoryManager invManager = interactor.GetComponent<InventoryManager>();
 
         if (invManager == null)

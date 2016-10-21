@@ -25,7 +25,7 @@ public class Interactor : MonoBehaviour
             Iinteractable obj = other.GetComponent<Iinteractable>();
             if (obj.isInstant())
             {
-                obj.interact(gameObject);
+                obj.interact(InteractionButton.NONE, gameObject);
                 return;
             }
 
@@ -60,14 +60,14 @@ public class Interactor : MonoBehaviour
     }
 
     // interact with the item at the top of the priority list
-    public bool interact()
+    public bool interact(InteractionButton button)
     {
         // if there is nothing to interact with, return false
         if (listOfInteractables.Count == 0)
             return false;
 
         // otherwise interact with it and return true
-        listOfInteractables[0].GetComponent<Iinteractable>().interact(gameObject);
+        listOfInteractables[0].GetComponent<Iinteractable>().interact(button, gameObject);
         return true;
     }
 }

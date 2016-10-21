@@ -15,8 +15,11 @@ public class Rail : MonoBehaviour, Iinteractable
         id = idTracker++;
     }
 
-    public void interact(GameObject interactor)
+    public void interact(InteractionButton button,  GameObject interactor)
     {
+        if (button != InteractionButton.Y)
+            return;
+
         Player player = interactor.GetComponent<Player>();
         Movement mover = interactor.GetComponent<Movement>();
 

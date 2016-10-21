@@ -3,10 +3,12 @@ using System.Collections;
 
 public interface Iinteractable // to be used for anything interactable with a convex hull
 {
-    void interact(GameObject interactor); // call this to interact with an interactable, given an interactor gameobject
+    void interact(InteractionButton button, GameObject interactor); // call this to interact with an interactable, given an interactor gameobject
     string getTypeLabel(); // used for priority listing and permission polling
     bool isInstant(); // check if it triggers automatically
 }
+
+public enum InteractionButton {Y, B, NONE};
 
 public static class InteractionTable
 {

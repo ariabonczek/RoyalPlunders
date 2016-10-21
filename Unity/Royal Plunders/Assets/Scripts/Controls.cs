@@ -1,13 +1,24 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+/*
+ * B - Sneak Attack
+ * X - Sprint
+ * A - Use Gadget
+ * Y - Interact
+ * L1 - sneak
+ * Left Stick - Movement
+ * Right Stick - Camera Orbit
+ * Right D-Pad - Gadget 2 Equip
+ * Left D-Pad - Gadget 1 Equip 
+ */
+
 public class Controls : MonoBehaviour
 {
     Camera mainCamera;
     ThirdPersonCamera cam;
     Interactor actor;
     Movement mover;
-    bool readyToInteract = true;
 
 	void Start ()
     {
@@ -22,19 +33,16 @@ public class Controls : MonoBehaviour
 	
 	void Update ()
     {
-        if (Input.GetButton("A Button") && readyToInteract)
-        {
-            readyToInteract = false;
-            actor.interact();
-        }
-        if (!Input.GetButton("A Button") && !readyToInteract)
-            readyToInteract = true;
-        
+        if (Input.GetButtonDown("Y Button"))
+            actor.interact(InteractionButton.Y);
+        if (Input.GetButtonDown("B Button"))
+            actor.interact(InteractionButton.B);
+
         cam.inputPitch = Input.GetAxis("Right Vertical");
         cam.inputYaw = Input.GetAxis("Right Horizontal");
         
         mover.sprint = Input.GetButton("X Button");
-        mover.sneak = Input.GetButton("B Button");
+        mover.sneak = Input.GetButton("Left Shoulder");
 
         cam.sprinting = mover.sprint;
         cam.sneaking = mover.sneak;

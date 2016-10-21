@@ -28,8 +28,11 @@ public class Box : MonoBehaviour, Iinteractable
         return "Box";
     }
 
-    public void interact(GameObject interactor)
+    public void interact(InteractionButton button, GameObject interactor)
     {
+        if (button != InteractionButton.Y)
+            return;
+
         if (mover)
         {
             mover.lockMovementToRail = false;

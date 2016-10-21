@@ -9,7 +9,7 @@ public class Key : MonoBehaviour, Iinteractable
         transform.rotation *= Quaternion.AngleAxis(1, Vector3.up);
     }
 
-    public void interact(GameObject interactor)
+    public void interact(InteractionButton button, GameObject interactor)
     {
         InventoryManager invManager = interactor.GetComponent<InventoryManager>();
 

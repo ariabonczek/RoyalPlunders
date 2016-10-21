@@ -20,7 +20,7 @@ public class Cake : MonoBehaviour, Iinteractable
         return bRetVal;
     }
 
-    public void interact(GameObject interactor)
+    public void interact(InteractionButton button, GameObject interactor)
     {
         if (!beingEaten)
         {
