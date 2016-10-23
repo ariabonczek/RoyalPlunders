@@ -39,6 +39,7 @@ public class Movement : MonoBehaviour
 
     // interfacing components
     NoiseMakerScript noiseScript;
+    Rigidbody body;
 
     // model
     GameObject model;
@@ -48,6 +49,7 @@ public class Movement : MonoBehaviour
     {
         noiseScript = GetComponent<NoiseMakerScript>();
         model = transform.FindChild("Model").gameObject;
+        body = GetComponent<Rigidbody>();
     }
 	
 	void Update ()
@@ -121,7 +123,7 @@ public class Movement : MonoBehaviour
             soundValue = 0;
         else
         {
-            this.transform.position = position + direction * appliedSpeed;
+            body.MovePosition(position + direction * appliedSpeed);
 
             Quaternion directionRotation = Quaternion.LookRotation(direction, Vector3.up);
 
