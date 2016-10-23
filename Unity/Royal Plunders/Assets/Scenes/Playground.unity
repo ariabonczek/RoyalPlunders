@@ -37,7 +37,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44692528, g: 0.4967872, b: 0.5750856, a: 1}
+  m_IndirectSpecularColor: {r: 0.44692558, g: 0.49678743, b: 0.57508624, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -1136,23 +1136,6 @@ Prefab:
       propertyPath: player
       value: 
       objectReference: {fileID: 135483952}
-    - target: {fileID: 4000012025887984, guid: 08eb47b15794d4d41a1dee072e33598c, type: 2}
-      propertyPath: m_RootOrder
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4000010998267526, guid: 08eb47b15794d4d41a1dee072e33598c, type: 2}
-      propertyPath: m_RootOrder
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4000010847279308, guid: 08eb47b15794d4d41a1dee072e33598c, type: 2}
-      propertyPath: m_RootOrder
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 114000012030386164, guid: 08eb47b15794d4d41a1dee072e33598c,
-        type: 2}
-      propertyPath: rotationSpeed
-      value: 1.2
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 08eb47b15794d4d41a1dee072e33598c, type: 2}
   m_IsPrefabParent: 0
@@ -20523,24 +20506,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 452493607}
   m_RootOrder: 5
---- !u!1 &1804859219 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1000013318909652, guid: 08eb47b15794d4d41a1dee072e33598c,
-    type: 2}
-  m_PrefabInternal: {fileID: 71883112}
---- !u!114 &1804859226
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1804859219}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b0767bc70bc951540bab077fc038a53d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  YOffsetFromOwner: 3
-  originalY: 0
 --- !u!43 &1859788413
 Mesh:
   m_ObjectHideFlags: 0

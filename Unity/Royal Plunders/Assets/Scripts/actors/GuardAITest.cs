@@ -169,7 +169,7 @@ public class GuardAITest : MonoBehaviour {
         if (leftTarget)
             angle = -angle;
 
-        Debug.Log(scanForward);
+        //Debug.Log(scanForward);
 
         Vector3 target = Quaternion.AngleAxis(angle, transform.up) * scanForward;
         return (target);

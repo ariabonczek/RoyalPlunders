@@ -35,10 +35,10 @@ public class Movement : MonoBehaviour
     // movement states
     public bool sprint;
     public bool sneak;
+    public bool holding;
 
     // interfacing components
     NoiseMakerScript noiseScript;
-    HolderScript holder;
 
     // model
     GameObject model;
@@ -47,7 +47,6 @@ public class Movement : MonoBehaviour
     void Start ()
     {
         noiseScript = GetComponent<NoiseMakerScript>();
-        holder = GetComponent<HolderScript>();
         model = transform.FindChild("Model").gameObject;
     }
 	
@@ -89,7 +88,7 @@ public class Movement : MonoBehaviour
         int soundValue = 0;
         float appliedSpeed;
 
-        if (holder && holder.IsHolding())
+        if (holding)
         {
             soundValue = 3;
             appliedSpeed = carrySpeed;

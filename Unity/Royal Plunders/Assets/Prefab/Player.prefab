@@ -157,7 +157,6 @@ GameObject:
   - 136: {fileID: 136000013446597348}
   - 114: {fileID: 114000013883181920}
   - 114: {fileID: 114000011083718470}
-  - 114: {fileID: 114000012120739258}
   - 114: {fileID: 114000011457214894}
   - 114: {fileID: 114000012242072376}
   - 114: {fileID: 114000012889260028}
@@ -938,18 +937,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   typeLabel: Player
---- !u!114 &114000012120739258
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000012587800764}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 006343ca198d8ad479f1a7a22c4920fa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  DisplacementOnDrop: 1
 --- !u!114 &114000012242072376
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1003,6 +990,7 @@ MonoBehaviour:
   lockRotation: 0
   sprint: 0
   sneak: 0
+  holding: 0
   modelTurnRate: 7.5
 --- !u!114 &114000014187666170
 MonoBehaviour:

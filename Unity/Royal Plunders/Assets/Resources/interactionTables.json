@@ -1,12 +1,13 @@
 {
-	"priority": [
+  "priority": [
+    "Holdable",
     "Key",
     "Chest",
-		"Door",
+    "Door",
     "Guard",
     "Box",
-		"Rail"
-	],
+    "Rail"
+  ],
 	"permissions": [
 		{
 			"name": "Guard",
@@ -23,7 +24,8 @@
 				"Guard",
         "Rail",
         "Box",
-        "Chest"
+        "Chest",
+        "Holdable"
 			]
 		}
 	]

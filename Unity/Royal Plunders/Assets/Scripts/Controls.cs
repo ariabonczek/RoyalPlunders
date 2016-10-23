@@ -20,6 +20,9 @@ public class Controls : MonoBehaviour
     Interactor actor;
     Movement mover;
 
+    string[] joys;
+    enum Controllers { XBOX, PS4, NONE};
+
 	void Start ()
     {
         mainCamera = Camera.main;
@@ -33,23 +36,66 @@ public class Controls : MonoBehaviour
 	
 	void Update ()
     {
-        if (Input.GetButtonDown("Y Button"))
-            actor.interact(InteractionButton.Y);
-        if (Input.GetButtonDown("B Button"))
-            actor.interact(InteractionButton.B);
+        Controllers controller = getControllerType();
 
-        cam.inputPitch = Input.GetAxis("Right Vertical");
-        cam.inputYaw = Input.GetAxis("Right Horizontal");
-        
-        mover.sprint = Input.GetButton("X Button");
-        mover.sneak = Input.GetButton("Left Shoulder");
+        if (controller == Controllers.XBOX)
+        {
+            if (Input.GetButtonDown("B"))
+                actor.interact(InteractionButton.B);
+
+            cam.inputPitch = Input.GetAxis("Right Vertical XBone");
+            cam.inputYaw = Input.GetAxis("Right Horizontal XBone");
+
+            mover.sprint = Input.GetButton("X XBone");
+        }
+
+        if (controller == Controllers.PS4)
+        {
+            if (Input.GetButtonDown("Circle"))
+                actor.interact(InteractionButton.B);
+
+            cam.inputPitch = Input.GetAxis("Right Vertical PS4");
+            cam.inputYaw = Input.GetAxis("Right Horizontal PS4");
+
+            mover.sprint = Input.GetButton("Square");
+        }
+
+        if (controller != Controllers.NONE)
+        {
+            if (Input.GetButtonDown("Y / Triangle"))
+                actor.interact(InteractionButton.Y);
+
+            mover.sneak = Input.GetButton("L1");
+
+            mover.direction.x = Input.GetAxis("Left Horizontal");
+            mover.direction.z = -Input.GetAxis("Left Vertical");
+        }
 
         cam.sprinting = mover.sprint;
         cam.sneaking = mover.sneak;
 
-        mover.direction.x = Input.GetAxis("Left Horizontal");
-        mover.direction.z = -Input.GetAxis("Left Vertical");
         mover.relativeForward = mainCamera.transform.forward;
         mover.relativeForward.y = 0;
+    }
+
+    Controllers getControllerType()
+    {
+        Controllers controller = Controllers.NONE;
+
+        joys = Input.GetJoystickNames();
+        for (int i = 0; i < joys.Length; ++i)
+        {
+            if (joys[i].IndexOf("Windows") != -1)
+            {
+                controller = Controllers.XBOX;
+                break;
+            }
+            else if (joys[i] == "Wireless Controller")
+            {
+                controller = Controllers.PS4;
+            }
+        }
+
+        return controller;
     }
 }

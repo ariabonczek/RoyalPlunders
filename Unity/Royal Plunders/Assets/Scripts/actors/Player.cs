@@ -5,7 +5,6 @@ using System.Collections;
 [RequireComponent(typeof(Controls))]
 [RequireComponent(typeof(Movement))]
 [RequireComponent(typeof(InventoryManager))]
-[RequireComponent(typeof(HolderScript))]
 [RequireComponent(typeof(NoiseMakerScript))]
 public class Player : MonoBehaviour, Iinteractable
 {
