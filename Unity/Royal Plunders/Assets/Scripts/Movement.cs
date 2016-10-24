@@ -4,6 +4,7 @@ using System.Collections.Generic;
 
 public class Movement : MonoBehaviour
 {
+    public float currentSpeed = 0;
     // movement speeds
     public float baseSpeed = 2;
     // joystick
@@ -120,7 +121,10 @@ public class Movement : MonoBehaviour
         }
 
         if (direction == Vector3.zero)
+        {
             soundValue = 0;
+            currentSpeed = 0;
+        }
         else
         {
             body.MovePosition(position + direction * appliedSpeed);
@@ -135,6 +139,7 @@ public class Movement : MonoBehaviour
             }
 
             model.transform.rotation = Quaternion.Lerp(model.transform.rotation, directionRotation, Time.deltaTime * modelTurnRate);
+            currentSpeed = appliedSpeed;
         }
 
         if (noiseScript)

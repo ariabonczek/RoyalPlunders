@@ -22,22 +22,15 @@ public class Cake : MonoBehaviour, Iinteractable
 
     public void interact(InteractionButton button, GameObject interactor)
     {
-        if (!beingEaten)
+        if(interactor.GetComponent<GadgetManager>())
         {
-            if (StartEating())
-            {
-                EatCake();
-            }
+            if (interactor.GetComponent<GadgetManager>().AddToSlot(GadgetManager.GadgetSlotType.Cake, this.gameObject))
+                transform.position -= new Vector3(0,-100,0);
         }
     }
 
     public void EatCake()
     {
-        while ( eatingTimer < eatTime )
-        {
-            // send guard ai data to change state
-            eatingTimer++;
-        }
     }
 
     public string getTypeLabel()

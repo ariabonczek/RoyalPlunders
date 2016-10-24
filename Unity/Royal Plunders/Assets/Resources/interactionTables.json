@@ -6,7 +6,10 @@
     "Door",
     "Guard",
     "Box",
-    "Rail"
+    "Rail",
+    "Popsicle",
+    "Cake",
+    "Jazz"
   ],
 	"permissions": [
 		{
@@ -25,7 +28,10 @@
         "Rail",
         "Box",
         "Chest",
-        "Holdable"
+        "Holdable",
+        "Popsicle",
+        "Cake",
+        "Jazz"
 			]
 		}
 	]

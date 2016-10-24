@@ -49,6 +49,14 @@ public class Interactor : MonoBehaviour
                 }
             }
         }
+        else if (InteractionTable.canInteract(gameObject, other))
+        {
+            Debug.Log("Problem with Listofinteractables contains");
+        }
+        else if (!listOfInteractables.Contains(other))
+        {
+            Debug.Log("Problem with can interact");
+        }
     }
 
     // Called by a ConvexHull, telling the interactor that it can no longer interact with this item
@@ -62,6 +70,7 @@ public class Interactor : MonoBehaviour
     // interact with the item at the top of the priority list
     public bool interact(InteractionButton button)
     {
+
         // if there is nothing to interact with, return false
         if (listOfInteractables.Count == 0)
             return false;

@@ -9,6 +9,11 @@ TagManager:
   - Key
   - Rail
   - Ending
+  - StunZone
+  - Cake
+  - Popsicle
+  - Jazz
+  - Electro
   layers:
   - Default
   - TransparentFX

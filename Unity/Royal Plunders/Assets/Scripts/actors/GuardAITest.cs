@@ -13,9 +13,19 @@ public class GuardAITest : MonoBehaviour {
 
     public float ScanRotationSpeed;
 
+    private bool canHear;
+
     public int AngleOfScan;
 
     public bool ScanAtWaypoints;
+
+    private GameObject Jazz;
+
+    private bool canBeDistracted;
+
+    public float DistractionCooldown;
+
+    private float currentDistractionCooldown;
 
     public bool useWaypointDirectionForScan;
 
@@ -50,13 +60,15 @@ public class GuardAITest : MonoBehaviour {
     // the distance at which the guard will chase the player
     public float PlayerSpotDistance;
 
+    public float CakeSpotDistance;
+
     // the distance from their original path destination where the guard will cut off a chase.
     public float MaxDistanceFromPoint;
 
     // the points for the guards patrol
     private Vector3[] pathLocations;
 
-    public enum AIState {Chasing, Suspcious,Patrolling,Escorting,Stunned,Sleeping,Distracted,Scanning};
+    public enum AIState {Chasing, Suspcious,Patrolling,Escorting,Stunned,Sleeping,Distracted,Scanning,Caking};
 
     private enum ScanningState {TurningRight,TurningLeft};
 
@@ -78,6 +90,8 @@ public class GuardAITest : MonoBehaviour {
 
     private bool suspiciousScan;
 
+    private GameObject cakeTarget;
+
     private Vector3 suspicionPoint;
 
     private int destPoint = 0;
@@ -97,9 +111,14 @@ public class GuardAITest : MonoBehaviour {
         suspiciousScan = false;
         agent = GetComponent<NavMeshAgent>();
         suspicionRange = false;
+        cakeTarget = null;
+        Jazz = null;
         agent.autoBraking = false;
         myState = AIState.Patrolling;
+        canHear = true;
         suspiciousPrev = false;
+        canBeDistracted = true;
+        currentDistractionCooldown = 0;
         escortLocation = Vector3.zero;
         myTarget = null;
         basePoint = transform.position;
@@ -127,6 +146,10 @@ public class GuardAITest : MonoBehaviour {
 
         disabled = false;
 
+        CanHear();
+       
+        RunDistractionCooldownTimer();
+
         AssessNegativeStatuses();
 
         DetermineAIState();
@@ -137,26 +160,59 @@ public class GuardAITest : MonoBehaviour {
 
     public void Stun()
     {
-        prevState = myState;
+        if (myState != AIState.Stunned && myState != AIState.Distracted && myState != AIState.Sleeping)
+            prevState = myState;
         myState = AIState.Stunned;
     }
 
     public void Sleep()
     {
-        prevState = myState;
+        if (myState != AIState.Stunned && myState != AIState.Distracted && myState != AIState.Sleeping)
+            prevState = myState;
         myState = AIState.Sleeping;
     }
 
     public void Distract()
     {
-        prevState = myState;
-        myState = AIState.Distracted;
+        if (canBeDistracted)
+        {
+            if (myState != AIState.Stunned && myState != AIState.Distracted && myState != AIState.Sleeping)
+                prevState = myState;
+            myState = AIState.Distracted;
+        }
+    }
+
+    private void CanHear()
+    {
+        canHear = true;
+        GameObject[] obj = GameObject.FindGameObjectsWithTag("Jazz");
+        foreach (GameObject g in obj)
+        {
+            if (g.GetComponent<Jazz>().InRange(this.gameObject) && myState == AIState.Distracted)
+            {
+                Debug.Log("OH HEY CXOOL");
+                canHear = false;
+            }
+        }
     }
 
     private void RotateTowards(Vector3 direction)
     {
        Quaternion lookRotation = Quaternion.LookRotation(direction);
        transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * ScanRotationSpeed);
+    }
+
+    private void RunDistractionCooldownTimer()
+    {
+        if(!canBeDistracted)
+        {
+            currentDistractedDuration += Time.deltaTime;
+            if(currentDistractionCooldown>= DistractionCooldown)
+            {
+                canBeDistracted = true;
+                currentDistractionCooldown = 0;
+            }
+        }
     }
 
     private Vector3 GetScanTarget(bool leftTarget)
@@ -168,8 +224,6 @@ public class GuardAITest : MonoBehaviour {
         float angle = AngleOfScan;
         if (leftTarget)
             angle = -angle;
-
-        //Debug.Log(scanForward);
 
         Vector3 target = Quaternion.AngleAxis(angle, transform.up) * scanForward;
         return (target);
@@ -235,14 +289,28 @@ public class GuardAITest : MonoBehaviour {
 
             case AIState.Distracted:
                 currentDistractedDuration += Time.deltaTime;
-                if(currentDistractedDuration>DistractedDuration)
+                if (currentDistractedDuration > DistractedDuration)
                 {
                     currentDistractedDuration = 0;
-                    myState = prevState;
+
+                    if (prevState != AIState.Distracted)
+                        myState = prevState;
+                    else
+                        myState = AIState.Patrolling;
+                    if (cakeTarget)
+                    {
+                        myState = AIState.Patrolling;
+                        Destroy(cakeTarget);
+                    }
+                    canBeDistracted = false;
                     agent.Resume();
                 }
                 else
                 {
+                    transform.GetChild(3).position = transform.position + new Vector3(0, 2, 0);
+                    transform.GetChild(0).position = transform.position + new Vector3(0, -100, 0);
+                    transform.GetChild(2).position = transform.position + new Vector3(0, -100, 0);
+                    transform.GetChild(1).position = transform.position + new Vector3(0, -100, 0);
                     agent.Stop();
                 }
                 break;
@@ -287,12 +355,12 @@ public class GuardAITest : MonoBehaviour {
         }
         else if (myState == AIState.Patrolling)
         {
+            agent.Resume();
             transform.GetChild(2).position = transform.position + new Vector3(0, 2, 0);
             transform.GetChild(0).position = transform.position + new Vector3(0, -100, 0);
             transform.GetChild(1).position = transform.position + new Vector3(0, -100, 0);
             transform.GetChild(3).position = transform.position + new Vector3(0, -100, 0);
             agent.destination = GetNextPoint();
-
             if (myTarget)
             {
                 myState = AIState.Escorting;
@@ -318,6 +386,19 @@ public class GuardAITest : MonoBehaviour {
                 myState = AIState.Patrolling;
             }
         }
+        else if (myState == AIState.Caking)
+        {
+            agent.Resume();
+            transform.GetChild(3).position = transform.position + new Vector3(0, 2, 0);
+            transform.GetChild(0).position = transform.position + new Vector3(0, -100, 0);
+            transform.GetChild(2).position = transform.position + new Vector3(0, -100, 0);
+            transform.GetChild(1).position = transform.position + new Vector3(0, -100, 0);
+            agent.destination = cakeTarget.transform.position;
+            if (Vector3.Distance(transform.position, cakeTarget.transform.position) < 1.2f)
+            {
+                Distract();
+            }
+        }
 
         // proceed to next patrol point when in range of current point
         if (Vector3.Distance(transform.position, GetNextPoint()) < 1 && myState == AIState.Patrolling)
@@ -334,7 +415,8 @@ public class GuardAITest : MonoBehaviour {
 
     private void DoScan()
     {
-        prevState = myState;
+        if(myState != AIState.Stunned && myState != AIState.Distracted && myState != AIState.Sleeping)
+            prevState = myState;
         myState = AIState.Scanning;
         if (useWaypointDirectionForScan && !suspiciousScan)
         {
@@ -355,6 +437,14 @@ public class GuardAITest : MonoBehaviour {
     {
         if (disabled)
             return;
+
+        // check to see if they notice a cake
+        if (CakeInView() && myState != AIState.Chasing)
+        {
+            //prevState = myState;
+            myState = AIState.Caking;
+            return;
+        }
 
         Debug.DrawLine(this.transform.position, player.transform.position);
         // chase the player if they are in range and you are not too far from your patrol route
@@ -383,7 +473,7 @@ public class GuardAITest : MonoBehaviour {
 
         // chase the player if they are in range and making a loud enough sound
         NoiseMakerScript noiseScript = player.GetComponent<NoiseMakerScript>();
-        if (noiseScript)
+        if (noiseScript && canHear)
         {
                 if (Vector3.Distance(transform.position, GetNextPoint()) <= MaxDistanceFromPoint)
                 {
@@ -473,6 +563,43 @@ public class GuardAITest : MonoBehaviour {
             }
             else
             {
+                return false;
+            }
+
+        }
+        return false;
+    }
+
+
+    bool CakeInView()
+    {
+        GameObject[] obj = GameObject.FindGameObjectsWithTag("Cake");
+        foreach (GameObject g in obj)
+        {
+            if (Vector3.Distance(transform.position, g.transform.position) > CakeSpotDistance * 2)
+                return false;
+
+            if (Vector3.Distance(transform.position, g.transform.position) > CakeSpotDistance)
+                suspicionRange = true;
+            else
+                suspicionRange = false;
+
+            // using the dot product formular where dot = |a||b|cos(theta) and solving for theta
+            Vector2 forward = new Vector2(transform.forward.x, transform.forward.z);
+            Vector2 toPlayer = new Vector2(g.transform.position.x - transform.position.x, g.transform.position.z - transform.position.z);
+
+            // the forward is already normalized, and by normalizing toPlayer, we eliminate the magnitude part of the equation
+            float dot = Vector2.Dot(forward.normalized, toPlayer.normalized);
+
+            // now we have cos(theta) for dot, we just need to get the arc cosine to get theta.
+            if (dot > 0 && Mathf.Acos(dot) <= (Mathf.Deg2Rad * angleOfView / 2))
+            {
+                cakeTarget = g;
+                return true;
+            }
+            else
+            {
+
                 return false;
             }
 

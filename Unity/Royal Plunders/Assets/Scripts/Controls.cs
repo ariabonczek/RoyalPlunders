@@ -43,6 +43,9 @@ public class Controls : MonoBehaviour
             if (Input.GetButtonDown("B"))
                 actor.interact(InteractionButton.B);
 
+            if (Input.GetButtonDown("A"))
+                GetComponent<GadgetManager>().UseGadget();
+
             cam.inputPitch = Input.GetAxis("Right Vertical XBone");
             cam.inputYaw = Input.GetAxis("Right Horizontal XBone");
 
@@ -53,6 +56,8 @@ public class Controls : MonoBehaviour
         {
             if (Input.GetButtonDown("Circle"))
                 actor.interact(InteractionButton.B);
+            if (Input.GetButtonDown("X PS4"))
+                GetComponent<GadgetManager>().UseGadget();
 
             cam.inputPitch = Input.GetAxis("Right Vertical PS4");
             cam.inputYaw = Input.GetAxis("Right Horizontal PS4");
