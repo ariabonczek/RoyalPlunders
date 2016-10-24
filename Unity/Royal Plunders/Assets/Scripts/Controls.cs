@@ -15,6 +15,8 @@ using System.Collections;
 
 public class Controls : MonoBehaviour
 {
+    public GameObject gameManager;
+
     Camera mainCamera;
     ThirdPersonCamera cam;
     Interactor actor;
@@ -45,6 +47,10 @@ public class Controls : MonoBehaviour
 
             if (Input.GetButtonDown("A"))
                 GetComponent<GadgetManager>().UseGadget();
+
+            if (Input.GetButtonDown("Start Button") && gameManager)
+                gameManager.GetComponent<PauseMenu>().HandleMenu();
+                
 
             cam.inputPitch = Input.GetAxis("Right Vertical XBone");
             cam.inputYaw = Input.GetAxis("Right Horizontal XBone");
