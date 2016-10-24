@@ -67,7 +67,7 @@ public class TargetAITest : MonoBehaviour {
             // doing a line cast check to see if there are any obstacles between the AI and the player
             ray = new Ray(transform.position, player.transform.position - transform.position);
 
-            if (Physics.Raycast(ray, out hit, PlayerSpotDistance))
+            if (Physics.Raycast(ray, out hit, PlayerSpotDistance) && PlayerInView())
             {
                 GameObject targetObj = hit.collider.gameObject;
                 if (targetObj == player || (targetObj.transform.parent && targetObj.transform.parent.gameObject == player))

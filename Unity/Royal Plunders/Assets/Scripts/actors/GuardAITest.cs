@@ -13,6 +13,8 @@ public class GuardAITest : MonoBehaviour {
 
     public float ScanRotationSpeed;
 
+    private Vector3 originalForward;
+
     private bool canHear;
 
     public int AngleOfScan;
@@ -111,6 +113,7 @@ public class GuardAITest : MonoBehaviour {
         suspiciousScan = false;
         agent = GetComponent<NavMeshAgent>();
         suspicionRange = false;
+        originalForward = transform.forward;
         cakeTarget = null;
         Jazz = null;
         agent.autoBraking = false;
@@ -174,7 +177,7 @@ public class GuardAITest : MonoBehaviour {
 
     public void Distract()
     {
-        if (canBeDistracted)
+        if (canBeDistracted && myState != AIState.Stunned)
         {
             if (myState != AIState.Stunned && myState != AIState.Distracted && myState != AIState.Sleeping)
                 prevState = myState;
@@ -265,7 +268,7 @@ public class GuardAITest : MonoBehaviour {
                 }
                 else
                 {
-                    transform.GetChild(3).position = transform.position + new Vector3(0, 2, 0);
+                    transform.GetChild(3).position = transform.position + new Vector3(0, -100, 0);
                     transform.GetChild(0).position = transform.position + new Vector3(0, -100, 0);
                     transform.GetChild(2).position = transform.position + new Vector3(0, -100, 0);
                     transform.GetChild(1).position = transform.position + new Vector3(0, -100, 0);
@@ -393,9 +396,15 @@ public class GuardAITest : MonoBehaviour {
             transform.GetChild(0).position = transform.position + new Vector3(0, -100, 0);
             transform.GetChild(2).position = transform.position + new Vector3(0, -100, 0);
             transform.GetChild(1).position = transform.position + new Vector3(0, -100, 0);
-            agent.destination = cakeTarget.transform.position;
-            if (Vector3.Distance(transform.position, cakeTarget.transform.position) < 1.2f)
+            if (!cakeTarget)
             {
+                myState = AIState.Patrolling;
+                return;
+            }
+            agent.destination = cakeTarget.transform.position;
+            if (Vector3.Distance(transform.position, cakeTarget.transform.position) < 1f)
+            {
+                agent.Stop();
                 Distract();
             }
         }
@@ -420,7 +429,14 @@ public class GuardAITest : MonoBehaviour {
         myState = AIState.Scanning;
         if (useWaypointDirectionForScan && !suspiciousScan)
         {
-            scanForward = pathPoints.transform.GetChild(destPoint).transform.forward;
+            if (!pathPoints)
+            {
+                scanForward = originalForward;
+            }
+            else
+            {
+                scanForward = pathPoints.transform.GetChild(destPoint).transform.forward;
+            }
         }
         else
         {
