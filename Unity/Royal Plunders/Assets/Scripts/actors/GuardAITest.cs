@@ -9,6 +9,8 @@ public class GuardAITest : MonoBehaviour {
 
     public GameObject pathPoints;
 
+    private Vector3 originalPosition;
+
     public TargetAITest myTarget;
 
     public float ScanRotationSpeed;
@@ -110,6 +112,7 @@ public class GuardAITest : MonoBehaviour {
         currentDistractedDuration = 0;
         currentSleepingDuration = 0;
         currentStunnedDuration = 0;
+        originalPosition = transform.position;
         suspiciousScan = false;
         agent = GetComponent<NavMeshAgent>();
         suspicionRange = false;
@@ -621,5 +624,14 @@ public class GuardAITest : MonoBehaviour {
 
         }
         return false;
+    }
+
+    public void Reset()
+    {
+        myState = AIState.Patrolling;
+        transform.forward = originalForward;
+        transform.position = originalPosition;
+        destPoint = 0;
+        Debug.Log("RESET GUARD");
     }
 }

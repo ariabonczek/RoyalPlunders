@@ -64,4 +64,10 @@ public class Holdable : MonoBehaviour, Iinteractable
     {
         return false;
     }
+
+    public void Reset()
+    {
+        held = false;
+        owner = null;
+    }
 }

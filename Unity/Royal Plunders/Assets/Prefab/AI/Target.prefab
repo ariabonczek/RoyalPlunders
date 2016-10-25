@@ -99,7 +99,7 @@ GameObject:
   - 114: {fileID: 114000011961409482}
   m_Layer: 0
   m_Name: Target
-  m_TagString: Untagged
+  m_TagString: Target
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -496,8 +496,8 @@ MonoBehaviour:
   player: {fileID: 0}
   angleOfView: 45
   sneakWalkDetectionRange: 0
-  slowWalkDetectionRange: 8
-  fastWalkDetectionRange: 15
+  slowWalkDetectionRange: 4
+  fastWalkDetectionRange: 12
   runDetectionRange: 30
   rotationSpeed: 1.2
   myState: 2

@@ -11,6 +11,10 @@ public class TargetAITest : MonoBehaviour {
 
     private Vector3 basePosition;
 
+    private Vector3 originalPosition;
+
+    private Vector3 originalForward;
+
     public float sneakWalkDetectionRange;
 
     public float slowWalkDetectionRange;
@@ -45,6 +49,8 @@ public class TargetAITest : MonoBehaviour {
     void Start () {
         agent = GetComponent<NavMeshAgent>();
         agent.autoBraking = false;
+        originalForward = transform.forward;
+        originalPosition = transform.position;
         myState = AIState.Unaware;
         basePosition = this.transform.position;
     }
@@ -255,5 +261,12 @@ public class TargetAITest : MonoBehaviour {
     public Vector3 GetTargetBasePosition()
     {
         return basePosition;
+    }
+
+    public void Reset()
+    {
+        transform.position = originalPosition;
+        transform.forward = originalForward;
+        myState = AIState.Unaware;
     }
 }

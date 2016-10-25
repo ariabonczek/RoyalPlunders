@@ -27,6 +27,11 @@ public class Chest : MonoBehaviour, Iinteractable
         }
     }
 
+    public void Reset()
+    {
+        isOpen = false;
+    }
+
     public bool isInstant()
     {
         return false;
