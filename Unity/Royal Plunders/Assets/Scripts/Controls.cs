@@ -42,14 +42,22 @@ public class Controls : MonoBehaviour
 
         if (controller == Controllers.XBOX)
         {
-            if (Input.GetButtonDown("B"))
-                actor.interact(InteractionButton.B);
-
-            if (Input.GetButtonDown("A"))
-                GetComponent<GadgetManager>().UseGadget();
-
             if (Input.GetButtonDown("Start Button") && gameManager)
                 gameManager.GetComponent<PauseMenu>().HandleMenu();
+
+            if (!gameManager.GetComponent<PauseMenu>().menuOpen)
+            {
+                if (Input.GetButtonDown("B"))
+                    actor.interact(InteractionButton.B);
+
+                if (Input.GetButtonDown("A"))
+                    GetComponent<GadgetManager>().UseGadget();
+            }
+            else
+            {                
+                if (Input.GetButtonDown("B"))
+                    gameManager.GetComponent<PauseMenu>().CloseSceneSelect();
+            }
                 
 
             cam.inputPitch = Input.GetAxis("Right Vertical XBone");
