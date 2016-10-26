@@ -7,6 +7,8 @@ public class PauseMenu : MonoBehaviour {
     public Transform pauseMenu;
     public Transform mainCamera;
 
+    public GameObject firstItem;
+
     public void HandleMenu()
     {
         if (!pauseMenu.gameObject.activeInHierarchy)
@@ -14,6 +16,9 @@ public class PauseMenu : MonoBehaviour {
             pauseMenu.gameObject.SetActive(true);
             Time.timeScale = 0;
             mainCamera.GetComponent<ThirdPersonCamera>().enabled = false;
+
+            GameObject myEventSystem = GameObject.Find("EventSystem");
+            myEventSystem.GetComponent<UnityEngine.EventSystems.EventSystem>().SetSelectedGameObject(firstItem);
         }
         else
         {
