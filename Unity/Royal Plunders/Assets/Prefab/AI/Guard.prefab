@@ -162,6 +162,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1000012946871854
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 4000011228553442}
+  - 108: {fileID: 108000014077697970}
+  m_Layer: 0
+  m_Name: Flashlight
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!4 &4000010753339036
 Transform:
   m_ObjectHideFlags: 1
@@ -175,6 +191,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 4000013504128236}
   m_RootOrder: 3
+--- !u!4 &4000011228553442
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000012946871854}
+  m_LocalRotation: {x: -0.03371817, y: -0.0022530202, z: 0.9994242, w: -0.0030396488}
+  m_LocalPosition: {x: -0.10000103, y: 0.07000014, z: 0.29999915}
+  m_LocalScale: {x: 1.2499971, y: 1.2499974, z: 1.2500004}
+  m_LocalEulerAnglesHint: {x: 179.733, y: -183.752, z: 0.32899475}
+  m_Children: []
+  m_Father: {fileID: 4000013504128236}
+  m_RootOrder: 7
 --- !u!4 &4000011762187810
 Transform:
   m_ObjectHideFlags: 1
@@ -248,8 +277,8 @@ Transform:
   m_GameObject: {fileID: 1000011881299508}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 3.1661081, y: 1.839162, z: 3.4608922}
-  m_LocalScale: {x: 0.8000029, y: 0.8, z: 0.8000029}
-  m_LocalEulerAnglesHint: {x: 0, y: 217.84999, z: 0}
+  m_LocalScale: {x: 0.8000007, y: 0.8, z: 0.8000007}
+  m_LocalEulerAnglesHint: {x: 0, y: 135, z: 0}
   m_Children:
   - {fileID: 4000012970192476}
   - {fileID: 4000012428765418}
@@ -258,6 +287,7 @@ Transform:
   - {fileID: 4000011762187810}
   - {fileID: 4000012915722570}
   - {fileID: 4000013515542690}
+  - {fileID: 4000011228553442}
   m_Father: {fileID: 0}
   m_RootOrder: 0
 --- !u!4 &4000013515542690
@@ -597,6 +627,40 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 2, y: 3, z: 2}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!108 &108000014077697970
+Light:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000012946871854}
+  m_Enabled: 1
+  serializedVersion: 7
+  m_Type: 0
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Intensity: 3.89
+  m_Range: 10
+  m_SpotAngle: 100
+  m_CookieSize: 10
+  m_Shadows:
+    m_Type: 1
+    m_Resolution: 1
+    m_CustomResolution: -1
+    m_Strength: 1
+    m_Bias: 0.025
+    m_NormalBias: 0.4
+    m_NearPlane: 0.2
+  m_Cookie: {fileID: 0}
+  m_DrawHalo: 0
+  m_Flare: {fileID: 0}
+  m_RenderMode: 0
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_Lightmapping: 4
+  m_AreaSize: {x: 1, y: 1}
+  m_BounceIntensity: 1
+  m_ShadowRadius: 0
+  m_ShadowAngle: 0
 --- !u!114 &114000010802401798
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -660,22 +724,22 @@ MonoBehaviour:
   pathPoints: {fileID: 0}
   myTarget: {fileID: 0}
   ScanRotationSpeed: 1
-  AngleOfScan: 45
-  ScanAtWaypoints: 0
+  AngleOfScan: 30
+  ScanAtWaypoints: 1
   DistractionCooldown: 10
-  useWaypointDirectionForScan: 0
-  StunnedDuration: 100
+  useWaypointDirectionForScan: 1
+  StunnedDuration: 30
   SleepingDuration: 5
   DistractedDuration: 4
   angleOfView: 45
   sneakWalkDetectionRange: 0
-  slowWalkDetectionRange: 0
-  fastWalkDetectionRange: 0
-  runDetectionRange: 0
-  PlayerSpotDistance: 8
+  slowWalkDetectionRange: 3
+  fastWalkDetectionRange: 10
+  runDetectionRange: 20
+  PlayerSpotDistance: 5
   CakeSpotDistance: 10
-  MaxDistanceFromPoint: 10
-  myState: 0
+  MaxDistanceFromPoint: 20
+  myState: 2
 --- !u!135 &135000010198038100
 SphereCollider:
   m_ObjectHideFlags: 1
@@ -757,13 +821,13 @@ NavMeshAgent:
   m_GameObject: {fileID: 1000011881299508}
   m_Enabled: 1
   m_Radius: 1
-  m_Speed: 1
+  m_Speed: 2.5
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
   m_StoppingDistance: 0
   m_AutoTraverseOffMeshLink: 1
-  m_AutoBraking: 1
+  m_AutoBraking: 0
   m_AutoRepath: 1
   m_Height: 2
   m_BaseOffset: 1

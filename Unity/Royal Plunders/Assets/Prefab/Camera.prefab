@@ -24,6 +24,8 @@ GameObject:
   - 124: {fileID: 124000012742302416}
   - 81: {fileID: 81000010518568018}
   - 114: {fileID: 114000010595744076}
+  - 114: {fileID: 114000011964085294}
+  - 114: {fileID: 114000012231094538}
   m_Layer: 0
   m_Name: Camera
   m_TagString: MainCamera
@@ -38,7 +40,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000010152478460}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.94, y: 2.76, z: -11.96}
+  m_LocalPosition: {x: 9.166573, y: 14.598279, z: -33.366226}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
@@ -112,13 +114,80 @@ MonoBehaviour:
   pitchRangeUp: -10
   pitchRangeDown: -30
   autoPitchPercent: 0.85
-  camHeightPercent: 1.35
-  camDistance: 3
+  camHeightPercent: 2
+  camDistance: 5
   turnSpeed: 2.5
   rotationLerp: 10
   raycastMask:
     serializedVersion: 2
     m_Bits: 4294966985
+--- !u!114 &114000011964085294
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000010152478460}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fdc35e0180670ab4e8d2f9439137791f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SMAA:
+    settings:
+      debugPass: 0
+      quality: 2
+      edgeDetectionMethod: 3
+    quality:
+      diagonalDetection: 1
+      cornerDetection: 1
+      threshold: 0.1
+      depthThreshold: 0.01
+      maxSearchSteps: 16
+      maxDiagonalSearchSteps: 8
+      cornerRounding: 25
+      localContrastAdaptationFactor: 2
+    predication:
+      enabled: 0
+      threshold: 0.01
+      scale: 2
+      strength: 0.4
+    temporal:
+      enabled: 0
+      fuzzSize: 2
+  m_FXAA:
+    preset:
+      qualitySettings:
+        subpixelAliasingRemovalAmount: 0.75
+        edgeDetectionThreshold: 0.166
+        minimumRequiredLuminance: 0.0833
+      consoleSettings:
+        subpixelSpreadAmount: 0.5
+        edgeSharpnessAmount: 8
+        edgeDetectionThreshold: 0.125
+        minimumRequiredLuminance: 0.05
+  m_Method: 0
+--- !u!114 &114000012231094538
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000010152478460}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e89654dcf6db746d2a57aeaaa14f5e83, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  settings:
+    intensity: 1
+    radius: 0.3
+    sampleCount: 2
+    sampleCountValue: 24
+    downsampling: 0
+    ambientOnly: 0
+    occlusionSource: 1
+    debug: 0
+  _aoShader: {fileID: 4800000, guid: 65e203e5acda447acbf9dc1ef78c4a39, type: 3}
+  _quadMesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!124 &124000012742302416
 Behaviour:
   m_ObjectHideFlags: 1
