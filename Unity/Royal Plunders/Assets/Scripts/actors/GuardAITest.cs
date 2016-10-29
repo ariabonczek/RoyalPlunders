@@ -166,6 +166,8 @@ public class GuardAITest : MonoBehaviour {
 
     public void Stun()
     {
+        if (myState == AIState.Chasing)
+            return;
         if (myState != AIState.Stunned && myState != AIState.Distracted && myState != AIState.Sleeping)
             prevState = myState;
         myState = AIState.Stunned;
