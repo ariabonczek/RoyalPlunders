@@ -20,10 +20,13 @@ public class ThirdPersonCamera : MonoBehaviour
 
     public float turnSpeed = 2.5f; // turn rate of the camera (via joystick)
     float pitch; // current pitch
+    float wallPitch;
     float yaw; // current yaw
 
     public float rotationLerp = 10; // rotation rate of the camera
     public LayerMask raycastMask;
+    public float clippingRadius = 0.3f;
+    public float wallPitchFactor = 0.4f;
 
     GameObject target; // target object
     Transform targetTransform; // target object transform (its faster)
@@ -43,17 +46,13 @@ public class ThirdPersonCamera : MonoBehaviour
 
         if (!sprinting && !sneaking) // if walking like a normal person
         {
-            yaw += inputYaw * turnSpeed; // rotate the yaw
+            pitch -= inputYaw < pitchYawTolerance ? inputPitch * turnSpeed : 0; // cull bad pitching on the joystick
+            pitch = Mathf.Clamp(pitch, pitchRangeDown, pitchRangeUp); // keep it in range
 
             if (changeState) // if the player just stopped sprinting/sneaking
             {
                 pitch = defaultPitch; // fix the pitch
                 changeState = false; // default state
-            }
-            else // allow the player to change the pitch
-            {
-                pitch -= inputYaw < pitchYawTolerance ? inputPitch * turnSpeed : 0; // cull bad pitching on the joystick
-                pitch = Mathf.Clamp(pitch, pitchRangeDown, pitchRangeUp); // keep it in range
             }
         }
         else
@@ -67,6 +66,8 @@ public class ThirdPersonCamera : MonoBehaviour
             else if (sneaking) // pitch down
                 pitch = defaultPitch - (defaultPitch - pitchRangeDown) * autoPitchPercent;
         }
+
+        yaw += inputYaw * turnSpeed; // rotate the yaw
 
         self.position = getPos(); // move the cam
         self.rotation = Quaternion.Lerp(self.rotation, getRot(), Time.smoothDeltaTime * rotationLerp); // rotate the cam
@@ -97,10 +98,16 @@ public class ThirdPersonCamera : MonoBehaviour
         float angle = Mathf.Deg2Rad * (-yaw - 90); // direction to go
         Vector3 pos = posAbove + new Vector3(Mathf.Cos(angle), 0, Mathf.Sin(angle)) * camDistance; // done! (pre-raycast)
 
+        Vector3 rayPos = targetTransform.position + Vector3.up * (targetTransform.localScale.y * 2 + clippingRadius);
         RaycastHit camCast;
-        Ray raycast = new Ray(pos, (posAbove - pos).normalized);
-        if (Physics.Raycast(raycast, out camCast, (posAbove - pos).magnitude, raycastMask))
-            pos = camCast.point;
+        Ray raycast = new Ray(rayPos, (pos - rayPos).normalized);
+        if (Physics.SphereCast(raycast, clippingRadius, out camCast, (pos - rayPos).magnitude, raycastMask))
+        {
+            pos = camCast.point + camCast.normal * clippingRadius;
+            wallPitch = Vector3.Angle(pos - rayPos, pos + Vector3.up * (posAbove.y - pos.y) - rayPos) * wallPitchFactor;
+        }
+        else
+            wallPitch = 0;
 
         return pos;
     }
@@ -110,7 +117,7 @@ public class ThirdPersonCamera : MonoBehaviour
     {
         Quaternion ang = Quaternion.LookRotation(Vector3.forward, Vector3.up); // nuetral
         ang = Quaternion.AngleAxis(yaw, Vector3.up) * ang; // yaw
-        ang = Quaternion.AngleAxis(-pitch, ang * Vector3.right) * ang; // pitch
+        ang = Quaternion.AngleAxis(-(pitch - wallPitch), ang * Vector3.right) * ang; // pitch
 
         return ang;
     }
