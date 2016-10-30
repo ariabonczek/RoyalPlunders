@@ -13,7 +13,11 @@ public class GuardAITest : MonoBehaviour {
 
     public TargetAITest myTarget;
 
+    public float PlayerAggroDistanceWhileEscorting;
+
     public float ScanRotationSpeed;
+
+    private Vector3 pointAtChaseAway;
 
     private Vector3 originalForward;
 
@@ -182,7 +186,7 @@ public class GuardAITest : MonoBehaviour {
 
     public void Distract()
     {
-        if (canBeDistracted && myState != AIState.Stunned)
+        if (canBeDistracted && myState != AIState.Stunned && myState != AIState.Escorting)
         {
             if (myState != AIState.Stunned && myState != AIState.Distracted && myState != AIState.Sleeping)
                 prevState = myState;
@@ -347,6 +351,11 @@ public class GuardAITest : MonoBehaviour {
             transform.GetChild(1).position = transform.position + new Vector3(0, -100, 0);
             transform.GetChild(3).position = transform.position + new Vector3(0, -100, 0);
             agent.destination = player.transform.position;
+            // if the target is with the guard then after a certain distance the guard will return to escorting them
+            if (myTarget && (Vector3.Distance(transform.position, player.transform.position) > PlayerAggroDistanceWhileEscorting + 2))
+            {
+                myState = AIState.Escorting;
+            }
         }
         else if (myState == AIState.Suspcious)
         {
@@ -386,7 +395,12 @@ public class GuardAITest : MonoBehaviour {
                 escortLocation = myTarget.GetComponent<TargetAITest>().GetTargetBasePosition();
             }
             agent.destination = escortLocation;
-            if (Vector3.Distance(transform.position, escortLocation) < 2)
+            if (Vector3.Distance(transform.position, player.transform.position) < PlayerAggroDistanceWhileEscorting)
+            {
+                pointAtChaseAway = transform.position;
+                myState = AIState.Chasing;
+            }
+            if (Vector3.Distance(transform.position, escortLocation) < 1.2f)
             {
                 myTarget.myState = TargetAITest.AIState.Unaware;
                 myTarget = null;
@@ -460,7 +474,7 @@ public class GuardAITest : MonoBehaviour {
             return;
 
         // check to see if they notice a cake
-        if (CakeInView() && myState != AIState.Chasing)
+        if (CakeInView() && myState != AIState.Chasing && myState != AIState.Escorting)
         {
             //prevState = myState;
             myState = AIState.Caking;
@@ -494,7 +508,7 @@ public class GuardAITest : MonoBehaviour {
 
         // chase the player if they are in range and making a loud enough sound
         NoiseMakerScript noiseScript = player.GetComponent<NoiseMakerScript>();
-        if (noiseScript && canHear)
+        if (noiseScript && canHear && myState != AIState.Escorting)
         {
                 if (Vector3.Distance(transform.position, GetNextPoint()) <= MaxDistanceFromPoint)
                 {

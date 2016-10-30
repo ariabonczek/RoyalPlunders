@@ -162,7 +162,7 @@ public class TargetAITest : MonoBehaviour {
 
             if(Vector3.Distance(transform.position, alertedGuard.transform.position) <3)
             {
-                alertedGuard.GetComponent<GuardAITest>().myState = GuardAITest.AIState.Chasing;
+                alertedGuard.GetComponent<GuardAITest>().myState = GuardAITest.AIState.Escorting;
                 alertedGuard.GetComponent<GuardAITest>().myTarget = this;
                 myState = AIState.WaitingForSafety;
             }
@@ -173,7 +173,7 @@ public class TargetAITest : MonoBehaviour {
             transform.GetChild(0).position = transform.position + new Vector3(0, -100, 0);
             transform.GetChild(2).position = transform.position + new Vector3(0, -100, 0);
 
-            agent.Resume();
+            agent.Stop();
             RotateTowards(suspicionPoint);
         }
         else if (myState == AIState.Unaware)
