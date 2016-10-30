@@ -21,6 +21,7 @@ public class Controls : MonoBehaviour
     ThirdPersonCamera cam;
     Interactor actor;
     Movement mover;
+    NoiseMakerScript noiseMaker;
 
     string[] joys;
     enum Controllers { XBOX, PS4, NONE};
@@ -32,7 +33,7 @@ public class Controls : MonoBehaviour
         actor = GetComponent<Interactor>();
         cam.setTarget(gameObject);
         mover = GetComponent<Movement>();
-
+        noiseMaker = GetComponent<NoiseMakerScript>();
         InteractionTable.LoadTables("interactionTables"); // might be a good idea to move this to a game manager once we have one
 	}
 	
@@ -85,6 +86,11 @@ public class Controls : MonoBehaviour
                 actor.interact(InteractionButton.Y);
 
             mover.sneak = Input.GetButton("L1");
+
+            if(Input.GetButton("R1"))
+            {
+                noiseMaker.AdjustSoundLevel(5);
+            }
 
             mover.direction.x = Input.GetAxis("Left Horizontal");
             mover.direction.z = -Input.GetAxis("Left Vertical");

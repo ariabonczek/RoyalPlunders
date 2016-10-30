@@ -17,6 +17,8 @@ public class GuardAITest : MonoBehaviour {
 
     public float ScanRotationSpeed;
 
+    public float GuardToGuardAlertRadius;
+
     private Vector3 pointAtChaseAway;
 
     private Vector3 originalForward;
@@ -64,6 +66,8 @@ public class GuardAITest : MonoBehaviour {
     public float fastWalkDetectionRange;
 
     public float runDetectionRange;
+
+    public float playerTriggerNoiseRange;
 
     // the distance at which the guard will chase the player
     public float PlayerSpotDistance;
@@ -356,6 +360,7 @@ public class GuardAITest : MonoBehaviour {
             {
                 myState = AIState.Escorting;
             }
+            AlertNearbyGuards();
         }
         else if (myState == AIState.Suspcious)
         {
@@ -530,7 +535,11 @@ public class GuardAITest : MonoBehaviour {
                             if (Vector3.Distance(transform.position, player.transform.position) < runDetectionRange && myState != AIState.Chasing)
                                 myState = AIState.Suspcious;
                             break;
-                        default:
+                        case 5:
+                            if (Vector3.Distance(transform.position, player.transform.position) < playerTriggerNoiseRange && myState != AIState.Chasing)
+                                myState = AIState.Suspcious;
+                            break;
+                    default:
 
                             break;
                     }
@@ -605,6 +614,19 @@ public class GuardAITest : MonoBehaviour {
         return false;
     }
 
+    void AlertNearbyGuards()
+    {
+        var objects = GameObject.FindGameObjectsWithTag("Guard");
+        var objectCount = objects.Length;
+        foreach (var obj in objects)
+        {
+            GameObject go = obj.gameObject;
+            if(Vector3.Distance(transform.position, go.transform.position)<GuardToGuardAlertRadius)
+            {
+                go.GetComponent<GuardAITest>().myState = AIState.Chasing;
+            }
+        }
+    }
 
     bool CakeInView()
     {

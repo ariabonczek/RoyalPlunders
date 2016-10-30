@@ -725,6 +725,7 @@ MonoBehaviour:
   myTarget: {fileID: 0}
   PlayerAggroDistanceWhileEscorting: 5
   ScanRotationSpeed: 1
+  GuardToGuardAlertRadius: 15
   AngleOfScan: 30
   ScanAtWaypoints: 1
   DistractionCooldown: 10
@@ -737,6 +738,7 @@ MonoBehaviour:
   slowWalkDetectionRange: 3
   fastWalkDetectionRange: 10
   runDetectionRange: 20
+  playerTriggerNoiseRange: 10
   PlayerSpotDistance: 5
   CakeSpotDistance: 10
   MaxDistanceFromPoint: 20
