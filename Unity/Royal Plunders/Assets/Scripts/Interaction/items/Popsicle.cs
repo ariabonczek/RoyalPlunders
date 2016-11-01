@@ -4,7 +4,9 @@ using System.Collections;
 public class Popsicle : MonoBehaviour, Iinteractable
 {
 
-    public float Range;
+    public float FreezeRange;
+
+    public float TriggerRange;
 
     private float velocity;
 
@@ -16,10 +18,13 @@ public class Popsicle : MonoBehaviour, Iinteractable
 
     private bool active;
 
+    private bool triggered;
+
     // Use this for initialization
     void Start()
     {
         active = false;
+        triggered = false;
     }
 
     public void Place(float speed)
@@ -38,29 +43,44 @@ public class Popsicle : MonoBehaviour, Iinteractable
         }
     }
 
+    private void CheckForTrigger()
+    {
+        GameObject[] obj = GameObject.FindGameObjectsWithTag("Guard");
+        foreach (GameObject g in obj)
+        {
+            if (Vector3.Distance(transform.position, g.transform.position) < TriggerRange)
+                triggered = true;
+        }
+    }
+
 
     // Update is called once per frame
     void Update()
     {
         if (active)
         {
-            currentDuration += Time.deltaTime;
-            if(currentDuration>= Duration)
-            {
-                active = false;
-                transform.position -= new Vector3(0, -100, 0);
-                return;
-            } 
-            velocity -= SpeedDecceleration;
-            if (velocity < 0)
-                velocity = 0;
-            transform.position += transform.forward * velocity * Time.deltaTime;
+            CheckForTrigger();
 
-            GameObject[] obj = GameObject.FindGameObjectsWithTag("Guard");
-            foreach (GameObject g in obj)
+            if (triggered)
             {
-                if (Vector3.Distance(transform.position, g.transform.position) < Range)
-                    g.GetComponent<GuardAITest>().Distract();
+                currentDuration += Time.deltaTime;
+                if (currentDuration >= Duration)
+                {
+                    active = false;
+                    transform.position -= new Vector3(0, -100, 0);
+                    return;
+                }
+                velocity -= SpeedDecceleration;
+                if (velocity < 0)
+                    velocity = 0;
+                transform.position += transform.forward * velocity * Time.deltaTime;
+
+                GameObject[] obj = GameObject.FindGameObjectsWithTag("Guard");
+                foreach (GameObject g in obj)
+                {
+                    if (Vector3.Distance(transform.position, g.transform.position) < FreezeRange)
+                        g.GetComponent<GuardAITest>().Distract();
+                }
             }
         }
     }
