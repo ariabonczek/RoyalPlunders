@@ -12,10 +12,13 @@ public class Jazz : MonoBehaviour, Iinteractable
 
     private bool active;
 
+    private bool triggered;
+
     // Use this for initialization
     void Start()
     {
         active = false;
+        triggered = false;
     }
 
     public void Place(float speed)
@@ -37,7 +40,7 @@ public class Jazz : MonoBehaviour, Iinteractable
     // Update is called once per frame
     void Update()
     {
-        if (active)
+        if (active && triggered)
         {
             currentDuration += Time.deltaTime;
             if (currentDuration >= Duration)
@@ -62,6 +65,11 @@ public class Jazz : MonoBehaviour, Iinteractable
             return true;
         else
             return false;
+    }
+
+    public void Trigger()
+    {
+        triggered = true;
     }
 
     public string getTypeLabel()
