@@ -1101,15 +1101,15 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4000013904678930, guid: 08eb47b15794d4d41a1dee072e33598c, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 4.707
+      value: -26.2
       objectReference: {fileID: 0}
     - target: {fileID: 4000013904678930, guid: 08eb47b15794d4d41a1dee072e33598c, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 3.27
+      value: 1.03
       objectReference: {fileID: 0}
     - target: {fileID: 4000013904678930, guid: 08eb47b15794d4d41a1dee072e33598c, type: 2}
       propertyPath: m_LocalPosition.z
-      value: 31.3
+      value: -2.8
       objectReference: {fileID: 0}
     - target: {fileID: 4000013904678930, guid: 08eb47b15794d4d41a1dee072e33598c, type: 2}
       propertyPath: m_LocalRotation.x
@@ -1131,6 +1131,11 @@ Prefab:
       propertyPath: m_RootOrder
       value: 16
       objectReference: {fileID: 0}
+    - target: {fileID: 114000011961409482, guid: 08eb47b15794d4d41a1dee072e33598c,
+        type: 2}
+      propertyPath: alarmSystem
+      value: 
+      objectReference: {fileID: 858320970}
     - target: {fileID: 114000012030386164, guid: 08eb47b15794d4d41a1dee072e33598c,
         type: 2}
       propertyPath: player
@@ -10002,6 +10007,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _entityType: 0
+--- !u!1 &858320970 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1000011734045816, guid: 62d838f4b4e9804418760a33eaefbd72,
+    type: 2}
+  m_PrefabInternal: {fileID: 2104592274}
 --- !u!43 &879617159
 Mesh:
   m_ObjectHideFlags: 0
@@ -24564,31 +24574,6 @@ Prefab:
       propertyPath: alarmLight
       value: 
       objectReference: {fileID: 1393892846}
-    - target: {fileID: 114000011474142440, guid: 62d838f4b4e9804418760a33eaefbd72,
-        type: 2}
-      propertyPath: setState
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114000011474142440, guid: 62d838f4b4e9804418760a33eaefbd72,
-        type: 2}
-      propertyPath: alarmState
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114000011474142440, guid: 62d838f4b4e9804418760a33eaefbd72,
-        type: 2}
-      propertyPath: alarmOffState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 114000011474142440, guid: 62d838f4b4e9804418760a33eaefbd72,
-        type: 2}
-      propertyPath: alarmActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 114000011474142440, guid: 62d838f4b4e9804418760a33eaefbd72,
-        type: 2}
-      propertyPath: disabledTime
-      value: 300
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 62d838f4b4e9804418760a33eaefbd72, type: 2}
   m_IsPrefabParent: 0

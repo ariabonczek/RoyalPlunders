@@ -7,6 +7,8 @@ public class Holdable : MonoBehaviour, Iinteractable
     private float originalY;
     private bool held = false;
 
+    public GameObject alarmSystem;
+
     Movement mover;
     Collider col;
     GameObject owner;
@@ -41,6 +43,8 @@ public class Holdable : MonoBehaviour, Iinteractable
         {
             originalY = transform.position.y;
             owner = interactor;
+
+            alarmSystem.GetComponent<AlarmSystem>().TurnOnAlarm();
         }
         else
         {

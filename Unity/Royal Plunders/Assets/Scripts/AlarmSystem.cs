@@ -34,7 +34,10 @@ public class AlarmSystem : MonoBehaviour, Iinteractable {
 
     public void interact(InteractionButton button, GameObject interactor)
     {
-        TurnOffAlarm();
+        if (!alarmDisabled)
+        {
+            TurnOffAlarm();
+        }
         alarmDisabled = true;
     }
 

@@ -69,7 +69,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000011734045816}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.33, y: 0.76, z: 0}
+  m_LocalPosition: {x: -18.86, y: 0.76, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
@@ -184,11 +184,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   alarmLight: {fileID: 0}
+  disabledTime: 300
+  currentTime: 0
   alarmLightMaxIntensity: 3
   alarmLightMinimumIntensity: 1
   alarmLightCurrentIntensity: 1
   alarmLightIncrement: 0.5
-  alarmActive: 1
+  alarmDisabled: 0
+  alarmActive: 0
+  alarmState: 1
+  alarmOffState: 2
 --- !u!114 &114000012274449706
 MonoBehaviour:
   m_ObjectHideFlags: 1
