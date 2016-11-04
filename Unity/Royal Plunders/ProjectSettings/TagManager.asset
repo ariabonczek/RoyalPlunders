@@ -17,6 +17,7 @@ TagManager:
   - EventSystem
   - Chest
   - Target
+  - Alarm
   layers:
   - Default
   - TransparentFX
