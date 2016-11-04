@@ -1,62 +1,101 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class AlarmSystem : MonoBehaviour {
+public class AlarmSystem : MonoBehaviour, Iinteractable {
 
     public GameObject alarmLight;
 
+    public float disabledTime;
+
+    // shouldn't be edited, just public facing data
+    public float currentTime;
+
+    // how bright do we want the lights
     public float alarmLightMaxIntensity;
     public float alarmLightMinimumIntensity;
     public float alarmLightCurrentIntensity;
     public float alarmLightIncrement;
+
+    // disablable for the alarm and is the alarm on
+    public bool alarmDisabled;
     public bool alarmActive;
 
     public GuardAITest.AIState alarmState;
     public GuardAITest.AIState alarmOffState;
 
     private float targetIntensity;
-    private bool alarmTurnedOn;
+    private float lastUpdate;
 
     void Start()
     {
-        alarmTurnedOn = false;
         targetIntensity = alarmLightMaxIntensity;
+        currentTime = 0;
+    }
+
+    public void interact(InteractionButton button, GameObject interactor)
+    {
+        TurnOffAlarm();
+        alarmDisabled = true;
     }
 
 	// Update is called once per frame
 	void Update () 
     {
-        if (alarmActive)
+        if (alarmActive && !alarmDisabled)
         {
-            if (!alarmTurnedOn)
-            {
-                alarmLight.GetComponent<Light>().enabled = true;
-            
-                alarmLight.GetComponent<Light>().intensity = alarmLightCurrentIntensity;
+            alarmLight.GetComponent<Light>().enabled = true;
 
-                for (int i = 0; i < GameManager.guardList.Length; i++)
-                {
-                    GameManager.guardList[i].GetComponent<GuardAITest>().myState = alarmState;
-                }
+            alarmLight.GetComponent<Light>().intensity = alarmLightCurrentIntensity;
 
-                alarmTurnedOn = true;
-            }
-            
             alarmLightCurrentIntensity = Mathf.Lerp(alarmLightCurrentIntensity, targetIntensity, alarmLightIncrement * Time.deltaTime);
             CheckIntensity();
         }
         else
         {
-            alarmTurnedOn = false;
             alarmLight.GetComponent<Light>().enabled = false;
             alarmLightCurrentIntensity = alarmLightMinimumIntensity;
+        }
 
-            for (int i = 0; i < GameManager.guardList.Length; i++)
+        UpdateDisableTimer();
+	}
+
+    public void UpdateDisableTimer()
+    {
+        if (alarmDisabled && (currentTime <= disabledTime) )
+        {
+            if (Time.time - lastUpdate >= 1f)
             {
-                GameManager.guardList[i].GetComponent<GuardAITest>().myState = alarmOffState;
+                currentTime += 1;
+                lastUpdate = Time.time;
             }
         }
-	}
+        else
+        {
+            currentTime = 0;
+            alarmDisabled = false;
+        }
+    }
+
+    public void TurnOnAlarm()
+    {
+        alarmActive = true;
+
+        for (int i = 0; i < GameManager.guardList.Length; i++)
+        {
+            GameManager.guardList[i].GetComponent<GuardAITest>().myState = alarmState;
+        }
+    }
+
+    public void TurnOffAlarm()
+    {
+        alarmActive = false;
+        alarmDisabled = true;
+
+        for (int i = 0; i < GameManager.guardList.Length; i++)
+        {
+            GameManager.guardList[i].GetComponent<GuardAITest>().myState = alarmOffState;
+        }
+    }
 
     public void CheckIntensity()
     {
@@ -71,5 +110,15 @@ public class AlarmSystem : MonoBehaviour {
                 targetIntensity = alarmLightMaxIntensity;
             }
         }
+    }
+
+    public string getTypeLabel()
+    {
+        return "Alarm";
+    }
+
+    public bool isInstant()
+    {
+        return false;
     }
 }

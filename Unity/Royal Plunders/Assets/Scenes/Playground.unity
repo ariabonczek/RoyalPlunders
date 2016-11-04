@@ -24529,7 +24529,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4000012455252212, guid: 62d838f4b4e9804418760a33eaefbd72, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 2.33
+      value: -18.86
       objectReference: {fileID: 0}
     - target: {fileID: 4000012455252212, guid: 62d838f4b4e9804418760a33eaefbd72, type: 2}
       propertyPath: m_LocalPosition.y
@@ -24583,6 +24583,11 @@ Prefab:
         type: 2}
       propertyPath: alarmActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000011474142440, guid: 62d838f4b4e9804418760a33eaefbd72,
+        type: 2}
+      propertyPath: disabledTime
+      value: 300
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 62d838f4b4e9804418760a33eaefbd72, type: 2}
