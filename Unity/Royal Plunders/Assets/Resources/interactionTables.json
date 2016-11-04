@@ -10,7 +10,8 @@
     "Popsicle",
     "Cake",
     "Jazz",
-    "Alarm"
+    "Alarm",
+    "Lazer"
   ],
 	"permissions": [
 		{
@@ -33,7 +34,8 @@
         "Popsicle",
         "Cake",
         "Jazz",
-        "Alarm"
+        "Alarm",
+        "Lazer"
 			]
 		}
 	]
