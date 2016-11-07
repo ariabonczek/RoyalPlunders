@@ -317,7 +317,7 @@ ParticleSystem:
         m_RotationOrder: 4
       minMaxState: 0
     startSpeed:
-      scalar: 5
+      scalar: 7
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -955,7 +955,7 @@ ParticleSystem:
           rgba: 4278190331
         key1:
           serializedVersion: 2
-          rgba: 4294967295
+          rgba: 4278453503
         key2:
           serializedVersion: 2
           rgba: 0
