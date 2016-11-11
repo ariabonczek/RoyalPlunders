@@ -54,6 +54,12 @@ public class GadgetManager : MonoBehaviour {
                     slot1 = GadgetSlotType.Empty;
                     return;
                 }
+                if (slot1Obj.GetComponent<NoiseMachine>())
+                {
+                    slot1Obj.GetComponent<NoiseMachine>().Trigger();
+                    slot1 = GadgetSlotType.Empty;
+                    return;
+                }
             }
             slot1 = GadgetSlotType.Empty;
             slot1Obj.transform.position = transform.GetChild(0).position + (transform.GetChild(0).forward * slot1Obj.transform.GetChild(0).localScale.z) + new Vector3(0,.4f,0);
@@ -67,6 +73,11 @@ public class GadgetManager : MonoBehaviour {
                 slot1Obj.GetComponent<Jazz>().Place(GetComponent<Movement>().currentSpeed);
                 slot1 = GadgetSlotType.Trigger;
             }
+            if (slot1Obj.GetComponent<NoiseMachine>())
+            {
+                slot1Obj.GetComponent<NoiseMachine>().Place(GetComponent<Movement>().currentSpeed);
+                slot1 = GadgetSlotType.Trigger;
+            }
         }
         else if (slot2 != GadgetSlotType.Empty)
         {
@@ -75,6 +86,12 @@ public class GadgetManager : MonoBehaviour {
                 if (slot2Obj.GetComponent<Jazz>())
                 {
                     slot2Obj.GetComponent<Jazz>().Trigger();
+                    slot2 = GadgetSlotType.Empty;
+                    return;
+                }
+                if (slot2Obj.GetComponent<NoiseMachine>())
+                {
+                    slot2Obj.GetComponent<NoiseMachine>().Trigger();
                     slot2 = GadgetSlotType.Empty;
                     return;
                 }
@@ -89,6 +106,11 @@ public class GadgetManager : MonoBehaviour {
             if (slot2Obj.GetComponent<Jazz>())
             {
                 slot2Obj.GetComponent<Jazz>().Place(GetComponent<Movement>().currentSpeed);
+                slot2 = GadgetSlotType.Trigger;
+            }
+            if (slot2Obj.GetComponent<NoiseMachine>())
+            {
+                slot2Obj.GetComponent<NoiseMachine>().Place(GetComponent<Movement>().currentSpeed);
                 slot2 = GadgetSlotType.Trigger;
             }
         }

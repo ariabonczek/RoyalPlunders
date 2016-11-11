@@ -565,6 +565,15 @@ public class GuardAITest : MonoBehaviour {
         }
     }
 
+    public void HearsSound(GameObject obj)
+    {
+        if (canHear && myState != AIState.Escorting)
+        {
+            myState = AIState.Suspcious;
+            suspicionPoint = obj.transform.position;
+        }
+    }
+
     void GotoNextPoint()
     {
         // Returns if no points have been set up

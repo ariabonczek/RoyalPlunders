@@ -9,6 +9,7 @@
     "Rail",
     "Popsicle",
     "Cake",
+    "NoiseMachine",
     "Jazz",
     "Alarm",
     "Lazer"
@@ -34,6 +35,7 @@
         "Popsicle",
         "Cake",
         "Jazz",
+	"NoiseMachine",
         "Alarm",
         "Lazer"
 			]
