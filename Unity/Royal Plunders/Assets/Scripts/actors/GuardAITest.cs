@@ -13,6 +13,12 @@ public class GuardAITest : MonoBehaviour {
 
     public TargetAITest myTarget;
 
+    public float minimumChaseTime;
+
+    private float currentChaseTime;
+
+    public float chaseSpeedMultiplier;
+
     public float PlayerAggroDistanceWhileEscorting;
 
     public float ScanRotationSpeed;
@@ -28,8 +34,6 @@ public class GuardAITest : MonoBehaviour {
     public int AngleOfScan;
 
     public bool ScanAtWaypoints;
-
-    private GameObject Jazz;
 
     private bool canBeDistracted;
 
@@ -100,6 +104,8 @@ public class GuardAITest : MonoBehaviour {
 
     private bool suspiciousPrev;
 
+    private float originalSpeed;
+
     private bool suspiciousScan;
 
     private GameObject cakeTarget;
@@ -121,12 +127,12 @@ public class GuardAITest : MonoBehaviour {
         currentSleepingDuration = 0;
         currentStunnedDuration = 0;
         originalPosition = transform.position;
+        originalSpeed = GetComponent<NavMeshAgent>().speed;
         suspiciousScan = false;
         agent = GetComponent<NavMeshAgent>();
         suspicionRange = false;
         originalForward = transform.forward;
         cakeTarget = null;
-        Jazz = null;
         agent.autoBraking = false;
         myState = AIState.Patrolling;
         canHear = true;
@@ -169,6 +175,15 @@ public class GuardAITest : MonoBehaviour {
         DetermineAIState();
 
         ExecuteAIStateResult();
+
+        if(myState == AIState.Chasing)
+        {
+            GetComponent<NavMeshAgent>().speed = originalSpeed * chaseSpeedMultiplier;
+        }
+        else
+        {
+            GetComponent<NavMeshAgent>().speed = originalSpeed;
+        }
    
     }
 
@@ -349,6 +364,7 @@ public class GuardAITest : MonoBehaviour {
         // while in the state of Chasing the player
         if (myState == AIState.Chasing)
         {
+            currentChaseTime += Time.deltaTime;
             agent.Resume();
             transform.GetChild(0).position = transform.position + new Vector3(0, 2, 0);
             transform.GetChild(2).position = transform.position + new Vector3(0, -100, 0);
@@ -403,7 +419,7 @@ public class GuardAITest : MonoBehaviour {
             if (Vector3.Distance(transform.position, player.transform.position) < PlayerAggroDistanceWhileEscorting)
             {
                 pointAtChaseAway = transform.position;
-                myState = AIState.Chasing;
+                StartChasing();
             }
             if (Vector3.Distance(transform.position, escortLocation) < 1.2f)
             {
@@ -501,12 +517,12 @@ public class GuardAITest : MonoBehaviour {
                     if (suspicionRange && myState != AIState.Chasing)
                         myState = AIState.Suspcious;
                     else
-                        myState = AIState.Chasing;
+                        StartChasing();
                 }
             }
             return;
         }
-        else if (Vector3.Distance(transform.position, GetNextPoint()) > MaxDistanceFromPoint && myState != AIState.Escorting)
+        else if (Vector3.Distance(transform.position, GetNextPoint()) > MaxDistanceFromPoint && myState != AIState.Escorting && (myState != AIState.Chasing || currentChaseTime >= minimumChaseTime))
         {
             myState = AIState.Patrolling;
         }
@@ -626,13 +642,12 @@ public class GuardAITest : MonoBehaviour {
     void AlertNearbyGuards()
     {
         var objects = GameObject.FindGameObjectsWithTag("Guard");
-        var objectCount = objects.Length;
         foreach (var obj in objects)
         {
             GameObject go = obj.gameObject;
             if(Vector3.Distance(transform.position, go.transform.position)<GuardToGuardAlertRadius)
             {
-                go.GetComponent<GuardAITest>().myState = AIState.Chasing;
+                go.GetComponent<GuardAITest>().StartChasing();
             }
         }
     }
@@ -673,12 +688,18 @@ public class GuardAITest : MonoBehaviour {
         return false;
     }
 
+    public void StartChasing()
+    {
+        if(myState != AIState.Chasing)
+            currentChaseTime = 0;
+        myState = AIState.Chasing;
+    }
+
     public void Reset()
     {
         myState = AIState.Patrolling;
         transform.forward = originalForward;
         transform.position = originalPosition;
         destPoint = 0;
-        Debug.Log("RESET GUARD");
     }
 }

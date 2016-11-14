@@ -3,7 +3,7 @@ using System.Collections;
 
 public class GadgetManager : MonoBehaviour {
 
-    public enum GadgetSlotType { Cake, Jazz, Popsicle, Trigger, Empty};
+    public enum GadgetSlotType { Cake, Jazz, Popsicle, Noise, Trigger, Empty};
 
     bool slot1Chosen;
 
@@ -15,12 +15,27 @@ public class GadgetManager : MonoBehaviour {
 
     GameObject slot2Obj;
 
+    GameObject popsicle;
+
+    GameObject cake;
+
+    GameObject noiseMaker;
+
+    GameObject jazzMaker;
+
+    GameObject triggerSign;
+
 	// Use this for initialization
 	void Start () {
         slot1 = GadgetSlotType.Empty;
         slot2 = GadgetSlotType.Empty;
         slot1Chosen = true;
-	}
+        popsicle = transform.GetChild(2).gameObject;
+        cake = transform.GetChild(3).gameObject;
+        noiseMaker = transform.GetChild(4).gameObject;
+        jazzMaker = transform.GetChild(5).gameObject;
+        triggerSign = transform.GetChild(6).gameObject;
+    }
 
     public bool AddToSlot(GadgetSlotType gadget, GameObject obj)
     {
@@ -44,7 +59,7 @@ public class GadgetManager : MonoBehaviour {
 
     public void UseGadget()
     {
-        if(slot1Chosen && slot1 != GadgetSlotType.Empty)
+        if (slot1Chosen && slot1 != GadgetSlotType.Empty)
         {
             if(slot1 == GadgetSlotType.Trigger)
             {
@@ -114,10 +129,142 @@ public class GadgetManager : MonoBehaviour {
                 slot2 = GadgetSlotType.Trigger;
             }
         }
+
+        if (slot1Chosen && slot1 == GadgetSlotType.Empty && slot2 != GadgetSlotType.Empty)
+        {
+            Debug.Log("CMOOON");
+            slot1Chosen = false;
+        }
+        if (!slot1Chosen && slot1 != GadgetSlotType.Empty && slot2 == GadgetSlotType.Empty)
+        {
+            slot1Chosen = true;
+        }
+    }
+
+    void HandleActiveGadgetShowcase()
+    {
+        if(slot1Chosen)
+        {
+            if (slot1 != GadgetSlotType.Empty)
+            {
+                switch (slot1)
+                {
+                    case GadgetSlotType.Cake:
+                        cake.transform.position = transform.position + new Vector3(0, 2, 0);
+                        noiseMaker.transform.position = transform.position + new Vector3(0, -100, 0);
+                        jazzMaker.transform.position = transform.position + new Vector3(0, -100, 0);
+                        popsicle.transform.position = transform.position + new Vector3(0, -100, 0);
+                        triggerSign.transform.position = transform.position + new Vector3(0, -100, 0);
+                        break;
+
+                    case GadgetSlotType.Popsicle:
+                        cake.transform.position = transform.position + new Vector3(0, -100, 0);
+                        noiseMaker.transform.position = transform.position + new Vector3(0, -100, 0);
+                        jazzMaker.transform.position = transform.position + new Vector3(0, -100, 0);
+                        popsicle.transform.position = transform.position + new Vector3(0, 2, 0);
+                        triggerSign.transform.position = transform.position + new Vector3(0, -100, 0);
+                        break;
+
+                    case GadgetSlotType.Jazz:
+                        cake.transform.position = transform.position + new Vector3(0, -100, 0);
+                        noiseMaker.transform.position = transform.position + new Vector3(0, -100, 0);
+                        jazzMaker.transform.position = transform.position + new Vector3(0, 2, 0);
+                        popsicle.transform.position = transform.position + new Vector3(0, -100, 0);
+                        triggerSign.transform.position = transform.position + new Vector3(0, -100, 0);
+                        break;
+
+                    case GadgetSlotType.Noise:
+                        cake.transform.position = transform.position + new Vector3(0, -100, 0);
+                        noiseMaker.transform.position = transform.position + new Vector3(0, 2, 0);
+                        jazzMaker.transform.position = transform.position + new Vector3(0, -100, 0);
+                        popsicle.transform.position = transform.position + new Vector3(0, -100, 0);
+                        triggerSign.transform.position = transform.position + new Vector3(0, -100, 0);
+                        break;
+
+                    case GadgetSlotType.Trigger:
+                        cake.transform.position = transform.position + new Vector3(0, -100, 0);
+                        noiseMaker.transform.position = transform.position + new Vector3(0, -100, 0);
+                        jazzMaker.transform.position = transform.position + new Vector3(0, -100, 0);
+                        popsicle.transform.position = transform.position + new Vector3(0, -100, 0);
+                        triggerSign.transform.position = transform.position + new Vector3(0, 3.5f, 0);
+                        break;
+
+                    default:
+                        break;
+                }
+            }
+            else
+            {
+                cake.transform.position = transform.position + new Vector3(0, -100, 0);
+                noiseMaker.transform.position = transform.position + new Vector3(0, -100, 0);
+                jazzMaker.transform.position = transform.position + new Vector3(0, -100, 0);
+                popsicle.transform.position = transform.position + new Vector3(0, -100, 0);
+                triggerSign.transform.position = transform.position + new Vector3(0, -100, 0);
+            }
+        }
+        else
+        {
+            if (slot2 != GadgetSlotType.Empty)
+            {
+                switch (slot2)
+                {
+                    case GadgetSlotType.Cake:
+                        cake.transform.position = transform.position + new Vector3(0, 2, 0);
+                        noiseMaker.transform.position = transform.position + new Vector3(0, -100, 0);
+                        jazzMaker.transform.position = transform.position + new Vector3(0, -100, 0);
+                        popsicle.transform.position = transform.position + new Vector3(0, -100, 0);
+                        triggerSign.transform.position = transform.position + new Vector3(0, -100, 0);
+                        break;
+
+                    case GadgetSlotType.Popsicle:
+                        cake.transform.position = transform.position + new Vector3(0, -100, 0);
+                        noiseMaker.transform.position = transform.position + new Vector3(0, -100, 0);
+                        jazzMaker.transform.position = transform.position + new Vector3(0, -100, 0);
+                        popsicle.transform.position = transform.position + new Vector3(0, 2, 0);
+                        triggerSign.transform.position = transform.position + new Vector3(0, -100, 0);
+                        break;
+
+                    case GadgetSlotType.Jazz:
+                        cake.transform.position = transform.position + new Vector3(0, -100, 0);
+                        noiseMaker.transform.position = transform.position + new Vector3(0, -100, 0);
+                        jazzMaker.transform.position = transform.position + new Vector3(0, 2, 0);
+                        popsicle.transform.position = transform.position + new Vector3(0, -100, 0);
+                        triggerSign.transform.position = transform.position + new Vector3(0, -100, 0);
+                        break;
+
+                    case GadgetSlotType.Noise:
+                        cake.transform.position = transform.position + new Vector3(0, -100, 0);
+                        noiseMaker.transform.position = transform.position + new Vector3(0, 2, 0);
+                        jazzMaker.transform.position = transform.position + new Vector3(0, -100, 0);
+                        popsicle.transform.position = transform.position + new Vector3(0, -100, 0);
+                        triggerSign.transform.position = transform.position + new Vector3(0, -100, 0);
+                        break;
+
+                    case GadgetSlotType.Trigger:
+                        cake.transform.position = transform.position + new Vector3(0, -100, 0);
+                        noiseMaker.transform.position = transform.position + new Vector3(0, -100, 0);
+                        jazzMaker.transform.position = transform.position + new Vector3(0, -100, 0);
+                        popsicle.transform.position = transform.position + new Vector3(0, -100, 0);
+                        triggerSign.transform.position = transform.position + new Vector3(0, 3.5f, 0);
+                        break;
+
+                    default:
+                        break;
+                }
+            }
+            else
+            {
+                cake.transform.position = transform.position + new Vector3(0, -100, 0);
+                noiseMaker.transform.position = transform.position + new Vector3(0, -100, 0);
+                jazzMaker.transform.position = transform.position + new Vector3(0, -100, 0);
+                popsicle.transform.position = transform.position + new Vector3(0, -100, 0);
+                triggerSign.transform.position = transform.position + new Vector3(0, -100, 0);
+            }
+        }
     }
 
     // Update is called once per frame
     void Update () {
-	
+        HandleActiveGadgetShowcase();
 	}
 }
