@@ -44,7 +44,8 @@ public class Holdable : MonoBehaviour, Iinteractable
             originalY = transform.position.y;
             owner = interactor;
 
-            alarmSystem.GetComponent<AlarmSystem>().TurnOnAlarm();
+            if(alarmSystem && alarmSystem.GetComponent<AlarmSystem>())
+                alarmSystem.GetComponent<AlarmSystem>().TurnOnAlarm();
         }
         else
         {
