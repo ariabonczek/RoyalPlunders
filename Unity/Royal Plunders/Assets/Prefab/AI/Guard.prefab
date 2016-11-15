@@ -275,9 +275,15 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000011881299508}
+<<<<<<< HEAD
   m_LocalRotation: {x: -0, y: 0.04577375, z: -0, w: 0.99895185}
   m_LocalPosition: {x: 3.1660929, y: 1.9066669, z: 3.4609003}
   m_LocalScale: {x: 0.80000126, y: 0.8, z: 0.80000126}
+=======
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 3.1661081, y: 1.839162, z: 3.4608922}
+  m_LocalScale: {x: 0.8000007, y: 0.8, z: 0.8000007}
+>>>>>>> 755333d733aa763068e723414d2148d57df4f663
   m_LocalEulerAnglesHint: {x: 0, y: 135, z: 0}
   m_Children:
   - {fileID: 4000012970192476}
@@ -723,6 +729,8 @@ MonoBehaviour:
   player: {fileID: 0}
   pathPoints: {fileID: 0}
   myTarget: {fileID: 0}
+  minimumChaseTime: 3
+  chaseSpeedMultiplier: 2
   PlayerAggroDistanceWhileEscorting: 5
   ScanRotationSpeed: 1
   GuardToGuardAlertRadius: 15

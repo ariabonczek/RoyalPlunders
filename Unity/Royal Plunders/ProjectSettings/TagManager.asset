@@ -18,6 +18,7 @@ TagManager:
   - Chest
   - Target
   - Alarm
+  - NoiseMachine
   layers:
   - Default
   - TransparentFX

@@ -6,8 +6,8 @@ Material:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: Purple
-  m_Shader: {fileID: 10755, guid: 0000000000000000f000000000000000, type: 0}
+  m_Name: Wood
+  m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
   m_ShaderKeywords: _EMISSION
   m_LightmapFlags: 1
   m_CustomRenderQueue: -1
@@ -121,7 +121,7 @@ Material:
     m_Colors:
     - first:
         name: _Color
-      second: {r: 1, g: 0.534, b: 1, a: 1}
+      second: {r: 0.41176468, g: 0.34929004, b: 0, a: 1}
     - first:
         name: _EmissionColor
-      second: {r: 0.9191176, g: 0.6082396, b: 0.88481385, a: 1}
+      second: {r: 0.35294116, g: 0.34320486, b: 0, a: 1}

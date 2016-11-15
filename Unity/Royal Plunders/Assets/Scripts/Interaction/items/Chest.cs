@@ -6,6 +6,13 @@ public class Chest : MonoBehaviour, Iinteractable
 {
     public GameObject itemPrefab;
     bool isOpen = false;
+    public int numberOfItems;
+    private int originalNumItems;
+
+    void Start()
+    {
+        originalNumItems = numberOfItems;
+    }
 
     public string getTypeLabel()
     {
@@ -23,13 +30,16 @@ public class Chest : MonoBehaviour, Iinteractable
             pos += transform.forward * itemPrefab.transform.localScale.z;
             
             GameObject.Instantiate(itemPrefab, pos, Quaternion.LookRotation(transform.forward, Vector3.up));
-            isOpen = true;
+            numberOfItems--;
+            if(numberOfItems<=0)
+                isOpen = true;
         }
     }
 
     public void Reset()
     {
         isOpen = false;
+        numberOfItems = originalNumItems;
     }
 
     public bool isInstant()

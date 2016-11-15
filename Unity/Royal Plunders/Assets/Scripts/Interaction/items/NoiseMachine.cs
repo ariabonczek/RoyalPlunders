@@ -33,7 +33,7 @@ public class NoiseMachine : MonoBehaviour, Iinteractable
     {
         if (!active && interactor.GetComponent<GadgetManager>())
         {
-            if (interactor.GetComponent<GadgetManager>().AddToSlot(GadgetManager.GadgetSlotType.Jazz, this.gameObject))
+            if (interactor.GetComponent<GadgetManager>().AddToSlot(GadgetManager.GadgetSlotType.Noise, this.gameObject))
                 transform.position -= new Vector3(0, -100, 0);
         }
     }
@@ -57,7 +57,6 @@ public class NoiseMachine : MonoBehaviour, Iinteractable
             {
                 if(InRange(g))
                 {
-                    Debug.Log("YE");
                     g.GetComponent<GuardAITest>().HearsSound(this.gameObject);
                 }
             }

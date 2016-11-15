@@ -62,7 +62,7 @@ GameObject:
   - 65: {fileID: 65000010753934262}
   - 23: {fileID: 23000010932434044}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: JazzMaker
   m_TagString: Electro
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -88,7 +88,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000010062641866}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -15.27081, y: 0.75, z: 0.44987583}
+  m_LocalPosition: {x: 12.507732, y: 0.6, z: -2.6612673}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
@@ -122,7 +122,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 7a6891d08af24ce4c905917421fb39fe, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
