@@ -185,7 +185,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000011225478880}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.03000021, y: 0.1000002, z: 0.3499992}
+  m_LocalPosition: {x: 0, y: -125, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
@@ -224,7 +224,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000010534795644}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.030000687, y: 0.10000014, z: 0.3499992}
+  m_LocalPosition: {x: 0, y: -125, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
@@ -237,7 +237,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000010762196530}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.030000687, y: 0.10000014, z: 0.3499992}
+  m_LocalPosition: {x: 0, y: 2.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
@@ -263,7 +263,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000011146755552}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.030000687, y: 1.9, z: 0.3499992}
+  m_LocalPosition: {x: 0, y: -125, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
@@ -275,9 +275,9 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000011881299508}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 12.58, y: 1.53, z: -0.39999914}
-  m_LocalScale: {x: 0.8000007, y: 0.8, z: 0.8000007}
+  m_LocalRotation: {x: -0, y: 0.04577375, z: -0, w: 0.99895185}
+  m_LocalPosition: {x: 3.1660929, y: 1.9066669, z: 3.4609003}
+  m_LocalScale: {x: 0.80000126, y: 0.8, z: 0.80000126}
   m_LocalEulerAnglesHint: {x: 0, y: 135, z: 0}
   m_Children:
   - {fileID: 4000012970192476}
@@ -726,23 +726,23 @@ MonoBehaviour:
   PlayerAggroDistanceWhileEscorting: 5
   ScanRotationSpeed: 1
   GuardToGuardAlertRadius: 15
-  AngleOfScan: 30
+  AngleOfScan: 35
   ScanAtWaypoints: 1
   DistractionCooldown: 10
   useWaypointDirectionForScan: 1
-  StunnedDuration: 30
+  StunnedDuration: 15
   SleepingDuration: 5
   DistractedDuration: 4
   angleOfView: 45
   sneakWalkDetectionRange: 0
-  slowWalkDetectionRange: 3
-  fastWalkDetectionRange: 10
-  runDetectionRange: 20
-  playerTriggerNoiseRange: 10
-  PlayerSpotDistance: 5
+  slowWalkDetectionRange: 2
+  fastWalkDetectionRange: 5
+  runDetectionRange: 8
+  playerTriggerNoiseRange: 20
+  PlayerSpotDistance: 15
   CakeSpotDistance: 10
-  MaxDistanceFromPoint: 20
-  myState: 2
+  MaxDistanceFromPoint: 30
+  myState: 7
 --- !u!135 &135000010198038100
 SphereCollider:
   m_ObjectHideFlags: 1
@@ -824,7 +824,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 1000011881299508}
   m_Enabled: 1
   m_Radius: 1
-  m_Speed: 1.4
+  m_Speed: 4
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
