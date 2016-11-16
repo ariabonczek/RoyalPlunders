@@ -20,6 +20,19 @@ public class NoiseMakerScript : MonoBehaviour {
         soundLevel = sound;
     }
 
+    public void PlayerTriggeredSound()
+    {
+        GameObject[] obj = GameObject.FindGameObjectsWithTag("Guard");
+        foreach (GameObject g in obj)
+        {
+            if (Vector3.Distance(transform.position, g.transform.position) < g.GetComponent<GuardAITest>().playerTriggerNoiseRange)
+            {
+                g.GetComponent<GuardAITest>().myState = GuardAITest.AIState.Suspcious;
+                g.GetComponent<GuardAITest>().suspicionPoint = transform.position;
+            }
+        }
+    }
+
     public int GetSoundLevel()
     {
         return soundLevel;

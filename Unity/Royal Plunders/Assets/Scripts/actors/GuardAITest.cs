@@ -110,7 +110,7 @@ public class GuardAITest : MonoBehaviour {
 
     private GameObject cakeTarget;
 
-    private Vector3 suspicionPoint;
+    public Vector3 suspicionPoint;
 
     private int destPoint = 0;
 
@@ -675,8 +675,19 @@ public class GuardAITest : MonoBehaviour {
             // now we have cos(theta) for dot, we just need to get the arc cosine to get theta.
             if (dot > 0 && Mathf.Acos(dot) <= (Mathf.Deg2Rad * angleOfView / 2))
             {
-                cakeTarget = g;
-                return true;
+                // doing a line cast check to see if there are any obstacles between the AI and the player
+                ray = new Ray(transform.position, g.transform.position - transform.position);
+
+                if (Physics.Raycast(ray, out hit, CakeSpotDistance))
+                {
+                    GameObject targetObj = hit.collider.gameObject;
+                    if (targetObj == g || (targetObj.transform.parent && targetObj.transform.parent.gameObject == g))
+                    {
+                        cakeTarget = g;
+                        return true;
+                    }
+                }
+                return false;
             }
             else
             {

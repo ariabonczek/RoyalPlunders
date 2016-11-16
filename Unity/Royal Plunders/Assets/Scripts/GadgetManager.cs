@@ -59,7 +59,7 @@ public class GadgetManager : MonoBehaviour {
 
     public void UseGadget()
     {
-        if (slot1Chosen && slot1 != GadgetSlotType.Empty)
+        if (slot1Chosen && slot1 != GadgetSlotType.Empty && slot1Obj)
         {
             if(slot1 == GadgetSlotType.Trigger)
             {
@@ -94,7 +94,7 @@ public class GadgetManager : MonoBehaviour {
                 slot1 = GadgetSlotType.Trigger;
             }
         }
-        else if (slot2 != GadgetSlotType.Empty)
+        else if (slot2 != GadgetSlotType.Empty && slot2Obj)
         {
             if (slot2 == GadgetSlotType.Trigger)
             {
@@ -112,7 +112,7 @@ public class GadgetManager : MonoBehaviour {
                 }
             }
             slot2 = GadgetSlotType.Empty;
-            slot2Obj.transform.position = transform.GetChild(0).position + (transform.GetChild(0).forward * slot1Obj.transform.GetChild(0).localScale.z) + new Vector3(0, .4f, 0);
+            slot2Obj.transform.position = transform.GetChild(0).position + (transform.GetChild(0).forward * slot2Obj.transform.GetChild(0).localScale.z) + new Vector3(0, .4f, 0);
             slot2Obj.transform.forward = transform.GetChild(0).forward;
             if (slot2Obj.GetComponent<Popsicle>())
             {
@@ -132,7 +132,6 @@ public class GadgetManager : MonoBehaviour {
 
         if (slot1Chosen && slot1 == GadgetSlotType.Empty && slot2 != GadgetSlotType.Empty)
         {
-            Debug.Log("CMOOON");
             slot1Chosen = false;
         }
         if (!slot1Chosen && slot1 != GadgetSlotType.Empty && slot2 == GadgetSlotType.Empty)
@@ -267,4 +266,12 @@ public class GadgetManager : MonoBehaviour {
     void Update () {
         HandleActiveGadgetShowcase();
 	}
+
+    public void Reset()
+    {
+        slot1 = GadgetSlotType.Empty;
+        slot2 = GadgetSlotType.Empty;
+        slot1Obj = null;
+        slot2Obj = null;
+    }
 }
