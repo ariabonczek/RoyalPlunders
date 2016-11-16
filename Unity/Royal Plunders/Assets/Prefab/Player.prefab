@@ -583,7 +583,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000012587800764}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 19.07, y: 12.6517315, z: -41.995834}
+  m_LocalPosition: {x: 5.11, y: 0.6, z: 3.566}
   m_LocalScale: {x: 0.85, y: 0.85, z: 0.85}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
@@ -1635,12 +1635,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentSpeed: 0
-  baseSpeed: 2
+  baseSpeed: 1
   speedChangeThreshold: 0.8
-  slowWalkSpeed: 1
-  fastWalkSpeed: 3
-  sprintSpeed: 4
-  sneakSpeed: 0.8
+  slowWalkSpeed: 3
+  fastWalkSpeed: 5
+  sprintSpeed: 7
+  sneakSpeed: 2.5
   carrySpeed: 1.5
   relativeForward: {x: 0, y: 0, z: 0}
   direction: {x: 0, y: 0, z: 0}
