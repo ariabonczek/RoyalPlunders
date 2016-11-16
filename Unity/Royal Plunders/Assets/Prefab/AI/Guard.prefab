@@ -197,10 +197,10 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000012946871854}
-  m_LocalRotation: {x: -0.03371817, y: -0.0022530202, z: 0.9994242, w: -0.0030396488}
+  m_LocalRotation: {x: 0, y: -0, z: 1, w: 0}
   m_LocalPosition: {x: -0.10000103, y: 0.07000014, z: 0.29999915}
-  m_LocalScale: {x: 1.2499971, y: 1.2499974, z: 1.2500004}
-  m_LocalEulerAnglesHint: {x: 179.733, y: -183.752, z: 0.32899475}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 180, y: -180, z: 0}
   m_Children: []
   m_Father: {fileID: 4000013504128236}
   m_RootOrder: 7
@@ -275,10 +275,10 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000011881299508}
-  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 41.48, y: 1, z: 50.09}
+  m_LocalRotation: {x: 0, y: 0.9848078, z: 0, w: 0.17364825}
+  m_LocalPosition: {x: 26.25, y: 1, z: 17.5}
   m_LocalScale: {x: 0.8000007, y: 0.8, z: 0.8000007}
-  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 160, z: 0}
   m_Children:
   - {fileID: 4000012970192476}
   - {fileID: 4000012428765418}
@@ -637,7 +637,7 @@ Light:
   serializedVersion: 7
   m_Type: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 3.89
+  m_Intensity: 2
   m_Range: 15
   m_SpotAngle: 100
   m_CookieSize: 10
@@ -658,7 +658,7 @@ Light:
     m_Bits: 4294967295
   m_Lightmapping: 4
   m_AreaSize: {x: 1, y: 1}
-  m_BounceIntensity: 1
+  m_BounceIntensity: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
 --- !u!114 &114000010802401798
@@ -735,16 +735,17 @@ MonoBehaviour:
   StunnedDuration: 15
   SleepingDuration: 5
   DistractedDuration: 4
-  angleOfView: 45
+  angleOfView: 50
   sneakWalkDetectionRange: 0
-  slowWalkDetectionRange: 2
-  fastWalkDetectionRange: 4
+  slowWalkDetectionRange: 1
+  fastWalkDetectionRange: 3
   runDetectionRange: 10
   playerTriggerNoiseRange: 15
   PlayerSpotDistance: 15
   CakeSpotDistance: 15
   MaxDistanceFromPoint: 30
   myState: 7
+  suspicionPoint: {x: 0, y: 0, z: 0}
 --- !u!135 &135000010198038100
 SphereCollider:
   m_ObjectHideFlags: 1
