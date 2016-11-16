@@ -73,6 +73,12 @@ public class Holdable : MonoBehaviour, Iinteractable
     public void Reset()
     {
         held = false;
+        if (owner)
+        {
+            Movement player = owner.GetComponent<Movement>();
+            if (player)
+                player.holding = held;
+        }
         owner = null;
     }
 }

@@ -55,6 +55,12 @@ public class SetJailPoint : MonoBehaviour
 
             if (g.GetComponent<TargetAITest>())
                 g.GetComponent<TargetAITest>().Reset();
+
+            if (g.GetComponent<GadgetManager>())
+                g.GetComponent<GadgetManager>().Reset();
+
+            if (g.tag == "Cake" || g.tag == "Jazz" || g.tag == "Electro" || g.tag == "Popsicle" || g.tag == "NoiseMachine")
+                Destroy(g);
         }
     }
 }

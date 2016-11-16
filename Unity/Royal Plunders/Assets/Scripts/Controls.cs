@@ -89,7 +89,7 @@ public class Controls : MonoBehaviour
 
             if(Input.GetButton("R1"))
             {
-                noiseMaker.AdjustSoundLevel(5);
+                noiseMaker.PlayerTriggeredSound();
             }
 
             mover.direction.x = Input.GetAxis("Left Horizontal");
