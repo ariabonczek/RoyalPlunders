@@ -26,101 +26,17 @@ Platform assembly: C:\Development\RoyalPlunders\Unity\Royal Plunders\Builds\Play
 Loading C:\Development\RoyalPlunders\Unity\Royal Plunders\Builds\Playtest01_November13_Data\Managed\KDTree.dll into Unity Child Domain
 Platform assembly: C:\Development\RoyalPlunders\Unity\Royal Plunders\Builds\Playtest01_November13_Data\Managed\Triangle.dll (this message is harmless)
 Loading C:\Development\RoyalPlunders\Unity\Royal Plunders\Builds\Playtest01_November13_Data\Managed\Triangle.dll into Unity Child Domain
-- Completed reload, in  0.366 seconds
+- Completed reload, in  0.279 seconds
 Platform assembly: C:\Development\RoyalPlunders\Unity\Royal Plunders\Builds\Playtest01_November13_Data\Managed\System.Core.dll (this message is harmless)
 Platform assembly: C:\Development\RoyalPlunders\Unity\Royal Plunders\Builds\Playtest01_November13_Data\Managed\System.dll (this message is harmless)
 desktop: 1920x1080 60Hz; virtual: 1920x1080 at 0,0
 <RI> Initializing input.
 <RI> Input initialized.
 <RI> Initialized touch support.
-UnloadTime: 1.019654 ms
+UnloadTime: 0.991232 ms
 Setting up 2 worker threads for Enlighten.
-  Thread -> id: 1080 -> priority: 1 
-  Thread -> id: 15d0 -> priority: 1 
-Joystick connected ("Wireless Controller").
- 
-(Filename:  Line: 1353)
-
-RESET GUARD
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
-
-RESET GUARD
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
-
-RESET GUARD
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
-
-RESET GUARD
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
-
-RESET GUARD
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
-
-RESET GUARD
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
-
-RESET GUARD
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
-
-RESET GUARD
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
-
-RESET GUARD
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
-
-RESET GUARD
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
-
-RESET GUARD
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
-
-RESET GUARD
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
-
-RESET GUARD
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
-
-RESET GUARD
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
-
-RESET GUARD
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
-
-RESET GUARD
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
-
-RESET GUARD
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
-
-RESET GUARD
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
-
-RESET GUARD
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
-
-RESET GUARD
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
-
+  Thread -> id: fb8 -> priority: 1 
+  Thread -> id: 2968 -> priority: 1 
 RESET GUARD
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
