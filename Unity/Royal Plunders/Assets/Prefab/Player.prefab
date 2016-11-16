@@ -121,7 +121,7 @@ GameObject:
   - 23: {fileID: 23000010804386606}
   m_Layer: 0
   m_Name: NoiseMachine
-  m_TagString: Electro
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -368,7 +368,7 @@ GameObject:
   - 23: {fileID: 23000010354662654}
   m_Layer: 0
   m_Name: JazzMaker
-  m_TagString: Electro
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -583,7 +583,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000012587800764}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: 25, y: 1, z: 67.5}
+  m_LocalPosition: {x: 12.9, y: 0, z: 1.8}
   m_LocalScale: {x: 0.85, y: 0.85, z: 0.85}
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
   m_Children:
