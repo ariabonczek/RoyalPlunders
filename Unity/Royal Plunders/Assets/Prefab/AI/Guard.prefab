@@ -275,10 +275,10 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000011881299508}
-  m_LocalRotation: {x: -0, y: 0.92387956, z: -0, w: 0.38268343}
-  m_LocalPosition: {x: 23.61, y: 13.03, z: -15.39}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 41.48, y: 1, z: 50.09}
   m_LocalScale: {x: 0.8000007, y: 0.8, z: 0.8000007}
-  m_LocalEulerAnglesHint: {x: 0, y: 135, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
   m_Children:
   - {fileID: 4000012970192476}
   - {fileID: 4000012428765418}
@@ -737,12 +737,12 @@ MonoBehaviour:
   DistractedDuration: 4
   angleOfView: 45
   sneakWalkDetectionRange: 0
-  slowWalkDetectionRange: 5
-  fastWalkDetectionRange: 7
-  runDetectionRange: 15
-  playerTriggerNoiseRange: 20
+  slowWalkDetectionRange: 2
+  fastWalkDetectionRange: 4
+  runDetectionRange: 10
+  playerTriggerNoiseRange: 15
   PlayerSpotDistance: 15
-  CakeSpotDistance: 10
+  CakeSpotDistance: 15
   MaxDistanceFromPoint: 30
   myState: 7
 --- !u!135 &135000010198038100
@@ -826,7 +826,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 1000011881299508}
   m_Enabled: 1
   m_Radius: 1
-  m_Speed: 4
+  m_Speed: 2.5
   m_Acceleration: 15
   avoidancePriority: 50
   m_AngularSpeed: 120
