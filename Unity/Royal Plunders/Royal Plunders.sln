@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
+# Visual Studio 2015
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Royal Plunders.CSharp.Plugins", "Royal Plunders.CSharp.Plugins.csproj", "{062A21C9-D1C2-9742-C4AC-71C002F8EF2D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Royal Plunders.CSharp", "Royal Plunders.CSharp.csproj", "{0E4F3B41-0D88-8CB4-6B6E-DFB299C1C8FA}"
