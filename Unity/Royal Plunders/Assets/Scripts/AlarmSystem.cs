@@ -76,6 +76,11 @@ public class AlarmSystem : MonoBehaviour, Iinteractable {
         {
             currentTime = 0;
             alarmDisabled = false;
+
+            for (int i = 0; i < GameManager.laserList.Length; i++)
+            {
+                GameManager.laserList[i].gameObject.SetActive(true);
+            }
         }
     }
 
@@ -97,6 +102,11 @@ public class AlarmSystem : MonoBehaviour, Iinteractable {
         for (int i = 0; i < GameManager.guardList.Length; i++)
         {
             GameManager.guardList[i].GetComponent<GuardAITest>().myState = alarmOffState;
+        }
+
+        for (int i = 0; i < GameManager.laserList.Length; i++)
+        {
+            GameManager.laserList[i].gameObject.SetActive(false);
         }
     }
 

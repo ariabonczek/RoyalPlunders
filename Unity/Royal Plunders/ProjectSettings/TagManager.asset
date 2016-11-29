@@ -19,6 +19,7 @@ TagManager:
   - Target
   - Alarm
   - NoiseMachine
+  - Lazer
   layers:
   - Default
   - TransparentFX

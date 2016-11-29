@@ -6600,6 +6600,10 @@ Prefab:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1090929652}
+    - target: {fileID: 1000013729103402, guid: def26d41e5c76774c9bf5c51e7aa70a3, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: def26d41e5c76774c9bf5c51e7aa70a3, type: 2}
   m_IsPrefabParent: 0
@@ -13519,6 +13523,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   GUARD_TAG: Guard
+  LAZER_TAG: Lazer
 --- !u!43 &1123719906
 Mesh:
   m_ObjectHideFlags: 0
@@ -24621,6 +24626,11 @@ Prefab:
       propertyPath: alarmLight
       value: 
       objectReference: {fileID: 1393892846}
+    - target: {fileID: 114000011474142440, guid: 62d838f4b4e9804418760a33eaefbd72,
+        type: 2}
+      propertyPath: disabledTime
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 62d838f4b4e9804418760a33eaefbd72, type: 2}
   m_IsPrefabParent: 0
