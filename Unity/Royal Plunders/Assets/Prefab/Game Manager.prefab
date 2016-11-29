@@ -53,7 +53,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   GUARD_TAG: Guard
-  guardList: []
+  LAZER_TAG: Lazer
 --- !u!114 &114000011917024436
 MonoBehaviour:
   m_ObjectHideFlags: 1
