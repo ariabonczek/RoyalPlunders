@@ -62,7 +62,7 @@ GameObject:
   - 195: {fileID: 195000013726394204}
   m_Layer: 0
   m_Name: VigilantGuard
-  m_TagString: Untagged
+  m_TagString: Guard
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
