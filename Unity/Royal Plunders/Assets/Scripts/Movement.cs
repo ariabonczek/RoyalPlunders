@@ -8,9 +8,13 @@ public class Movement : MonoBehaviour
     // movement speeds
     public float baseSpeed = 2;
     // joystick
-    public float speedChangeThreshold = 0.8f;
-    public float slowWalkSpeed = 2;
-    public float fastWalkSpeed = 3;
+    public float speedChangeThreshold1To2 = 0.3f;
+    public float speedChangeThreshold2To3 = 0.6f;
+    public float speedChangeThreshold3To4 = 0.8f;
+    public float walkSpeed1 = 2;
+    public float walkSpeed2 = 3;
+    public float walkSpeed3 = 4;
+    public float walkSpeed4 = 5;
     // button speeds
     public float sprintSpeed = 4;
     public float sneakSpeed = 0.3f;
@@ -98,7 +102,7 @@ public class Movement : MonoBehaviour
         }
         else if (sprint)
         {
-            soundValue = 4;
+            soundValue = 6;
             appliedSpeed = sprintSpeed;
         }
         else if(sneak)
@@ -108,15 +112,25 @@ public class Movement : MonoBehaviour
         }
         else
         { 
-            if (speed < speedChangeThreshold)
+            if (speed < speedChangeThreshold1To2)
             {
                 soundValue = 2;
-                appliedSpeed = slowWalkSpeed;
+                appliedSpeed = walkSpeed1;
+            }
+            else if( speed < speedChangeThreshold2To3)
+            {
+                soundValue = 3;
+                appliedSpeed = walkSpeed2;
+            }
+            else if( speed < speedChangeThreshold3To4)
+            {
+                soundValue = 4;
+                appliedSpeed = walkSpeed3;
             }
             else
             {
-                soundValue = 3;
-                appliedSpeed = fastWalkSpeed;
+                soundValue = 5;
+                appliedSpeed = walkSpeed4;
             }
         }
 

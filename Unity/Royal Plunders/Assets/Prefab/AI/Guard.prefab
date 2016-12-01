@@ -737,8 +737,10 @@ MonoBehaviour:
   DistractedDuration: 4
   angleOfView: 50
   sneakWalkDetectionRange: 0
-  slowWalkDetectionRange: 3
-  fastWalkDetectionRange: 5
+  walk1DetectionRange: 2
+  walk2DetectionRange: 4
+  walk3DetectionRange: 6
+  walk4DetectionRange: 8
   runDetectionRange: 10
   playerTriggerNoiseRange: 15
   PlayerSpotDistance: 15

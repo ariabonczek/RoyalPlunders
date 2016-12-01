@@ -65,9 +65,13 @@ public class GuardAITest : MonoBehaviour {
 
     public float sneakWalkDetectionRange;
 
-    public float slowWalkDetectionRange;
+    public float walk1DetectionRange;
 
-    public float fastWalkDetectionRange;
+    public float walk2DetectionRange;
+
+    public float walk3DetectionRange;
+
+    public float walk4DetectionRange;
 
     public float runDetectionRange;
 
@@ -540,18 +544,26 @@ public class GuardAITest : MonoBehaviour {
                                 myState = AIState.Suspcious;
                             break;
                         case 2:
-                            if (Vector3.Distance(transform.position, player.transform.position) < slowWalkDetectionRange && myState != AIState.Chasing)
+                            if (Vector3.Distance(transform.position, player.transform.position) < walk1DetectionRange && myState != AIState.Chasing)
                                 myState = AIState.Suspcious;
                             break;
                         case 3:
-                            if (Vector3.Distance(transform.position, player.transform.position) < fastWalkDetectionRange && myState != AIState.Chasing)
+                            if (Vector3.Distance(transform.position, player.transform.position) < walk2DetectionRange && myState != AIState.Chasing)
                                 myState = AIState.Suspcious;
                             break;
                         case 4:
-                            if (Vector3.Distance(transform.position, player.transform.position) < runDetectionRange && myState != AIState.Chasing)
+                            if (Vector3.Distance(transform.position, player.transform.position) < walk3DetectionRange && myState != AIState.Chasing)
                                 myState = AIState.Suspcious;
                             break;
                         case 5:
+                            if (Vector3.Distance(transform.position, player.transform.position) < walk4DetectionRange && myState != AIState.Chasing)
+                                myState = AIState.Suspcious;
+                            break;
+                        case 6:
+                            if (Vector3.Distance(transform.position, player.transform.position) < runDetectionRange && myState != AIState.Chasing)
+                                myState = AIState.Suspcious;
+                            break;
+                        case 7:
                             if (Vector3.Distance(transform.position, player.transform.position) < playerTriggerNoiseRange && myState != AIState.Chasing)
                                 myState = AIState.Suspcious;
                             break;
@@ -685,6 +697,10 @@ public class GuardAITest : MonoBehaviour {
                     {
                         cakeTarget = g;
                         return true;
+                    }
+                    else
+                    {
+                        Debug.Log("CAKE OBSTAKLE: " + targetObj);
                     }
                 }
                 return false;
