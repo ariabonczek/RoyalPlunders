@@ -16489,11 +16489,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 5
       objectReference: {fileID: 0}
-    - target: {fileID: 114000012595850968, guid: 944eed087f8639f4bbe05a27197ee8b2,
-        type: 2}
-      propertyPath: respawnPosition
-      value: 
-      objectReference: {fileID: 320263124}
     - target: {fileID: 114000013084243630, guid: 944eed087f8639f4bbe05a27197ee8b2,
         type: 2}
       propertyPath: player
@@ -16504,6 +16499,16 @@ Prefab:
       propertyPath: pathPoints
       value: 
       objectReference: {fileID: 797260264}
+    - target: {fileID: 114000012595850968, guid: 944eed087f8639f4bbe05a27197ee8b2,
+        type: 2}
+      propertyPath: respawnPosition
+      value: 
+      objectReference: {fileID: 320263124}
+    - target: {fileID: 114000012595850968, guid: 944eed087f8639f4bbe05a27197ee8b2,
+        type: 2}
+      propertyPath: alarmSystem
+      value: 
+      objectReference: {fileID: 858320970}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 944eed087f8639f4bbe05a27197ee8b2, type: 2}
   m_IsPrefabParent: 0
@@ -16580,6 +16585,11 @@ Prefab:
       propertyPath: runDetectionRange
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114000012595850968, guid: 944eed087f8639f4bbe05a27197ee8b2,
+        type: 2}
+      propertyPath: alarmSystem
+      value: 
+      objectReference: {fileID: 858320970}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 944eed087f8639f4bbe05a27197ee8b2, type: 2}
   m_IsPrefabParent: 0
