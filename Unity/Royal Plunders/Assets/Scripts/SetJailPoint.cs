@@ -5,6 +5,8 @@ public class SetJailPoint : MonoBehaviour
 {
     public Transform respawnPosition;
 
+    public GameObject alarmSystem;
+
     void Update()
     {
         GuardAITest guardScript = GetComponent<GuardAITest>();
@@ -19,6 +21,7 @@ public class SetJailPoint : MonoBehaviour
                     if(guardScript.myTarget)
                     {
                         guardScript.myState = GuardAITest.AIState.Escorting;
+                        alarmSystem.GetComponent<AlarmSystem>().ResetAlarm();
                     }
                     else
                     {

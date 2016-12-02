@@ -110,6 +110,22 @@ public class AlarmSystem : MonoBehaviour, Iinteractable {
         }
     }
 
+    public void ResetAlarm()
+    {
+        alarmActive = false;
+        alarmDisabled = false;
+
+        for (int i = 0; i < GameManager.guardList.Length; i++)
+        {
+            GameManager.guardList[i].GetComponent<GuardAITest>().myState = alarmOffState;
+        }
+
+        for (int i = 0; i < GameManager.laserList.Length; i++)
+        {
+            GameManager.laserList[i].gameObject.SetActive(true);
+        }
+    }
+
     public void CheckIntensity()
     {
         if (Mathf.Abs(targetIntensity - alarmLightCurrentIntensity) < alarmLightIncrement)

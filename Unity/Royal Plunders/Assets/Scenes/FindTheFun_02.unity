@@ -19806,6 +19806,11 @@ Prefab:
       propertyPath: m_TagString
       value: Guard
       objectReference: {fileID: 0}
+    - target: {fileID: 114000013814571710, guid: 5cc52973435b86544840fe34ebc0918f,
+        type: 2}
+      propertyPath: alarmSystem
+      value: 
+      objectReference: {fileID: 692851669}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5cc52973435b86544840fe34ebc0918f, type: 2}
   m_IsPrefabParent: 0
@@ -21835,6 +21840,11 @@ Prefab:
       propertyPath: m_Name
       value: VigilantGuard_A6_01
       objectReference: {fileID: 0}
+    - target: {fileID: 114000013814571710, guid: 5cc52973435b86544840fe34ebc0918f,
+        type: 2}
+      propertyPath: alarmSystem
+      value: 
+      objectReference: {fileID: 692851669}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5cc52973435b86544840fe34ebc0918f, type: 2}
   m_IsPrefabParent: 0
@@ -23319,6 +23329,11 @@ Prefab:
       propertyPath: chaseSpeedMultiplier
       value: 2.5
       objectReference: {fileID: 0}
+    - target: {fileID: 114000012984070782, guid: a09e7291054beca499445100f62347b1,
+        type: 2}
+      propertyPath: alarmSystem
+      value: 
+      objectReference: {fileID: 692851669}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a09e7291054beca499445100f62347b1, type: 2}
   m_IsPrefabParent: 0
@@ -51682,6 +51697,11 @@ Prefab:
       propertyPath: minimumChaseTime
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 114000012984070782, guid: a09e7291054beca499445100f62347b1,
+        type: 2}
+      propertyPath: alarmSystem
+      value: 
+      objectReference: {fileID: 692851669}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a09e7291054beca499445100f62347b1, type: 2}
   m_IsPrefabParent: 0
@@ -52595,6 +52615,11 @@ Prefab:
       propertyPath: MaxDistanceFromPoint
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 114000012984070782, guid: a09e7291054beca499445100f62347b1,
+        type: 2}
+      propertyPath: alarmSystem
+      value: 
+      objectReference: {fileID: 692851669}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a09e7291054beca499445100f62347b1, type: 2}
   m_IsPrefabParent: 0
