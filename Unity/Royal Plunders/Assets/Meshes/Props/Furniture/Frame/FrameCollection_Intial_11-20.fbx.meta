@@ -1,15 +1,22 @@
 fileFormatVersion: 2
-guid: 9feac83cd7b448848ae988fac1f793d7
-timeCreated: 1479875205
+guid: 91c7ccfa6f5b26d43a187fdf6e34b550
+timeCreated: 1480653572
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
   fileIDToRecycleName:
-    100000: //RootNode
-    400000: //RootNode
-    2300000: //RootNode
-    3300000: //RootNode
-    4300000: Crate_Intial_10_23:pCube1
+    100000: Frame_Intial_01_11_4:polySurface8
+    100002: Frame_Intial_11_4:pCube9
+    100004: //RootNode
+    400000: Frame_Intial_01_11_4:polySurface8
+    400002: Frame_Intial_11_4:pCube9
+    400004: //RootNode
+    2300000: Frame_Intial_01_11_4:polySurface8
+    2300002: Frame_Intial_11_4:pCube9
+    3300000: Frame_Intial_01_11_4:polySurface8
+    3300002: Frame_Intial_11_4:pCube9
+    4300000: Frame_Intial_11_4:pCube9
+    4300002: Frame_Intial_01_11_4:polySurface8
     9500000: //RootNode
   materials:
     importMaterials: 1
