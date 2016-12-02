@@ -69,6 +69,9 @@ public class Controls : MonoBehaviour
 
         if (controller == Controllers.PS4)
         {
+            if (Input.GetButtonDown("Start Button") && gameManager)
+                gameManager.GetComponent<PauseMenu>().HandleMenu();
+
             if (Input.GetButtonDown("Circle"))
                 actor.interact(InteractionButton.B);
             if (Input.GetButtonDown("X PS4"))
