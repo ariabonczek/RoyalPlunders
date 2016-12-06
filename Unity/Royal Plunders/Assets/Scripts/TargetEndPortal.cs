@@ -16,11 +16,11 @@ public class TargetEndPortal : MonoBehaviour {
 
     void OnTriggerEnter(Collider col)
     {
-        if(col.gameObject.tag == "Player")
+        if(col.gameObject.GetComponent<Movement>())
         {
             if(col.gameObject.GetComponent<Movement>().holding)
             {
-                SceneManager.LoadScene(SceneManager.GetSceneAt(SceneManager.GetActiveScene().buildIndex +1).name);
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
             }
         }
     }

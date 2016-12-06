@@ -13,6 +13,11 @@ public class GuardFlashlight : MonoBehaviour {
 
         myLight.spotAngle =guardScript.angleOfView * 1.6f;
         myLight.range = guardScript.PlayerSpotDistance;
+
+        if(myLight.spotAngle>179)
+        {
+            myLight.spotAngle = 179;
+        }
 	}
 	
 	// Update is called once per frame

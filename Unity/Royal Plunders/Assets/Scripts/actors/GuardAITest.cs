@@ -77,6 +77,8 @@ public class GuardAITest : MonoBehaviour {
 
     public float playerTriggerNoiseRange;
 
+    public float playerOutOfSightTimer;
+
     // the distance at which the guard will chase the player
     public float PlayerSpotDistance;
 
@@ -99,6 +101,8 @@ public class GuardAITest : MonoBehaviour {
     private AIState prevState;
 
     private Vector3 scanForward;
+
+    private float playerOutOfSightCurrent;
 
     private Vector3 wierd;
 
@@ -126,6 +130,7 @@ public class GuardAITest : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
+        playerOutOfSightCurrent = 0;
         disabled = false;
         currentDistractedDuration = 0;
         currentSleepingDuration = 0;
@@ -381,6 +386,22 @@ public class GuardAITest : MonoBehaviour {
                 myState = AIState.Escorting;
             }
             AlertNearbyGuards();
+            //doing a raycast check to see if the player is out of view
+            if (CanSeePlayer())
+            {
+                playerOutOfSightCurrent = 0;
+            }
+            else
+            {
+                playerOutOfSightCurrent += Time.deltaTime;
+            }
+
+            if(playerOutOfSightCurrent >= playerOutOfSightTimer)
+            {
+                myState = AIState.Suspcious;
+                playerOutOfSightCurrent = 0;
+                suspicionPoint = player.transform.position;
+            }
         }
         else if (myState == AIState.Suspcious)
         {
@@ -394,6 +415,7 @@ public class GuardAITest : MonoBehaviour {
                 suspicionPoint = player.transform.position;
             }
             agent.destination = suspicionPoint;
+            playerOutOfSightCurrent = 0;
         }
         else if (myState == AIState.Patrolling)
         {
@@ -407,6 +429,7 @@ public class GuardAITest : MonoBehaviour {
             {
                 myState = AIState.Escorting;
             }
+            playerOutOfSightCurrent = 0;
         }
         else if (myState == AIState.Escorting)
         {
@@ -432,6 +455,7 @@ public class GuardAITest : MonoBehaviour {
                 escortLocation = Vector3.zero;
                 myState = AIState.Patrolling;
             }
+            playerOutOfSightCurrent = 0;
         }
         else if (myState == AIState.Caking)
         {
@@ -451,6 +475,7 @@ public class GuardAITest : MonoBehaviour {
                 agent.Stop();
                 Distract();
             }
+            playerOutOfSightCurrent = 0;
         }
 
         // proceed to next patrol point when in range of current point
@@ -600,6 +625,22 @@ public class GuardAITest : MonoBehaviour {
             myState = AIState.Suspcious;
             suspicionPoint = obj.transform.position;
         }
+    }
+
+    bool CanSeePlayer()
+    {
+        // doing a line cast check to see if there are any obstacles between the AI and the player
+        ray = new Ray(transform.position, player.transform.position - transform.position);
+
+        if (Physics.Raycast(ray, out hit, PlayerSpotDistance))
+        {
+            GameObject targetObj = hit.collider.gameObject;
+            if (targetObj == player || (targetObj.transform.parent && targetObj.transform.parent.gameObject == player))
+            {
+                return true;
+            }
+        }
+        return false;
     }
 
     void GotoNextPoint()
