@@ -171,6 +171,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 4000011228553442}
   - 108: {fileID: 108000014077697970}
+  - 114: {fileID: 114000012815528634}
   m_Layer: 0
   m_Name: Flashlight
   m_TagString: Untagged
@@ -276,7 +277,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000011881299508}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 12.58, y: 1.53, z: -0.39999914}
+  m_LocalPosition: {x: 20.645142, y: 12.01, z: -20.9367}
   m_LocalScale: {x: 0.8000009, y: 0.8, z: 0.8000009}
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
   m_Children:
@@ -710,6 +711,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   respawnPosition: {fileID: 0}
   alarmSystem: {fileID: 0}
+--- !u!114 &114000012815528634
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000012946871854}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86b32980abe0943428ab903e20db393b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114000013084243630
 MonoBehaviour:
   m_ObjectHideFlags: 1
