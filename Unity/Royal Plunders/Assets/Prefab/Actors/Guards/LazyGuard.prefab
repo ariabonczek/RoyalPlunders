@@ -678,26 +678,27 @@ MonoBehaviour:
   player: {fileID: 0}
   pathPoints: {fileID: 0}
   myTarget: {fileID: 0}
-  minimumChaseTime: 3
+  minimumChaseTime: 7.5
   chaseSpeedMultiplier: 1.75
   PlayerAggroDistanceWhileEscorting: 6
   ScanRotationSpeed: 1
   GuardToGuardAlertRadius: 15
   AngleOfScan: 20
-  ScanAtWaypoints: 0
+  ScanAtWaypoints: 1
   DistractionCooldown: 3
-  useWaypointDirectionForScan: 1
+  useWaypointDirectionForScan: 0
   StunnedDuration: 15
-  SleepingDuration: 5
-  DistractedDuration: 4
-  angleOfView: 30
+  SleepingDuration: 6
+  DistractedDuration: 6
+  angleOfView: 45
   sneakWalkDetectionRange: 0
-  walk1DetectionRange: 1
+  walk1DetectionRange: 0
   walk2DetectionRange: 2
-  walk3DetectionRange: 3
+  walk3DetectionRange: 4
   walk4DetectionRange: 5
-  runDetectionRange: 7
+  runDetectionRange: 8
   playerTriggerNoiseRange: 15
+  playerOutOfSightTimer: 0
   PlayerSpotDistance: 15
   CakeSpotDistance: 15
   MaxDistanceFromPoint: 30
@@ -809,7 +810,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 1000010402154510}
   m_Enabled: 1
   m_Radius: 1
-  m_Speed: 1.25
+  m_Speed: 3
   m_Acceleration: 15
   avoidancePriority: 50
   m_AngularSpeed: 120
