@@ -3,66 +3,91 @@ using System.Collections;
 
 public class GuardAITest : MonoBehaviour {
 
+    // this guard's nav agent
     NavMeshAgent agent;
 
+    // the player
     public GameObject player;
 
+    // the containing object for all the locations that makup this guards patrol route
     public GameObject pathPoints;
 
+    // the starting location used for resetting
     private Vector3 originalPosition;
 
+    // the starting forward used for resetting
+    private Vector3 originalForward;
+
+    // the target this guard is set to protect
     public TargetAITest myTarget;
 
+    // variables to track chase time, allowing guards to have a minumum amount of time chasing the player
     public float minimumChaseTime;
 
     private float currentChaseTime;
 
+    // the multiplier applied to the guard's speed when pursuing the player
     public float chaseSpeedMultiplier;
 
+    // the distance a guard will veer from the target when escorting them back
     public float PlayerAggroDistanceWhileEscorting;
 
+    // the speed that a guard will rotate to scan an environment
     public float ScanRotationSpeed;
 
+    // the distance at which guards will alert nearby guards if they are in chase mode
     public float GuardToGuardAlertRadius;
 
+    // the original point a guard was at if they are chasing a player away during an escort
     private Vector3 pointAtChaseAway;
 
-    private Vector3 originalForward;
-
+    // tracking if the guard can use sound detection at this time
     private bool canHear;
 
+    // the angle of view that the guard will rotate to the left and right to scan
     public int AngleOfScan;
 
+    // Whether the guard will scan at each stop on their patrol
     public bool ScanAtWaypoints;
 
+    // The three variables used to track if a guard has been distracted so recently that they temporarily cannot be again
     private bool canBeDistracted;
 
     public float DistractionCooldown;
 
     private float currentDistractionCooldown;
 
+    // whether guards should scan from whatever direction they are facing when they reach each patrol waypoint or use the waypoint's direction
     public bool useWaypointDirectionForScan;
 
+    // the two variables tracking how long a guard is stunned for
     public float StunnedDuration;
 
     private float currentStunnedDuration;
 
+    //the two variables tracking how long a guard is sleeping for 
     public float SleepingDuration;
 
     private float currentSleepingDuration;
 
+    //the two variables tracking how long a guard is distracted
     public float DistractedDuration;
 
     private float currentDistractedDuration;
 
+    // this variable is used by the distracted, sleeping, and stunned states to keep the guard from moving normally in those states
     private bool disabled;
 
+    // the location the guard needs to escort the target back to
     private Vector3 escortLocation;
      
+    // the location used as a singular "patrol point" if none are actually set
     private Vector3 basePoint;
 
+    // the angle a guard can see from their forward to the left and right
     public float angleOfView;
 
+    // these variables cover the range at which a player if they are moving at each respective speed
     public float sneakWalkDetectionRange;
 
     public float walk1DetectionRange;
@@ -77,11 +102,13 @@ public class GuardAITest : MonoBehaviour {
 
     public float playerTriggerNoiseRange;
 
+    // this variable is used to track how long a guard will keep up a chase if a player has disappeared from view
     public float playerOutOfSightTimer;
 
     // the distance at which the guard will chase the player
     public float PlayerSpotDistance;
 
+    // the distance at which the guard will see a cake to seek out
     public float CakeSpotDistance;
 
     // the distance from their original path destination where the guard will cut off a chase.
@@ -90,36 +117,58 @@ public class GuardAITest : MonoBehaviour {
     // the points for the guards patrol
     private Vector3[] pathLocations;
 
+    // the enum that covers the guard's base AI state machine
+    // Chasing- Aware of the player and moving to detain them actively until they are out of range and have pursued long enough or if the player goes out of range for too long
+    // Suspicious- Heard a sound at a certain location and is moving to the location of the sound
+    // Patrolling- Moving between patrol points unaware of player presence entirely
+    // Escorting- The targ et has seen the player and come to this guard, who will escort them back while keeping an eye out for the player
+    // Stunned- Temporarily rendered incapacitated by the player. Cannot move, hear, or see the player 
+    // Sleeping- Functionality equivalent to stunned, but can be activated usign a seperate means and differing timer
+    // Distracted- Intrigued by something and will deviate from, the normal patrol. Can still hear or see the player
+    // Scanning- Looking to the left and right in search of the player, but still in patrol mode. Triggered at interval in patrol
+    // Caking- Have arrived at cake and is eating it.
     public enum AIState {Chasing, Suspcious,Patrolling,Escorting,Stunned,Sleeping,Distracted,Scanning,Caking};
 
+    // the enum for the scanning states which delineate whether the guard is checking left or right.
     private enum ScanningState {TurningRight,TurningLeft};
 
+    // the actual scanning state for the guard
     private ScanningState myScan;
 
+    // the actual AI State fort he guard
     public AIState myState;
 
+    // the previous AI state for the guard to use for transition logic
     private AIState prevState;
 
+    // the direction the scan is toward
     private Vector3 scanForward;
 
+    // the current amount of time the player has been out of sight (used for losing line of sight when the player goes out of range
     private float playerOutOfSightCurrent;
 
-    private Vector3 wierd;
-
+    // something a guard will seek to investigate (i.e. scan towards)
     private Vector3 scanTarget;
 
+    // the range at which a guard will go into suspicion mode if they see the player (if they are not so close as to initiate chase)
     private bool suspicionRange;
 
+    // the previous state for suspicion
     private bool suspiciousPrev;
 
+    // the base speed for the guard, used to track it when the guard increases in speed for chases
     private float originalSpeed;
 
+    // Whether the guard is currently scanning
     private bool suspiciousScan;
 
+    // the reference to the current cake target
     private GameObject cakeTarget;
 
+    // the source of the sound that the guard is investigating
     public Vector3 suspicionPoint;
 
+    // the index tracker for the current point in patrols being tracked
     private int destPoint = 0;
 
     // ray used for player detection checks
