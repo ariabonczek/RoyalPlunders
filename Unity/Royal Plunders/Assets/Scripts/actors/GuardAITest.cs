@@ -180,6 +180,8 @@ public class GuardAITest : MonoBehaviour {
     // Use this for initialization
     void Start () {
         playerOutOfSightCurrent = 0;
+        if (playerOutOfSightTimer >= 0)
+            playerOutOfSightTimer = .1f;
         disabled = false;
         currentDistractedDuration = 0;
         currentSleepingDuration = 0;
@@ -528,7 +530,9 @@ public class GuardAITest : MonoBehaviour {
         }
 
         // proceed to next patrol point when in range of current point
-        if (Vector3.Distance(transform.position, GetNextPoint()) < 1 && myState == AIState.Patrolling)
+        Vector3 diffVec = (GetNextPoint() - transform.position);
+        diffVec.y = 0;
+        if (diffVec.magnitude < 1.0f && myState == AIState.Patrolling)
         {
             if(ScanAtWaypoints)
             {
