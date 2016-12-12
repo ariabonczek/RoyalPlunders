@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: c5e9038813e28824f9d4599e9cd07f1e
-timeCreated: 1480652976
+guid: 5b3deb09fd152194cb56b489b65b9660
+timeCreated: 1481492605
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
@@ -9,8 +9,7 @@ ModelImporter:
     400000: //RootNode
     2300000: //RootNode
     3300000: //RootNode
-    4300000: Crate_Intial_10_23:pCube1
-    9500000: //RootNode
+    4300000: pillar
   materials:
     importMaterials: 1
     materialName: 0
@@ -35,7 +34,7 @@ ModelImporter:
     isReadable: 1
   meshes:
     lODScreenPercentages: []
-    globalScale: 5
+    globalScale: 1
     meshCompression: 0
     addColliders: 0
     importBlendShapes: 1
@@ -69,7 +68,7 @@ ModelImporter:
     rootMotionBoneName: 
     hasTranslationDoF: 0
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  animationType: 2
+  animationType: 0
   humanoidOversampling: 1
   additionalBone: 0
   userData: 

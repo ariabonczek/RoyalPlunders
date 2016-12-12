@@ -15,9 +15,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Junglegym.unity
   - enabled: 0
     path: Assets/Scenes/MileStone 2 Deliverable.unity
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/FindTheFun_02.unity
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/FindTheFun_04.unity
   - enabled: 0
     path: Assets/Scenes/ARTDEMO.unity
