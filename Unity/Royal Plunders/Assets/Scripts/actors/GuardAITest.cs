@@ -586,7 +586,9 @@ public class GuardAITest : MonoBehaviour {
 
         Debug.DrawLine(this.transform.position, player.transform.position);
         // chase the player if they are in range and you are not too far from your patrol route
-        if (player && PlayerInView() && Vector3.Distance(transform.position, GetNextPoint()) <= MaxDistanceFromPoint)
+        Vector3 diffVec = GetNextPoint() - transform.position;
+        diffVec.y = 0;
+        if (player && PlayerInView() && (diffVec.magnitude <= MaxDistanceFromPoint || currentChaseTime < minimumChaseTime))
         {
             // doing a line cast check to see if there are any obstacles between the AI and the player
             ray = new Ray(transform.position, player.transform.position - transform.position);
