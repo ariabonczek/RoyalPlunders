@@ -180,7 +180,7 @@ public class GuardAITest : MonoBehaviour {
     // Use this for initialization
     void Start () {
         playerOutOfSightCurrent = 0;
-        if (playerOutOfSightTimer >= 0)
+        if (playerOutOfSightTimer <= 0)
             playerOutOfSightTimer = .1f;
         disabled = false;
         currentDistractedDuration = 0;
