@@ -98,13 +98,16 @@ public class ThirdPersonCamera : MonoBehaviour
         float angle = Mathf.Deg2Rad * (-yaw - 90); // direction to go
         Vector3 pos = posAbove + new Vector3(Mathf.Cos(angle), 0, Mathf.Sin(angle)) * camDistance; // done! (pre-raycast)
 
-        Vector3 rayPos = targetTransform.position + Vector3.up * (targetTransform.localScale.y * 2 + clippingRadius);
+        Vector3 rayPos = targetTransform.position + Vector3.up * (targetTransform.localScale.y * 2 + clippingRadius); // where to look for occlusion from
         RaycastHit camCast;
-        Ray raycast = new Ray(rayPos, (pos - rayPos).normalized);
-        if (Physics.SphereCast(raycast, clippingRadius, out camCast, (pos - rayPos).magnitude, raycastMask))
+        Ray raycast = new Ray(rayPos, (pos - rayPos).normalized); // the occlusion ray
+        if (Physics.SphereCast(raycast, clippingRadius, out camCast, (pos - rayPos).magnitude, raycastMask)) // spherecast is used for corner detection
         {
-            pos = camCast.point + camCast.normal * clippingRadius;
-            wallPitch = Vector3.Angle(pos - rayPos, pos + Vector3.up * (posAbove.y - pos.y) - rayPos) * wallPitchFactor;
+            if (Vector3.Dot(camCast.normal, Vector3.up) > 0)
+            {
+                pos = camCast.point + camCast.normal * clippingRadius; // push the camera off of the wall
+                wallPitch = Vector3.Angle(pos - rayPos, pos + Vector3.up * (posAbove.y - pos.y) - rayPos) * wallPitchFactor; // look down properly
+            }
         }
         else
             wallPitch = 0;
