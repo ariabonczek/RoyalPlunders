@@ -1636,6 +1636,11 @@ Prefab:
       propertyPath: sceneFirstItem
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 114000011429244128, guid: 91005e444b02e734da3a0c8272a468f1,
+        type: 2}
+      propertyPath: INTERACT_PROMPT
+      value: InteractPrompt
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 91005e444b02e734da3a0c8272a468f1, type: 2}
   m_IsPrefabParent: 0

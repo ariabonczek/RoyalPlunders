@@ -28,6 +28,10 @@ public class Interactor : MonoBehaviour
                 obj.interact(InteractionButton.NONE, gameObject);
                 return;
             }
+            else
+            {
+                GameManager.prompt.SetActive(true);
+            }
 
             // add it to the list
             listOfInteractables.Insert(0, other);
