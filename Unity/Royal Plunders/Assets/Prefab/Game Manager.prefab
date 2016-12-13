@@ -54,6 +54,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   GUARD_TAG: Guard
   LAZER_TAG: Lazer
+  INTERACT_PROMPT: InteractPrompt
 --- !u!114 &114000011917024436
 MonoBehaviour:
   m_ObjectHideFlags: 1

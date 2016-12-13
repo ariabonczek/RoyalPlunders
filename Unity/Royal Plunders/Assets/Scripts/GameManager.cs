@@ -18,6 +18,9 @@ public class GameManager : MonoBehaviour {
         laserList = GameObject.FindGameObjectsWithTag(LAZER_TAG); // find all the lasers and cache them
 
         prompt = GameObject.FindGameObjectWithTag(INTERACT_PROMPT);
-        prompt.SetActive(false);
+        if (prompt)
+        {
+            prompt.SetActive(false);
+        }
     }
 }
