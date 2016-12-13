@@ -1,19 +1,34 @@
 fileFormatVersion: 2
-guid: e5d68ca0e956e584eb6475a25ad3af0f
-timeCreated: 1479875369
+guid: c12852116b018e24a95a901337c6cec3
+timeCreated: 1481616113
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
   fileIDToRecycleName:
-    100000: group2
-    100002: nurbsToPoly8
-    100004: //RootNode
-    400000: group2
-    400002: nurbsToPoly8
-    400004: //RootNode
-    2300000: nurbsToPoly8
-    3300000: nurbsToPoly8
-    4300000: nurbsToPoly8
+    100000: front3
+    100002: front5
+    100004: group17
+    100006: //RootNode
+    100008: polySurface162
+    100010: polySurface168
+    400000: front3
+    400002: front5
+    400004: group17
+    400006: //RootNode
+    400008: polySurface162
+    400010: polySurface168
+    2300000: front3
+    2300002: front5
+    2300004: polySurface162
+    2300006: polySurface168
+    3300000: front3
+    3300002: front5
+    3300004: polySurface162
+    3300006: polySurface168
+    4300000: polySurface162
+    4300002: polySurface168
+    4300004: front5
+    4300006: front3
     9500000: //RootNode
   materials:
     importMaterials: 1
@@ -39,7 +54,7 @@ ModelImporter:
     isReadable: 1
   meshes:
     lODScreenPercentages: []
-    globalScale: 100
+    globalScale: 1
     meshCompression: 0
     addColliders: 0
     importBlendShapes: 1
