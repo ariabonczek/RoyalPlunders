@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Lazer : MonoBehaviour , Iinteractable
 {
-    public GameObject alarmSystem;
+    public GameObject alarmSystem; // the alarm system
 
     public void interact(InteractionButton button, GameObject interactor)
     {

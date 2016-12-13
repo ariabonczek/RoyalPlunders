@@ -3,9 +3,6 @@ using System.Collections;
 
 public class NoiseMachine : MonoBehaviour, Iinteractable
 {
-
-
-
     public float Range;
 
     public float Duration;
