@@ -2,11 +2,12 @@
 using System.Collections;
 
 /*
- * B - Sneak Attack
+ * B - Interact
  * X - Sprint
  * A - Use Gadget
- * Y - Interact
+ * Y - Grab the target
  * L1 - sneak
+ * R1 - trigger sound
  * Left Stick - Movement
  * Right Stick - Camera Orbit
  * Right D-Pad - Gadget 2 Equip
@@ -15,110 +16,114 @@ using System.Collections;
 
 public class Controls : MonoBehaviour
 {
-    public GameObject gameManager;
+    public GameObject gameManager; // used for accessing the pause menu
 
-    Camera mainCamera;
-    ThirdPersonCamera cam;
-    Interactor actor;
-    Movement mover;
-    NoiseMakerScript noiseMaker;
+    Camera mainCamera; // handle camera motion
+    ThirdPersonCamera cam; // handle camera controls
+    Interactor actor; // handle player interaction
+    Movement mover; // handle player movement
+    NoiseMakerScript noiseMaker; // handle player noise
 
-    string[] joys;
-    enum Controllers { XBOX, PS4, NONE};
+    string[] joys; // joystick poll array
+    enum Controllers { XBOX, PS4, NONE}; // supported joysticks (NONE means you can't play well)
 
 	void Start ()
     {
-        mainCamera = Camera.main;
-        cam = mainCamera.GetComponent<ThirdPersonCamera>();
-        actor = GetComponent<Interactor>();
-        cam.setTarget(gameObject);
-        mover = GetComponent<Movement>();
-        noiseMaker = GetComponent<NoiseMakerScript>();
+        mainCamera = Camera.main; // cache the main camera
+        cam = mainCamera.GetComponent<ThirdPersonCamera>(); // cache the cam controls
+        actor = GetComponent<Interactor>(); // cache the player's interaction
+        cam.setTarget(gameObject); // link the camera to the player
+        mover = GetComponent<Movement>(); // cache the movement component
+        noiseMaker = GetComponent<NoiseMakerScript>(); // cache the noise maker
         InteractionTable.LoadTables("interactionTables"); // might be a good idea to move this to a game manager once we have one
 	}
 	
 	void Update ()
     {
-        Controllers controller = getControllerType();
+        Controllers controller = getControllerType(); // poll for the controller being used
 
-        if (controller == Controllers.XBOX)
+        if (controller == Controllers.XBOX) // XBOX bindings
         {
-            if (Input.GetButtonDown("Start Button") && gameManager)
-                gameManager.GetComponent<PauseMenu>().HandleMenu();
-
-            if (!gameManager.GetComponent<PauseMenu>().menuOpen)
+            if (!gameManager.GetComponent<PauseMenu>().menuOpen) // if the menu is not open
             {
-                if (Input.GetButtonDown("B"))
+                if (Input.GetButtonDown("B")) // interact
                     actor.interact(InteractionButton.B);
 
-                if (Input.GetButtonDown("A"))
+                if (Input.GetButtonDown("A")) // use gadget
                     GetComponent<GadgetManager>().UseGadget();
             }
             else
             {                
-                if (Input.GetButtonDown("B"))
+                if (Input.GetButtonDown("B")) // go back in the menu
                     gameManager.GetComponent<PauseMenu>().CloseSceneSelect();
             }
                 
 
-            cam.inputPitch = Input.GetAxis("Right Vertical XBone");
-            cam.inputYaw = Input.GetAxis("Right Horizontal XBone");
+            cam.inputPitch = Input.GetAxis("Right Vertical XBone"); // look up and down
+            cam.inputYaw = Input.GetAxis("Right Horizontal XBone"); // look left and right
 
-            mover.sprint = Input.GetButton("X XBone");
+            mover.sprint = Input.GetButton("X XBone"); // sprint
         }
 
-        if (controller == Controllers.PS4)
+        if (controller == Controllers.PS4) // PS4 bindings
         {
-            if (Input.GetButtonDown("Start Button") && gameManager)
-                gameManager.GetComponent<PauseMenu>().HandleMenu();
-
-            if (Input.GetButtonDown("Circle"))
-                actor.interact(InteractionButton.B);
-            if (Input.GetButtonDown("X PS4"))
-                GetComponent<GadgetManager>().UseGadget();
-
-            cam.inputPitch = Input.GetAxis("Right Vertical PS4");
-            cam.inputYaw = Input.GetAxis("Right Horizontal PS4");
-
-            mover.sprint = Input.GetButton("Square");
-        }
-
-        if (controller != Controllers.NONE)
-        {
-            if (Input.GetButtonDown("Y / Triangle"))
-                actor.interact(InteractionButton.Y);
-
-            mover.sneak = Input.GetButton("L1");
-
-            if(Input.GetButton("R1"))
+            if (!gameManager.GetComponent<PauseMenu>().menuOpen) // if the menu is not open
             {
-                noiseMaker.PlayerTriggeredSound();
+                if (Input.GetButtonDown("Circle")) // interact
+                    actor.interact(InteractionButton.B);
+
+                if (Input.GetButtonDown("X PS4")) // use gadget
+                    GetComponent<GadgetManager>().UseGadget();
+            }
+            else
+            {
+                if (Input.GetButtonDown("Circle")) // go back in the menu
+                    gameManager.GetComponent<PauseMenu>().CloseSceneSelect();
             }
 
-            mover.direction.x = Input.GetAxis("Left Horizontal");
-            mover.direction.z = -Input.GetAxis("Left Vertical");
+            cam.inputPitch = Input.GetAxis("Right Vertical PS4"); // look up and down
+            cam.inputYaw = Input.GetAxis("Right Horizontal PS4"); // look left and right
+
+            mover.sprint = Input.GetButton("Square"); // sprint
         }
 
-        cam.sprinting = mover.sprint;
-        cam.sneaking = mover.sneak;
+        if (controller != Controllers.NONE) // if there is a controller plugged in
+        {
+            if (Input.GetButtonDown("Y / Triangle")) // grab the target
+                actor.interact(InteractionButton.Y);
 
-        mover.relativeForward = mainCamera.transform.forward;
-        mover.relativeForward.y = 0;
+            if(Input.GetButton("R1")) // make a sound
+                noiseMaker.PlayerTriggeredSound();
+
+            if (Input.GetButtonDown("Start Button") && gameManager) // pause the game
+                gameManager.GetComponent<PauseMenu>().HandleMenu();
+
+            mover.sneak = Input.GetButton("L1"); // sneak
+            mover.direction.z = -Input.GetAxis("Left Vertical"); // move up and down
+            mover.direction.x = Input.GetAxis("Left Horizontal"); // move left and right
+        }
+
+        cam.sprinting = mover.sprint; // apply sprint to the camera
+        cam.sneaking = mover.sneak; // apply sneak to the camera
+
+        mover.relativeForward = mainCamera.transform.forward; // orient the controller's forward
+        mover.relativeForward.y = 0; // normalize it to the XZ plane
     }
 
+    // finds out which controller is in use
     Controllers getControllerType()
     {
-        Controllers controller = Controllers.NONE;
+        Controllers controller = Controllers.NONE; // default status
 
-        joys = Input.GetJoystickNames();
-        for (int i = 0; i < joys.Length; ++i)
+        joys = Input.GetJoystickNames(); // Unity controller report
+        for (int i = 0; i < joys.Length; ++i) // for each controller
         {
-            if (joys[i].IndexOf("Windows") != -1)
+            if (joys[i].IndexOf("Windows") != -1) // if it is an xbox controller
             {
                 controller = Controllers.XBOX;
                 break;
             }
-            else if (joys[i] == "Wireless Controller")
+            else if (joys[i] == "Wireless Controller") // if it is a PS4 controller
             {
                 controller = Controllers.PS4;
             }

@@ -20,8 +20,8 @@ public class AlarmSystem : MonoBehaviour, Iinteractable {
     public bool alarmDisabled;
     public bool alarmActive;
 
-    public GuardAITest.AIState alarmState;
-    public GuardAITest.AIState alarmOffState;
+    public GuardAITest.AIState alarmState; // the state guards ought to be in during an alarm
+    public GuardAITest.AIState alarmOffState; // the state guards ought to be in with no alarm
 
     private float targetIntensity;
     private float lastUpdate;
@@ -148,6 +148,6 @@ public class AlarmSystem : MonoBehaviour, Iinteractable {
 
     public bool isInstant()
     {
-        return false;
+        return false; // not instant
     }
 }

@@ -13,8 +13,8 @@ public class Player : MonoBehaviour, Iinteractable
 
     private bool vulnerable;
 
-    private int railID = 0;
-    public int RailID { get { return railID;} }
+    private int railID = 0; // which rail the player is on
+    public int RailID { get { return railID;} } // get the rail ID
 
     void Start()
     {
@@ -49,11 +49,13 @@ public class Player : MonoBehaviour, Iinteractable
         return false;
     }
 
+    // make the player attached to this rail
     public void assignRail(Rail rail)
     {
         railID = rail.ID;
     }
 
+    // free the player from the rail
     public void unassignRail()
     {
         railID = 0;

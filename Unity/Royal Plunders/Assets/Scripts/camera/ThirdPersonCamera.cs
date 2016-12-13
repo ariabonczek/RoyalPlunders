@@ -103,7 +103,7 @@ public class ThirdPersonCamera : MonoBehaviour
         Ray raycast = new Ray(rayPos, (pos - rayPos).normalized); // the occlusion ray
         if (Physics.SphereCast(raycast, clippingRadius, out camCast, (pos - rayPos).magnitude, raycastMask)) // spherecast is used for corner detection
         {
-            if (Vector3.Dot(camCast.normal, Vector3.up) > 0)
+            if (Vector3.Dot(camCast.normal, Vector3.up) > 0) // hot-fix for held items blocking the camera cast.
             {
                 pos = camCast.point + camCast.normal * clippingRadius; // push the camera off of the wall
                 wallPitch = Vector3.Angle(pos - rayPos, pos + Vector3.up * (posAbove.y - pos.y) - rayPos) * wallPitchFactor; // look down properly

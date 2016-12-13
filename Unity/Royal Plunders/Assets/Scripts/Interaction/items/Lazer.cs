@@ -7,7 +7,7 @@ public class Lazer : MonoBehaviour , Iinteractable
 
     public void interact(InteractionButton button, GameObject interactor)
     {
-        alarmSystem.GetComponent<AlarmSystem>().TurnOnAlarm();
+        alarmSystem.GetComponent<AlarmSystem>().TurnOnAlarm(); // turn on the alarm system when something interacts with the laser
     }
 
     public string getTypeLabel()
@@ -17,6 +17,6 @@ public class Lazer : MonoBehaviour , Iinteractable
 
     public bool isInstant()
     {
-        return true;
+        return true; // this is triggered on interaction
     }
 }

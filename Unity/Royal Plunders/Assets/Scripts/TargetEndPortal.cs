@@ -16,11 +16,11 @@ public class TargetEndPortal : MonoBehaviour {
 
     void OnTriggerEnter(Collider col)
     {
-        if(col.gameObject.GetComponent<Movement>())
+        if(col.gameObject.GetComponent<Movement>()) // if the object can move in our system
         {
-            if(col.gameObject.GetComponent<Movement>().holding)
+            if(col.gameObject.GetComponent<Movement>().holding) // and is holding something
             {
-                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1); // then the player captured the target, next level!
             }
         }
     }
