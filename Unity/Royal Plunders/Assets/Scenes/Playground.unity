@@ -6575,6 +6575,16 @@ Prefab:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114000011130057096, guid: def26d41e5c76774c9bf5c51e7aa70a3,
+        type: 2}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 135483952}
+    - target: {fileID: 114000014290711938, guid: def26d41e5c76774c9bf5c51e7aa70a3,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1090929652}
     - target: {fileID: 114000013998948266, guid: def26d41e5c76774c9bf5c51e7aa70a3,
         type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -6585,7 +6595,7 @@ Prefab:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1090929652}
-    - target: {fileID: 114000014290711938, guid: def26d41e5c76774c9bf5c51e7aa70a3,
+    - target: {fileID: 114000011884780706, guid: def26d41e5c76774c9bf5c51e7aa70a3,
         type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -6595,15 +6605,6 @@ Prefab:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1090929652}
-    - target: {fileID: 114000011884780706, guid: def26d41e5c76774c9bf5c51e7aa70a3,
-        type: 2}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 1090929652}
-    - target: {fileID: 1000013729103402, guid: def26d41e5c76774c9bf5c51e7aa70a3, type: 2}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: def26d41e5c76774c9bf5c51e7aa70a3, type: 2}
   m_IsPrefabParent: 0

@@ -20,6 +20,7 @@ TagManager:
   - Alarm
   - NoiseMachine
   - Lazer
+  - KEY_COUNT
   layers:
   - Default
   - TransparentFX
