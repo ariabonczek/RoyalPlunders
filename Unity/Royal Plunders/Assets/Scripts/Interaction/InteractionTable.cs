@@ -69,15 +69,15 @@ public static class InteractionTable
     // 0 means B and A have the same priority or one is not listed
     public static int priorityCheck(GameObject objA, GameObject objB)
     {
-        if (!objA || !objB)
+        if (!objA || !objB) // if either object does not exist
             return 0;
 
         int objALevel = System.Array.IndexOf(tables.priority, objA.GetComponent<Iinteractable>().getTypeLabel());
         int objBLevel = System.Array.IndexOf(tables.priority, objB.GetComponent<Iinteractable>().getTypeLabel());
 
-        if (objALevel < 0 || objBLevel < 0) // incomparable
+        if (objALevel < 0 || objBLevel < 0) // incomparable (same priority)
             return 0;
 
-        return objBLevel - objALevel;
+        return objBLevel - objALevel; // the difference in priority
     }
 }

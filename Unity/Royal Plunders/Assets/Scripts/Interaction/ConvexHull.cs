@@ -8,7 +8,7 @@ public class ConvexHull : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (interactableObject == null)
+        if (interactableObject == null) // this convex hull is not bound to an interactable!
         {
             Debug.Log("Something triggered a ConvexHull that has no linked object! " + transform.position);
             return;
@@ -22,7 +22,7 @@ public class ConvexHull : MonoBehaviour
 
     void OnTriggerExit(Collider other)
     {
-        if (interactableObject == null)
+        if (interactableObject == null) // this convex hull is not bound to an interactable!
         {
             Debug.Log("Something triggered a ConvexHull that has no linked object! " + transform.position);
             return;
