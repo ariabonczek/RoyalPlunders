@@ -140,6 +140,22 @@ public class GadgetManager : MonoBehaviour {
         }
     }
 
+    public GadgetSlotType GetPrimaryGadget()
+    {
+        if (slot1Chosen)
+            return slot1;
+        else
+            return slot2;
+    }
+
+    public GadgetSlotType GetSecondaryGadget()
+    {
+        if (slot1Chosen)
+            return slot2;
+        else
+            return slot1;
+    }
+
     void HandleActiveGadgetShowcase()
     {
         if(slot1Chosen)
