@@ -37,7 +37,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 8.805636e-39, g: 0, b: 2.4698908, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -1046,18 +1046,11 @@ Prefab:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4000013616321708, guid: a09e7291054beca499445100f62347b1, type: 2}
-      propertyPath: m_LocalScale.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4000013616321708, guid: a09e7291054beca499445100f62347b1, type: 2}
-      propertyPath: m_LocalScale.z
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4000013616321708, guid: a09e7291054beca499445100f62347b1, type: 2}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
+    - target: {fileID: 114000012984070782, guid: a09e7291054beca499445100f62347b1,
+        type: 2}
+      propertyPath: respawnPosition
+      value: 
+      objectReference: {fileID: 1258704419}
     - target: {fileID: 114000011955462930, guid: a09e7291054beca499445100f62347b1,
         type: 2}
       propertyPath: player
@@ -1072,31 +1065,6 @@ Prefab:
       propertyPath: m_Name
       value: LazyGuard_A1_01
       objectReference: {fileID: 0}
-    - target: {fileID: 114000011955462930, guid: a09e7291054beca499445100f62347b1,
-        type: 2}
-      propertyPath: useWaypointDirectionForScan
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114000011955462930, guid: a09e7291054beca499445100f62347b1,
-        type: 2}
-      propertyPath: ScanRotationSpeed
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 114000011955462930, guid: a09e7291054beca499445100f62347b1,
-        type: 2}
-      propertyPath: playerOutOfSightTimer
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 23000012642839580, guid: a09e7291054beca499445100f62347b1,
-        type: 2}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: ac281b1cc3aa0e24eb3c62e3df947c19, type: 2}
-    - target: {fileID: 114000012984070782, guid: a09e7291054beca499445100f62347b1,
-        type: 2}
-      propertyPath: respawnPosition
-      value: 
-      objectReference: {fileID: 1258704419}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a09e7291054beca499445100f62347b1, type: 2}
   m_IsPrefabParent: 0
@@ -11046,12 +11014,12 @@ ParticleSystem:
   prewarm: 0
   playOnAwake: 1
   moveWithTransform: 0
-  scalingMode: 1
+  scalingMode: 2
   InitialModule:
     serializedVersion: 2
     enabled: 1
     startLifetime:
-      scalar: 2
+      scalar: 3
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -11202,7 +11170,7 @@ ParticleSystem:
       maxColor: {r: 1, g: 1, b: 1, a: 1}
       minMaxState: 2
     startSize:
-      scalar: 0.5
+      scalar: 0.7
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -11218,7 +11186,7 @@ ParticleSystem:
         serializedVersion: 2
         m_Curve:
         - time: 0
-          value: 0.2
+          value: 0.14285715
           inSlope: 0
           outSlope: 0
           tangentMode: 0
@@ -11869,7 +11837,7 @@ ParticleSystem:
         serializedVersion: 2
         m_Curve:
         - time: 0
-          value: 1
+          value: 0.5
           inSlope: 0
           outSlope: 0
           tangentMode: 0
@@ -11880,7 +11848,7 @@ ParticleSystem:
         serializedVersion: 2
         m_Curve:
         - time: 0
-          value: 0
+          value: 1
           inSlope: 0
           outSlope: 0
           tangentMode: 0
@@ -12391,7 +12359,7 @@ ParticleSystem:
         m_RotationOrder: 4
       minMaxState: 0
     curve:
-      scalar: 0.7853982
+      scalar: 0.7853981
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -12677,8 +12645,8 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1846568728}
   m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 1.150116, z: 0}
-  m_LocalScale: {x: 0.114748605, y: 0.11474872, z: 0.2637882}
+  m_LocalPosition: {x: 0, y: 1.08, z: 0}
+  m_LocalScale: {x: 0.111112885, y: 0.11111293, z: 0.25543016}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 1858204016}
