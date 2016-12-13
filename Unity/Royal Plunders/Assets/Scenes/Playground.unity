@@ -3587,7 +3587,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4000011817249446, guid: 600ce856240b8254ab9e3d5b96d9de73, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -18.88
+      value: -21.33
       objectReference: {fileID: 0}
     - target: {fileID: 4000011817249446, guid: 600ce856240b8254ab9e3d5b96d9de73, type: 2}
       propertyPath: m_LocalPosition.y
@@ -3622,6 +3622,34 @@ Prefab:
       propertyPath: gameManager
       value: 
       objectReference: {fileID: 1090929651}
+    - target: {fileID: 4000013300276858, guid: 600ce856240b8254ab9e3d5b96d9de73, type: 2}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000012845174138, guid: 600ce856240b8254ab9e3d5b96d9de73, type: 2}
+      propertyPath: m_RootOrder
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000012368121996, guid: 600ce856240b8254ab9e3d5b96d9de73, type: 2}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000011968169042, guid: 600ce856240b8254ab9e3d5b96d9de73, type: 2}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000011325265516, guid: 600ce856240b8254ab9e3d5b96d9de73, type: 2}
+      propertyPath: m_RootOrder
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000010537697688, guid: 600ce856240b8254ab9e3d5b96d9de73, type: 2}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000010081037310, guid: 600ce856240b8254ab9e3d5b96d9de73, type: 2}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 600ce856240b8254ab9e3d5b96d9de73, type: 2}
   m_IsPrefabParent: 0
@@ -6575,11 +6603,6 @@ Prefab:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 114000011130057096, guid: def26d41e5c76774c9bf5c51e7aa70a3,
-        type: 2}
-      propertyPath: player
-      value: 
-      objectReference: {fileID: 135483952}
     - target: {fileID: 114000014290711938, guid: def26d41e5c76774c9bf5c51e7aa70a3,
         type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -6605,6 +6628,24 @@ Prefab:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1090929652}
+    - target: {fileID: 114000011130057096, guid: def26d41e5c76774c9bf5c51e7aa70a3,
+        type: 2}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 135483952}
+    - target: {fileID: 1000013012771652, guid: def26d41e5c76774c9bf5c51e7aa70a3, type: 2}
+      propertyPath: m_TagString
+      value: InteractPrompt
+      objectReference: {fileID: 0}
+    - target: {fileID: 1000013012771652, guid: def26d41e5c76774c9bf5c51e7aa70a3, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000014226859688, guid: def26d41e5c76774c9bf5c51e7aa70a3,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: def26d41e5c76774c9bf5c51e7aa70a3, type: 2}
   m_IsPrefabParent: 0
@@ -13525,6 +13566,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   GUARD_TAG: Guard
   LAZER_TAG: Lazer
+  INTERACT_PROMPT: InteractPrompt
 --- !u!43 &1123719906
 Mesh:
   m_ObjectHideFlags: 0

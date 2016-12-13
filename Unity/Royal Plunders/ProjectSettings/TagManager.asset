@@ -21,6 +21,7 @@ TagManager:
   - NoiseMachine
   - Lazer
   - KEY_COUNT
+  - InteractPrompt
   layers:
   - Default
   - TransparentFX

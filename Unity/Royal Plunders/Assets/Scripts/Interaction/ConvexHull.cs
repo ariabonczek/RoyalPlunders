@@ -16,8 +16,10 @@ public class ConvexHull : MonoBehaviour
 
         // if the object has an interactor, give this interactableObject to it
         Interactor inter = other.gameObject.GetComponent<Interactor>();
-        if ( inter != null)
+        if (inter != null)
+        {
             inter.addInteractable(interactableObject);
+        }
     }
 
     void OnTriggerExit(Collider other)
@@ -32,5 +34,7 @@ public class ConvexHull : MonoBehaviour
         Interactor inter = other.gameObject.GetComponent<Interactor>();
         if ( inter != null)
             inter.removeInteractable(interactableObject);
+
+        GameManager.prompt.SetActive(false);
     }
 }
