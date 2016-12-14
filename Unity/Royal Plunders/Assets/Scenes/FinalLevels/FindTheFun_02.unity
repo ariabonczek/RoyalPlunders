@@ -91,7 +91,7 @@ NavMeshSettings:
     minRegionArea: 2
     cellSize: 0.083333336
     manualCellSize: 0
-  m_NavMeshData: {fileID: 23800000, guid: 9fc844213d3a03940b95da7cfa261635, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: dd664c66dc1b75742aeaca856838d392, type: 2}
 --- !u!1001 &20192206
 Prefab:
   m_ObjectHideFlags: 0
@@ -3939,6 +3939,24 @@ Transform:
   m_PrefabParentObject: {fileID: 4000010408994444, guid: f7cb78150acc059469f11536349ab868,
     type: 2}
   m_PrefabInternal: {fileID: 493494279}
+--- !u!1 &495234210 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1000011382620728, guid: a46bd222004702d4fa6913e7661adc63,
+    type: 2}
+  m_PrefabInternal: {fileID: 1409901928}
+--- !u!136 &495234211
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 495234210}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 22.421005
+  m_Height: 120.901596
+  m_Direction: 1
+  m_Center: {x: 0.0000000027245095, y: -0.00006102651, z: 2.3208451}
 --- !u!1001 &497521363
 Prefab:
   m_ObjectHideFlags: 0
@@ -13885,6 +13903,10 @@ Prefab:
     - target: {fileID: 1000010040622752, guid: c642c570cd4668444baebc5304293377, type: 2}
       propertyPath: m_StaticEditorFlags
       value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 1000011455598082, guid: c642c570cd4668444baebc5304293377, type: 2}
+      propertyPath: m_StaticEditorFlags
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c642c570cd4668444baebc5304293377, type: 2}
