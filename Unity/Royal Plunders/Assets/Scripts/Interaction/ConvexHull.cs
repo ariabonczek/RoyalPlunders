@@ -35,6 +35,6 @@ public class ConvexHull : MonoBehaviour
         if ( inter != null)
             inter.removeInteractable(interactableObject);
 
-        GameManager.prompt.SetActive(false);
+        GameManager.promptImage.color = new Color(1, 1, 1, 0);
     }
 }

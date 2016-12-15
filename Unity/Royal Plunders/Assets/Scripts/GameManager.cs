@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class GameManager : MonoBehaviour {
@@ -10,7 +11,10 @@ public class GameManager : MonoBehaviour {
     public static GameObject[] guardList; // all the guards
     public static GameObject[] laserList; // all the lasers
 
+    public static float fadeSpeed = 0.1f;
+
     public static GameObject prompt;
+    public static Image promptImage;
 
     void Start()
     {
@@ -20,7 +24,8 @@ public class GameManager : MonoBehaviour {
         prompt = GameObject.FindGameObjectWithTag(INTERACT_PROMPT);
         if (prompt)
         {
-            prompt.SetActive(false);
+            promptImage = prompt.GetComponent<Image>();
+            promptImage.color = new Color(1, 1, 1, 0);
         }
     }
 }

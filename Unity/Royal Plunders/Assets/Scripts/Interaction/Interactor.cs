@@ -30,7 +30,7 @@ public class Interactor : MonoBehaviour
             }
             else
             {
-                GameManager.prompt.SetActive(true);
+                GameManager.promptImage.color = Color.white;
             }
 
             // add it to the list
