@@ -2067,14 +2067,11 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 4000012171654278, guid: 5cc52973435b86544840fe34ebc0918f, type: 2}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 180
-      objectReference: {fileID: 0}
-    - target: {fileID: 1000012442766566, guid: 5cc52973435b86544840fe34ebc0918f, type: 2}
-      propertyPath: m_Name
-      value: VigilantGuard_A1_02
-      objectReference: {fileID: 0}
+    - target: {fileID: 114000013814571710, guid: 5cc52973435b86544840fe34ebc0918f,
+        type: 2}
+      propertyPath: respawnPosition
+      value: 
+      objectReference: {fileID: 1258704419}
     - target: {fileID: 114000010518685634, guid: 5cc52973435b86544840fe34ebc0918f,
         type: 2}
       propertyPath: player
@@ -2091,33 +2088,8 @@ Prefab:
       value: 
       objectReference: {fileID: 1044625138}
     - target: {fileID: 1000012442766566, guid: 5cc52973435b86544840fe34ebc0918f, type: 2}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114000010518685634, guid: 5cc52973435b86544840fe34ebc0918f,
-        type: 2}
-      propertyPath: StunnedDuration
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 114000013814571710, guid: 5cc52973435b86544840fe34ebc0918f,
-        type: 2}
-      propertyPath: respawnPosition
-      value: 
-      objectReference: {fileID: 1258704419}
-    - target: {fileID: 195000013726394204, guid: 5cc52973435b86544840fe34ebc0918f,
-        type: 2}
-      propertyPath: m_Radius
-      value: 0.4
-      objectReference: {fileID: 0}
-    - target: {fileID: 195000013726394204, guid: 5cc52973435b86544840fe34ebc0918f,
-        type: 2}
-      propertyPath: m_Height
-      value: 1.82
-      objectReference: {fileID: 0}
-    - target: {fileID: 195000013726394204, guid: 5cc52973435b86544840fe34ebc0918f,
-        type: 2}
-      propertyPath: m_BaseOffset
-      value: 0.2
+      propertyPath: m_Name
+      value: VigilantGuard_A1_02
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5cc52973435b86544840fe34ebc0918f, type: 2}
@@ -18220,18 +18192,6 @@ Prefab:
     - target: {fileID: 1000012148354766, guid: 8004e04708c2cf74a8d0aa0aba4e5dad, type: 2}
       propertyPath: m_Name
       value: Sofa_02 (1)
-      objectReference: {fileID: 0}
-    - target: {fileID: 4000013532750930, guid: 8004e04708c2cf74a8d0aa0aba4e5dad, type: 2}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 142.07
-      objectReference: {fileID: 0}
-    - target: {fileID: 4000013532750930, guid: 8004e04708c2cf74a8d0aa0aba4e5dad, type: 2}
-      propertyPath: m_LocalScale.x
-      value: 0.010000005
-      objectReference: {fileID: 0}
-    - target: {fileID: 4000013532750930, guid: 8004e04708c2cf74a8d0aa0aba4e5dad, type: 2}
-      propertyPath: m_LocalScale.z
-      value: 0.010000005
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 8004e04708c2cf74a8d0aa0aba4e5dad, type: 2}
